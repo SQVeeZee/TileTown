@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da93a4ddecb57704980d3b1aac217847, type: 3}
+  m_Name: Purple Building
+  m_EditorClassIdentifier: 
+  m_impactsConfigs: {fileID: 11400000, guid: c26e156f748567d42852a3dc5d72c040, type: 2}
+  m_buildingViewPrefab: {fileID: -3848998698128374649, guid: 7b2531a6426e2df4bbdd9877f0b0e44b, type: 3}
+  m_buildingName: PURPLE
+  m_buildingType: 12
+  m_buildingDescription: SmthCool

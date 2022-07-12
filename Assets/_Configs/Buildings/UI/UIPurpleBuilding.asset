@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2397c36d6a9f52f4fb5c0a2274bbc775, type: 3}
+  m_Name: UIPurpleBuilding
+  m_EditorClassIdentifier: 
+  m_buildingConfigs: {fileID: 11400000, guid: 21cc3e1b4ac02344eb6c7e0c75f4fb4d, type: 2}
+  m_color: {r: 0.8773585, g: 0.23727298, b: 0.85622287, a: 1}

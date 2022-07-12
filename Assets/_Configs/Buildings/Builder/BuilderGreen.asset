@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76e1a459783b0449a6ad1a2140ed73f, type: 3}
+  m_Name: BuilderGreen
+  m_EditorClassIdentifier: 
+  m_buildingConfigs: {fileID: 11400000, guid: ea675162095bdb2459f504ed96aa07bb, type: 2}
+  m_viewBuildingConfigs: {fileID: 11400000, guid: 6274273422127ab4ebc4949046c4f40f, type: 2}
+  m_buildingPrefab: {fileID: 6963048723949980336, guid: 3c8e9bd7c82043844acc52be6de188a5, type: 3}
