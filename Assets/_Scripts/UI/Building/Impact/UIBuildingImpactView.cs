@@ -1,11 +1,9 @@
-using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using Zenject;
 
-namespace UI.Building.Impact
+namespace _Scripts.UI.Building.Impact
 {
     public class UIBuildingImpactView : MonoBehaviour
     {

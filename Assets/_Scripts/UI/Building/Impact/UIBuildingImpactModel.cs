@@ -1,7 +1,8 @@
+using _Scripts.Gameplay.Building.Impact;
+using _Scripts.UI.Building.Impact.Configs;
 using JetBrains.Annotations;
-using UI.Building.Impact.Configs;
 
-namespace UI.Building.Impact
+namespace _Scripts.UI.Building.Impact
 {
     [UsedImplicitly]
     public class UIBuildingImpactModel

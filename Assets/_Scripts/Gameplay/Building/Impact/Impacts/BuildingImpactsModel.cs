@@ -1,5 +1,5 @@
 using JetBrains.Annotations;
-using UI.Building.Impact.Impacts.Configs;
+using _Scripts.UI.Building.Impact.Impacts.Configs;
 
 namespace _Scripts.Gameplay.Building.Impact.Impacts
 {

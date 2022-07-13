@@ -1,9 +1,8 @@
-using Gameplay.Map.Grid;
-using Gameplay.Tile;
+using _Scripts.Gameplay.Tile.Map.Grid;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Map
+namespace _Scripts.Gameplay.Tile.Map
 {
     public sealed class MapMonoInstaller : MonoInstaller
     {

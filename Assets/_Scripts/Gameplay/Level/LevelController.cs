@@ -1,9 +1,9 @@
-using Gameplay.Map;
+using _Scripts.Gameplay.Tile.Map;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Level
+namespace _Scripts.Gameplay.Level
 {
     public class LevelController: MonoBehaviour
     {

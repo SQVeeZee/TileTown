@@ -2,7 +2,7 @@ using System;
 using _Scripts.Gameplay.Building.Configs;
 using DG.Tweening;
 using JetBrains.Annotations;
-using UI.Building.Impact.Impacts.Configs;
+using _Scripts.UI.Building.Impact.Impacts.Configs;
 using UnityEngine;
 using Zenject;
 

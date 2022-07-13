@@ -1,12 +1,16 @@
-using UI.Building.Impact.Impacts.Configs;
+using _Scripts.UI.Building.Impact.Impacts.Configs;
 using UnityEngine;
 using Zenject;
 
-public class BuildingImpactMonoInstaller : MonoInstaller
+namespace _Scripts.Gameplay.Building.Impact
 {
-    [SerializeField] private BuildingImpactsConfigs m_configs;
-    public override void InstallBindings()
+    public class BuildingImpactMonoInstaller : MonoInstaller
     {
-        Container.BindInstance(m_configs).AsSingle();
+        [SerializeField] private BuildingImpactsConfigs m_configs;
+
+        public override void InstallBindings()
+        {
+            Container.BindInstance(m_configs).AsSingle();
+        }
     }
 }

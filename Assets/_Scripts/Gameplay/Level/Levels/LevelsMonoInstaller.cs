@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Level.Levels
+namespace _Scripts.Gameplay.Level.Levels
 {
     public class LevelsMonoInstaller : MonoInstaller
     {

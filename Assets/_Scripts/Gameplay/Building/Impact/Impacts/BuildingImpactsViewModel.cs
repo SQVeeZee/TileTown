@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using _Scripts.Gameplay.Building;
+using _Scripts.Gameplay.Building.Impact;
 using _Scripts.Gameplay.Building.Impact.Impacts;
-using Gameplay.Map;
-using UI.Building.Impact.Impacts.Configs;
+using _Scripts.Gameplay.Tile.Map;
+using _Scripts.UI.Building.Impact.Impacts.Configs;
 using Zenject;
 
-namespace UI.Building.Impact.Impacts
+namespace _Scripts.UI.Building.Impact.Impacts
 {
     public class BuildingImpactsViewModel
     {
@@ -14,19 +15,19 @@ namespace UI.Building.Impact.Impacts
         
         private readonly BuildingImpactsModel m_model = null;
         private readonly UIBuildingImpactsPanel m_view = null;
-        private readonly BuildingImpactViewModel.Pool m_impactPool = null;
+        private readonly UIBuildingImpactViewModel.Pool m_impactPool = null;
 
         private readonly MapController m_mapController = null;
         
         private BuildingViewModel m_clickedBuilding = null;
 
-        private List<BuildingImpactViewModel> m_impacts;
+        private List<UIBuildingImpactViewModel> m_impacts;
         
         [Inject]
         BuildingImpactsViewModel(
             BuildingImpactsModel model,
             UIBuildingImpactsPanel view,
-            BuildingImpactViewModel.Pool impactPool
+            UIBuildingImpactViewModel.Pool impactPool
         )
         {
             m_model = model;
@@ -57,7 +58,7 @@ namespace UI.Building.Impact.Impacts
             
             if (configs.Count == 0) return;
 
-            m_impacts = new List<BuildingImpactViewModel>();
+            m_impacts = new List<UIBuildingImpactViewModel>();
             
             foreach (var impactConfig in configs)
             {

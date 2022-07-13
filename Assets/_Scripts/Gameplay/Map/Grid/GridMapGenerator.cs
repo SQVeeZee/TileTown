@@ -1,9 +1,8 @@
 using System;
-using Gameplay.Tile;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Map.Grid
+namespace _Scripts.Gameplay.Tile.Map.Grid
 {
     public class GridMapGenerator : IMapGenerator
     {

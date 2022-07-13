@@ -1,24 +1,27 @@
-using Gameplay.Tile;
-using UI.Building.Impact;
-using UI.Building.Impact.Impacts;
+using _Scripts.Gameplay.Tile;
+using _Scripts.UI.Building.Impact;
+using _Scripts.UI.Building.Impact.Impacts;
 using Zenject;
 
-public class BuildingRemoveViewModel : BaseImpact
+namespace _Scripts.Gameplay.Building.Impact.Remove
 {
-    public override EBuildingImpactType ImpactType => EBuildingImpactType.REMOVE;
-
-    [Inject]
-    public BuildingRemoveViewModel(
-        BuildingImpactsViewModel impactsViewModel
-        ) 
-        : base(impactsViewModel)
+    public class BuildingRemoveViewModel : BaseImpact
     {
-    }
+        public override EBuildingImpactType ImpactType => EBuildingImpactType.REMOVE;
 
-    protected override void DoImpact(TileController tileController)
-    {
-        var building = tileController.BuildingViewModel;
+        [Inject]
+        public BuildingRemoveViewModel(
+            BuildingImpactsViewModel impactsViewModel
+        )
+            : base(impactsViewModel)
+        {
+        }
 
-        // building.Remove();
+        protected override void DoImpact(TileController tileController)
+        {
+            var building = tileController.BuildingViewModel;
+
+            // building.Remove();
+        }
     }
 }

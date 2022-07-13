@@ -1,12 +1,14 @@
 using System;
+using _Scripts.Gameplay.Building.Impact;
+using _Scripts.UI.Building.Impact.Configs;
+using _Scripts.UI.Canvas;
 using JetBrains.Annotations;
-using UI.Building.Impact.Configs;
 using UnityEngine;
 using Zenject;
 
-namespace UI.Building.Impact
+namespace _Scripts.UI.Building.Impact
 {
-    public class BuildingImpactViewModel: MonoBehaviour, IPoolable<BuildingImpactConfigs, Transform>
+    public class UIBuildingImpactViewModel: MonoBehaviour, IPoolable<BuildingImpactConfigs, Transform>
     {
         public event Action<EBuildingImpactType> ImpactClicked = null;
         
@@ -71,7 +73,7 @@ namespace UI.Building.Impact
         }
         
         [UsedImplicitly]
-        public class Pool : MonoPoolableMemoryPool<BuildingImpactConfigs, Transform, BuildingImpactViewModel>
+        public class Pool : MonoPoolableMemoryPool<BuildingImpactConfigs, Transform, UIBuildingImpactViewModel>
         {
         }
     }

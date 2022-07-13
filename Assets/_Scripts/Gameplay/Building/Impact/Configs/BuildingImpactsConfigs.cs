@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using UI.Building.Impact.Configs;
+using _Scripts.UI.Building.Impact.Configs;
 using UnityEngine;
 
-namespace UI.Building.Impact.Impacts.Configs
+namespace _Scripts.UI.Building.Impact.Impacts.Configs
 {
     [CreateAssetMenu(fileName = ASSET_FILE_NAME, menuName = ASSET_FILE_PATH, order = ASSET_MENU_ORDER)]
     public class BuildingImpactsConfigs : ScriptableObject

@@ -1,4 +1,4 @@
-namespace Gameplay.Tile
+namespace _Scripts.Gameplay.Tile
 {
     public enum ETileState
     {

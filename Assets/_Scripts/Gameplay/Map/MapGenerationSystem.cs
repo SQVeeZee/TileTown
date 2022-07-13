@@ -1,9 +1,8 @@
 using System;
-using Gameplay.Map.Grid;
-using Gameplay.Tile;
+using _Scripts.Gameplay.Tile.Map.Grid;
 using Zenject;
 
-namespace Gameplay.Map
+namespace _Scripts.Gameplay.Tile.Map
 {
     public class MapGenerationSystem
     {

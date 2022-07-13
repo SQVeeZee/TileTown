@@ -1,4 +1,4 @@
-namespace UI.Building.Impact
+namespace _Scripts.Gameplay.Building.Impact
 {
     public enum EBuildingImpactType
     {

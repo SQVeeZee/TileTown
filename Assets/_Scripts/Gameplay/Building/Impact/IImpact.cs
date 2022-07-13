@@ -1,6 +1,7 @@
-using UI.Building.Impact;
-
-public interface IImpact
+namespace _Scripts.Gameplay.Building.Impact
 {
-    EBuildingImpactType ImpactType { get; }
+    public interface IImpact
+    {
+        EBuildingImpactType ImpactType { get; }
+    }
 }

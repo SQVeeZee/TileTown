@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.UI.Control
+namespace _Scripts.UI.Control
 {
     public class ControlController : IInitializable, IDisposable
     {

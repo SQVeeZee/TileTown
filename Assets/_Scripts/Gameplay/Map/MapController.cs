@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using _Scripts.Gameplay.Building;
+using _Scripts.Gameplay.Building.Impact.Impacts;
+using _Scripts.UI.Control;
 using Cameras;
-using Gameplay.Tile;
-using Gameplay.UI.Control;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Map
+namespace _Scripts.Gameplay.Tile.Map
 {
     [Flags]
     public enum EMapInteractionState: byte

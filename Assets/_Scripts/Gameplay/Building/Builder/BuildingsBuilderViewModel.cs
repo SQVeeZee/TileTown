@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using _Scripts.Gameplay.Building.Builder.Configs;
-using _Scripts.UI.Buildings.Builder;
-using Gameplay.Map;
-using Gameplay.Tile;
+using _Scripts.Gameplay.Tile;
+using _Scripts.UI.Building;
+using _Scripts.UI.Building.Builder;
+using _Scripts.Gameplay.Tile.Map;
 using Zenject;
 
 namespace _Scripts.Gameplay.Building.Builder

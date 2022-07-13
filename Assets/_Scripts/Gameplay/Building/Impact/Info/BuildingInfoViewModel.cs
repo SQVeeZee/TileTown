@@ -1,6 +1,7 @@
 using System;
 using _Scripts.Gameplay.Building.Configs;
-using UI.Building.Impact.Info;
+using _Scripts.Gameplay.Building.Impact.Impacts;
+using _Scripts.UI.Building.Impact.Info;
 using Zenject;
 
 namespace Gameplay.Building.Impact.Info

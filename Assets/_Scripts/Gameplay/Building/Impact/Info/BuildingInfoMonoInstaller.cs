@@ -1,5 +1,5 @@
 using Gameplay.Building.Impact.Info;
-using UI.Building.Impact.Info;
+using _Scripts.UI.Building.Impact.Info;
 using UnityEngine;
 using Zenject;
 

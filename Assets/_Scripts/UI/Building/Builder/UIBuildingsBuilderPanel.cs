@@ -1,6 +1,7 @@
+using _Scripts.UI.View;
 using UnityEngine;
 
-namespace _Scripts.UI.Buildings.Builder
+namespace _Scripts.UI.Building.Builder
 {
     public class UIBuildingsBuilderPanel : BaseUIView
     {

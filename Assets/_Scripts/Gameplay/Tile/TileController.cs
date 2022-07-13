@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Tile
+namespace _Scripts.Gameplay.Tile
 {
     public class TileController : MonoBehaviour
     {

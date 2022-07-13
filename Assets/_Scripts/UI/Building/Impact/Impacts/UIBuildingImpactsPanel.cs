@@ -1,6 +1,7 @@
+using _Scripts.UI.View;
 using UnityEngine;
 
-namespace UI.Building.Impact.Impacts
+namespace _Scripts.UI.Building.Impact.Impacts
 {
     public class UIBuildingImpactsPanel : BaseUIView
     {

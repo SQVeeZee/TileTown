@@ -1,6 +1,6 @@
+using _Scripts.Gameplay.Building;
 using _Scripts.Gameplay.Building.Configs;
-using UI.Building.Impact.Impacts.Configs;
-using UnityEngine;
+using _Scripts.UI.Building.Impact.Impacts.Configs;
 using Zenject;
 
 public class BuildingModel

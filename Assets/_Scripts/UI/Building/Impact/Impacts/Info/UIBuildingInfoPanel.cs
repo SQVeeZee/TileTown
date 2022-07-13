@@ -1,10 +1,11 @@
 using System;
+using _Scripts.UI.View;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace UI.Building.Impact.Info
+namespace _Scripts.UI.Building.Impact.Info
 {
     public class UIBuildingInfoPanel : BaseUIView
     {

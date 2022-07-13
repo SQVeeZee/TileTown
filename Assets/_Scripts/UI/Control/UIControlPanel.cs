@@ -1,8 +1,9 @@
 using System;
+using _Scripts.UI.Input;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.UI.Control
+namespace _Scripts.UI.Control
 {
     public class UIControlPanel : MonoBehaviour, IInitializable, IDisposable
     {

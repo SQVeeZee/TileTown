@@ -1,7 +1,8 @@
+using _Scripts.Gameplay.Tile.Configs;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Tile
+namespace _Scripts.Gameplay.Tile
 {
     public sealed class TileMonoInstaller : MonoInstaller
     {

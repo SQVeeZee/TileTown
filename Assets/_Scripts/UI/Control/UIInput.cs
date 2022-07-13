@@ -2,18 +2,21 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UIInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+namespace _Scripts.UI.Input
 {
-    public event Action<Vector2> PointerDown = null;
-    public event Action<Vector2> PointerUp = null;
-    
-    void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
+    public class UIInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        PointerDown?.Invoke(eventData.position);
-    }
+        public event Action<Vector2> PointerDown = null;
+        public event Action<Vector2> PointerUp = null;
 
-    void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
-    {
-        PointerUp?.Invoke(eventData.position);
+        void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
+        {
+            PointerDown?.Invoke(eventData.position);
+        }
+
+        void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
+        {
+            PointerUp?.Invoke(eventData.position);
+        }
     }
 }

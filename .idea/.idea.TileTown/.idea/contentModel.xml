@@ -86,11 +86,6 @@
                 <e p="LevelsMonoInstaller.cs" t="Include" />
               </e>
             </e>
-            <e p="LevelInteraction" t="Include">
-              <e p="InteractionModel.cs" t="Include" />
-              <e p="InteractionView.cs" t="Include" />
-              <e p="InteractionViewModel.cs" t="Include" />
-            </e>
             <e p="Map" t="Include">
               <e p="Grid" t="Include">
                 <e p="GridMapGenerator.cs" t="Include" />
@@ -104,10 +99,8 @@
               <e p="Configs" t="Include">
                 <e p="TileViewConfigs.cs" t="Include" />
               </e>
-              <e p="DefaultTile" t="Include">
-                <e p="TileController.cs" t="Include" />
-              </e>
               <e p="ETileState.cs" t="Include" />
+              <e p="TileController.cs" t="Include" />
               <e p="TileModel.cs" t="Include" />
               <e p="TileMonoInstaller.cs" t="Include" />
               <e p="TileView.cs" t="Include" />
@@ -130,7 +123,6 @@
                 <e p="UIBuildingsBuilderPanel.cs" t="Include" />
               </e>
               <e p="Impact" t="Include">
-                <e p="BuildingImpactViewModel.cs" t="Include" />
                 <e p="EBuildingImpactType.cs" t="Include" />
                 <e p="Impacts" t="Include">
                   <e p="BuildingImpactsMonoInstaller.cs" t="Include" />
@@ -141,6 +133,7 @@
                 </e>
                 <e p="UIBuildingImpactModel.cs" t="Include" />
                 <e p="UIBuildingImpactView.cs" t="Include" />
+                <e p="UIBuildingImpactViewModel.cs" t="Include" />
                 <e p="UIImpactMonoInstaller.cs" t="Include" />
               </e>
               <e p="UIBuildingMonoInstaller.cs" t="Include" />
@@ -148,7 +141,6 @@
               <e p="UIBuildingViewModel.cs" t="Include" />
             </e>
             <e p="Canvas" t="Include">
-              <e p="CanvasMonoInstaller.cs" t="Include" />
               <e p="UICanvas.cs" t="Include" />
             </e>
             <e p="Control" t="Include">

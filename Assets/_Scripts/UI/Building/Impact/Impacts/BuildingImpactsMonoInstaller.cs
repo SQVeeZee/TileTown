@@ -1,14 +1,15 @@
-using _Scripts.Gameplay.Building.Impact.Impacts;
+using _Scripts.UI.Building.Impact;
+using _Scripts.UI.Building.Impact.Impacts;
 using UnityEngine;
 using Zenject;
 
-namespace UI.Building.Impact.Impacts
+namespace _Scripts.Gameplay.Building.Impact.Impacts
 {
     public sealed class BuildingImpactsMonoInstaller : MonoInstaller
     {
         [Header("Panels")]
         [SerializeField] private UIBuildingImpactsPanel m_impactsPanel = null;
-        [SerializeField] private BuildingImpactViewModel m_impactPrefab = null;
+        [SerializeField] private UIBuildingImpactViewModel m_impactPrefab = null;
         
         public override void InstallBindings()
         {
@@ -19,8 +20,6 @@ namespace UI.Building.Impact.Impacts
             BindImpactFactory();
         }
 
-        #region Impacts
-
         private void BindImpacts()
         {
             Container.Bind<BuildingImpactsModel>().FromNew().AsSingle().NonLazy();
@@ -29,16 +28,10 @@ namespace UI.Building.Impact.Impacts
                 .AsSingle().NonLazy();
         }
 
-        #endregion
-
-        #region Impact
-
         private void BindImpactFactory()
         {
-            Container.BindMemoryPool<BuildingImpactViewModel, BuildingImpactViewModel.Pool>()
+            Container.BindMemoryPool<UIBuildingImpactViewModel, UIBuildingImpactViewModel.Pool>()
                 .FromComponentInNewPrefab(m_impactPrefab);
         }
-
-        #endregion
     }
 }

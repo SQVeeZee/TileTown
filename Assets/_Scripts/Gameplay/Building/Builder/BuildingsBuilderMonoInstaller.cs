@@ -1,11 +1,10 @@
-using _Scripts.Gameplay.Building;
-using _Scripts.Gameplay.Building.Builder;
 using _Scripts.Gameplay.Building.Builder.Configs;
-using _Scripts.UI.Buildings.Builder;
+using _Scripts.UI.Building;
+using _Scripts.UI.Building.Builder;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Building.Builder
+namespace _Scripts.Gameplay.Building.Builder
 {
     public class BuildingsBuilderMonoInstaller : MonoInstaller
     {

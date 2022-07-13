@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.UI.Control
+namespace _Scripts.UI.Control
 {
     public sealed class ControlMonoInstaller : MonoInstaller
     {

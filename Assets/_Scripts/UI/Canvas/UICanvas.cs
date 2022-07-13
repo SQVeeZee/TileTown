@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public class UICanvas : MonoBehaviour
+namespace _Scripts.UI.Canvas
 {
-    [SerializeField] private Transform m_canvasTransform = null;
+    public class UICanvas : MonoBehaviour
+    {
+        [SerializeField] private Transform m_canvasTransform = null;
 
-    public Transform ViewParent => m_canvasTransform;
+        public Transform ViewParent => m_canvasTransform;
+    }
 }

@@ -1,6 +1,4 @@
-using Gameplay.Tile;
-
-namespace Gameplay.Map.Grid
+namespace _Scripts.Gameplay.Tile.Map.Grid
 {
     public interface IMapGenerator
     {
