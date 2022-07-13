@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da93a4ddecb57704980d3b1aac217847, type: 3}
   m_Name: Blue Building
   m_EditorClassIdentifier: 
-  m_impactsConfigs: {fileID: 11400000, guid: c26e156f748567d42852a3dc5d72c040, type: 2}
-  m_buildingViewPrefab: {fileID: 842140958833751204, guid: 6052db02e4f4bd04faebdc934e63825f, type: 3}
   m_buildingName: BLUE
   m_buildingType: 11
-  m_buildingDescription: SmthCool
+  m_buildingDescription: "\u0422\u0440\u0451\u0445\u043A\u0432\u0430\u0440\u0442\u0438\u0440\u043D\u044B\u0435
+    \u0436\u0438\u043B\u044B\u0435 \n\u0434\u043E\u043C\u0430 \u0441 \u043F\u043E\u0434\u0432\u0430\u043B\u043E\u043C"

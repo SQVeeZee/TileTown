@@ -1,3 +1,4 @@
+using _Scripts.Gameplay.Building;
 using Gameplay.Building;
 using Gameplay.Tile;
 using UI.Building.Impact;
@@ -17,25 +18,5 @@ public abstract class BaseImpact : IImpact
     )
     {
         m_impactsViewModel = impactsViewModel;
-    }
-    
-    protected void Initialize()
-    {
-        m_impactsViewModel.ImpactClicked += OnImpactClicked;
-    }
-
-    protected void Dispose()
-    {
-        m_impactsViewModel.ImpactClicked -= OnImpactClicked;
-    }
-
-    private void OnImpactClicked(EBuildingImpactType impactType, TileController tileController)
-    {
-        if (impactType == ImpactType)
-        {
-            m_building = tileController.BuildingViewModel;
-            
-            DoImpact(tileController);
-        }
     }
 }

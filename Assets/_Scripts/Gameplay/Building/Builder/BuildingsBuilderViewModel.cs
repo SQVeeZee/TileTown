@@ -1,21 +1,27 @@
 using System;
+using System.Collections.Generic;
+using _Scripts.Gameplay.Building.Builder.Configs;
+using _Scripts.UI.Buildings.Builder;
 using Gameplay.Map;
 using Gameplay.Tile;
-using UI.Building.Impact.Builder;
-using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Building.Builder
+namespace _Scripts.Gameplay.Building.Builder
 {
     public class BuildingsBuilderViewModel: IInitializable, IDisposable
     {
         private readonly BuildingBuilderModel m_model = null;
         private readonly UIBuildingsBuilderPanel m_view = null;
+
+        private readonly List<UIBuildingViewModel> m_uiBuildings = new List<UIBuildingViewModel>();
         
         private readonly BuildingViewModel.Factory m_buildingsFactory = null;
         private readonly UIBuildingViewModel.Factory m_uiBuildingsFactory = null;
 
+        private readonly MapController m_mapController = null;
+        
         private TileController m_clickedTile = null;
+        
         
         [Inject]
         public BuildingsBuilderViewModel(
@@ -23,7 +29,9 @@ namespace Gameplay.Building.Builder
             UIBuildingsBuilderPanel view,
             
             BuildingViewModel.Factory buildingsFactory,
-            UIBuildingViewModel.Factory uiBuildingsFactory
+            UIBuildingViewModel.Factory uiBuildingsFactory,
+
+            MapController mapController
         )
         {
             m_model = model;
@@ -32,26 +40,43 @@ namespace Gameplay.Building.Builder
             m_buildingsFactory = buildingsFactory;
 
             m_uiBuildingsFactory = uiBuildingsFactory;
+            
+            m_mapController = mapController;
         }
 
         void IInitializable.Initialize()
         {
-            m_model.Added += OnAddedController;
-            m_model.Removed += OnAddedController;
-
-            FillGrid();
+            m_mapController.EmptyTileClicked += OnEmptyTileClicked;
         }
 
         void IDisposable.Dispose()
         {
-            m_model.Added -= OnAddedController;
-            m_model.Removed -= OnAddedController;
+            m_mapController.EmptyTileClicked -= OnEmptyTileClicked;
         }
 
+        private void OnEmptyTileClicked(TileController tileController)
+        {
+            Validation();
+            
+            m_clickedTile = tileController;
+            
+            m_view.DoShow();
+        }
+
+        private void Validation()
+        {
+            if (m_uiBuildings.Count == 0)
+            {
+                FillGrid();
+            }
+        }
+        
         private void FillGrid()
         {
-            var builderConfigs = m_model.BuilderConfigs.GroupBuilderConfigs;
-            
+            var builderConfigs = m_model.BuilderConfigs;
+
+            if (builderConfigs.Count == 0) return;
+
             foreach (var buildingConfigs in builderConfigs)
             {
                 UIBuildingViewModel buildingViewModel = m_uiBuildingsFactory.Create();
@@ -60,26 +85,22 @@ namespace Gameplay.Building.Builder
                     buildingConfigs.BuildingConfigs,
                     buildingConfigs.ViewBuildingConfigs,
                     m_view.GridRoot);
+
+                m_uiBuildings.Add(buildingViewModel);
                 
                 buildingViewModel.BuildingClicked += OnBuildingClicked;
             }
         }
         
-        private void OnAddedController(MapController mapController)
+        private void ClearGrid()
         {
-            mapController.EmptyTileClicked += OnEmptyTileClicked;
-        }
-        
-        private void OnRemovedController(MapController mapController)
-        {
-            mapController.EmptyTileClicked -= OnEmptyTileClicked;
-        }
-
-        private void OnEmptyTileClicked(TileController tileController)
-        {
-            m_clickedTile = tileController;
+            foreach (var uiBuilding in m_uiBuildings)
+            {
+                uiBuilding.BuildingClicked -= OnBuildingClicked;
+                m_uiBuildingsFactory.Remove(uiBuilding);
+            }
             
-            m_view.DoShow();
+            m_uiBuildings.Clear();
         }
 
         private void OnBuildingClicked(EBuildingType buildingType)
@@ -99,8 +120,7 @@ namespace Gameplay.Building.Builder
 
                 var instance = m_buildingsFactory.Create(buildingPrefab, m_clickedTile.TileTransform);
 
-                m_clickedTile.BuildingViewModel = instance;
-                m_clickedTile.TileState = ETileState.FILLED;
+                m_clickedTile.SetTileBuilding(instance);
             }
         }
     }

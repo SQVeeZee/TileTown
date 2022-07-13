@@ -1,8 +1,8 @@
-using Gameplay.Building.Configs;
+using _Scripts.Gameplay.Building.Configs;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Building
+namespace _Scripts.Gameplay.Building
 {
     public class BuildingMonoInstaller : MonoInstaller
     {

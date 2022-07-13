@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae19bc70d5dc694ea5f1963546cdd52, type: 3}
+  m_Name: DestroyXInfo Impacts
+  m_EditorClassIdentifier: 
+  m_impactConfigs:
+  - {fileID: 11400000, guid: fd67a762368c62a43a34e78a33053692, type: 2}
+  - {fileID: 11400000, guid: fe16152dd570e514d945c432ac51ce85, type: 2}

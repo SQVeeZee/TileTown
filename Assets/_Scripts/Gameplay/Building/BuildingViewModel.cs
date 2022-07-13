@@ -1,13 +1,18 @@
-using Gameplay.Building.Configs;
+using System;
+using _Scripts.Gameplay.Building.Configs;
+using DG.Tweening;
 using JetBrains.Annotations;
 using UI.Building.Impact.Impacts.Configs;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Building
+namespace _Scripts.Gameplay.Building
 {
     public class BuildingViewModel: MonoBehaviour
     {
+        public event Action TileMove = null;
+        public event Action TileRemove = null;
+        
         [SerializeField] private Transform m_transform;
         
         private BuildingModel m_model = null;
@@ -15,6 +20,8 @@ namespace Gameplay.Building
         
         public BaseBuildingConfigs Configs => m_model.Configs;
         public BuildingImpactsConfigs ImpactConfigs => m_model.ImpactsConfigs;
+
+        private Tweener m_moveTween = null;
         
         [Inject]
         public void Constructor(
@@ -28,12 +35,48 @@ namespace Gameplay.Building
 
         public void Remove()
         {
+            TileRemove?.Invoke();
             
+            Destroy(gameObject);
         }
 
-        private void SetPosition(Transform parent)
+        public void ChangePosition(Transform targetTransform, bool isAnimated = true)
         {
-            m_transform.SetParent(parent, false);
+            TileMove?.Invoke();
+            
+            if (isAnimated)
+            {
+                DoMove(targetTransform);
+            }
+            else
+            {
+                SetPosition(targetTransform);
+            }
+        }
+
+        private void DoMove(Transform targetTransform)
+        {
+            ResetMove();
+            
+            Vector3 targetPosition = targetTransform.position;
+            
+            m_moveTween = m_transform.DOMove(targetPosition, 0.5f);
+        }
+
+        private void ResetMove()
+        {
+            m_moveTween?.Kill();
+            m_moveTween = null;
+        }
+
+        private void SetPosition(Transform targetTransform)
+        {
+            m_transform.position = targetTransform.position;
+        }
+
+        public void SetParent(Transform parent, bool positionStays = false)
+        {
+            m_transform.SetParent(parent, positionStays);
         }
         
         [UsedImplicitly]
@@ -43,7 +86,7 @@ namespace Gameplay.Building
             {
                 var instance = base.Create(prefab, parent);
 
-                instance.SetPosition(parent);
+                instance.SetParent(parent);
                 
                 return instance;
             }

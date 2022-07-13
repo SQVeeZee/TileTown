@@ -1,4 +1,4 @@
-using Gameplay.Building.Configs;
+using _Scripts.Gameplay.Building.Configs;
 using UI.Building.Impact.Impacts.Configs;
 using UnityEngine;
 using Zenject;

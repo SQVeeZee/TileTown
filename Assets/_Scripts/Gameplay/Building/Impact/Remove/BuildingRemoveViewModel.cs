@@ -19,6 +19,6 @@ public class BuildingRemoveViewModel : BaseImpact
     {
         var building = tileController.BuildingViewModel;
 
-        building.Remove();
+        // building.Remove();
     }
 }

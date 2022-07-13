@@ -6,23 +6,38 @@ using Zenject;
 
 public abstract class BaseUIView : MonoBehaviour, IUIView
 {
+    [SerializeField] private RectTransform m_transform = null;
     [SerializeField] private Canvas m_canvas = null;
     [SerializeField] private CanvasGroup m_canvasGroup = null;
 
     private UIViewConfigs m_viewConfigs = null;
     private Tweener m_tween = null;
+
+    private UICanvas m_uiCanvas = null;
     
     [Inject]
     public void Constructor(
-        UIViewConfigs viewConfigs
+        UIViewConfigs viewConfigs,
+        UICanvas uiCanvas
         )
     {
         m_viewConfigs = viewConfigs;
+        m_uiCanvas = uiCanvas;
     }
 
     private void Start()
     {
+        SetupTransform();
+        
         DoHide(true);
+    }
+
+    private void SetupTransform()
+    {
+        if (m_transform == null)
+            m_transform = GetComponent<RectTransform>();
+
+        m_transform.SetParent(m_uiCanvas.ViewParent, false);
     }
 
     public void DoShow(bool force = false, Action callback = null)

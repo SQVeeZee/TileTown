@@ -1,30 +1,32 @@
 using System;
 using System.Collections.Generic;
+using _Scripts.Gameplay.Building;
+using _Scripts.Gameplay.Building.Impact.Impacts;
 using Gameplay.Map;
-using Gameplay.Tile;
 using UI.Building.Impact.Impacts.Configs;
-using UnityEngine;
 using Zenject;
 
 namespace UI.Building.Impact.Impacts
 {
-    public class BuildingImpactsViewModel: IInitializable, IDisposable
+    public class BuildingImpactsViewModel
     {
-        public event Action<EBuildingImpactType, TileController> ImpactClicked = null;
+        public event Action<EBuildingImpactType, BuildingViewModel> ImpactClicked = null;
         
         private readonly BuildingImpactsModel m_model = null;
         private readonly UIBuildingImpactsPanel m_view = null;
-        private readonly UIBuildingImpactViewModel.Pool m_impactPool = null;
-        
-        private TileController m_clickedTile = null;
+        private readonly BuildingImpactViewModel.Pool m_impactPool = null;
 
-        private List<UIBuildingImpactViewModel> m_impacts;
+        private readonly MapController m_mapController = null;
+        
+        private BuildingViewModel m_clickedBuilding = null;
+
+        private List<BuildingImpactViewModel> m_impacts;
         
         [Inject]
         BuildingImpactsViewModel(
             BuildingImpactsModel model,
             UIBuildingImpactsPanel view,
-            UIBuildingImpactViewModel.Pool impactPool
+            BuildingImpactViewModel.Pool impactPool
         )
         {
             m_model = model;
@@ -33,37 +35,18 @@ namespace UI.Building.Impact.Impacts
             m_impactPool = impactPool;
         }
 
-        void IInitializable.Initialize()
+        public void EnableBuildingImpactsView(BuildingViewModel building)
         {
-            m_model.Added += OnAddedMapController;
-            m_model.Removed += OnRemovedMapController;
+            OnEnabledBuildingImpactsView(building);
         }
         
-        void IDisposable.Dispose()
+        private void OnEnabledBuildingImpactsView(BuildingViewModel building)
         {
-            m_model.Added -= OnAddedMapController;
-            m_model.Removed -= OnRemovedMapController;
-        }
+            m_clickedBuilding = building;
 
-        private void OnAddedMapController(MapController controller)
-        {
-            controller.FilledTileClicked += OnFilledTileClicked;
-        }
-        
-        private void OnRemovedMapController(MapController controller)
-        {
-            controller.FilledTileClicked -= OnFilledTileClicked;
-        }
-
-        private void OnFilledTileClicked(TileController tileController)
-        {
-            var building = tileController.BuildingViewModel;
-
-            m_model.ImpactsConfigs = building.ImpactConfigs;
+            m_model.ImpactsConfigs = m_clickedBuilding.ImpactConfigs;
 
             FillActionPanel(m_model.ImpactsConfigs);
-
-            m_clickedTile = tileController;
             
             m_view.DoShow();
         }
@@ -74,7 +57,7 @@ namespace UI.Building.Impact.Impacts
             
             if (configs.Count == 0) return;
 
-            m_impacts = new List<UIBuildingImpactViewModel>();
+            m_impacts = new List<BuildingImpactViewModel>();
             
             foreach (var impactConfig in configs)
             {
@@ -88,12 +71,11 @@ namespace UI.Building.Impact.Impacts
 
         private void OnImpactClicked(EBuildingImpactType buildingImpactType)
         {
-            Debug.Log(buildingImpactType);
             m_view.DoHide();
             
-            ImpactClicked?.Invoke(buildingImpactType, m_clickedTile);
+            ImpactClicked?.Invoke(buildingImpactType, m_clickedBuilding);
 
-            m_clickedTile = null;
+            m_clickedBuilding = null;
 
             ClearImpacts();
         }

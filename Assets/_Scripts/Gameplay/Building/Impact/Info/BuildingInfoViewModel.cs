@@ -1,61 +1,54 @@
 using System;
-using Gameplay.Building.Configs;
-using Gameplay.Tile;
-using UI.Building.Impact;
-using UI.Building.Impact.Impacts;
+using _Scripts.Gameplay.Building.Configs;
 using UI.Building.Impact.Info;
 using Zenject;
 
 namespace Gameplay.Building.Impact.Info
 {
-    public class BuildingInfoViewModel: BaseImpact, IInitializable, IDisposable
+    public class BuildingInfoViewModel: IInitializable, IDisposable
     {
         private readonly UIBuildingInfoPanel m_view = null;
         private readonly BuildingInfoModel m_model = null;
-
-        private BaseBuildingConfigs m_baseBuildingConfigs = null;
+        private readonly ImpactsController m_impacts = null;
         
-        public override EBuildingImpactType ImpactType => EBuildingImpactType.SHOW_INFO;
-
         [Inject]
         public BuildingInfoViewModel(
             UIBuildingInfoPanel view,
             BuildingInfoModel model,
-
-            BuildingImpactsViewModel impactsViewModel
-        ) : base(impactsViewModel)
+            
+            ImpactsController impactsController
+        )
         {
             m_view = view;
             m_model = model;
+
+            m_impacts = impactsController;
         }
 
         void IInitializable.Initialize()
         {
-            Initialize();
-
             m_view.CloseButtonPressed += OnCloseButtonPressed;
+            m_impacts.ShowImpactClicked += OnShowImpactClicked;
         }
 
         void IDisposable.Dispose()
         {
-            Dispose();
-            
             m_view.CloseButtonPressed -= OnCloseButtonPressed;
-        }
-        
-        protected override void DoImpact(TileController tileController)
-        {
-            ShowInfo();
+            
+            m_impacts.ShowImpactClicked -= OnShowImpactClicked;
         }
 
-        private void ShowInfo()
+        private void OnShowImpactClicked(BaseBuildingConfigs baseBuildingConfigs)
         {
-            m_baseBuildingConfigs = m_building.Configs;
-            
+            ShowInfo(baseBuildingConfigs);
+        }
+
+        private void ShowInfo(BaseBuildingConfigs baseBuildingConfigs)
+        {
             m_view.Initialize(
-                m_baseBuildingConfigs.BuildingName,
-                m_baseBuildingConfigs.BuildingType.ToString(),
-                m_baseBuildingConfigs.BuildingDescription
+                baseBuildingConfigs.BuildingName,
+                baseBuildingConfigs.BuildingType.ToString(),
+                baseBuildingConfigs.BuildingDescription
                 );
             
             m_view.DoShow();

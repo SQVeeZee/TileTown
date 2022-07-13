@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Building
+namespace _Scripts.Gameplay.Building
 {
     public class BuildingView : MonoBehaviour
     {

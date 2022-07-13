@@ -1,11 +1,10 @@
-using Gameplay.Map;
 using JetBrains.Annotations;
 using UI.Building.Impact.Impacts.Configs;
 
-namespace UI.Building.Impact.Impacts
+namespace _Scripts.Gameplay.Building.Impact.Impacts
 {
     [UsedImplicitly]
-    public class BuildingImpactsModel : BaseSimpleModel<MapController>
+    public class BuildingImpactsModel
     {
         public BuildingImpactsConfigs ImpactsConfigs { get; set; }
     }

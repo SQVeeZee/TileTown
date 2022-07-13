@@ -1,7 +1,6 @@
-using Gameplay.Building.Buildings.Configs;
 using UnityEngine;
 
-namespace Gameplay.Building.Configs
+namespace _Scripts.Gameplay.Building.Configs
 {
     [CreateAssetMenu(fileName = ASSET_FILE_NAME, menuName = ASSET_FILE_PATH, order = ASSET_MENU_ORDER)]
     public class BaseBuildingConfigs : ScriptableObject

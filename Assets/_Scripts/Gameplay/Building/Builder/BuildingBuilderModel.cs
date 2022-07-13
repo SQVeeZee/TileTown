@@ -1,23 +1,22 @@
-using Gameplay.Map;
+using System.Collections.Generic;
+using _Scripts.Gameplay.Building.Builder.Configs;
 using Zenject;
 
-namespace Gameplay.Building.Builder
+namespace _Scripts.Gameplay.Building.Builder
 {
-    public class BuildingBuilderModel: BaseSimpleModel<MapController>
+    public sealed class BuildingBuilderModel
     {
         private readonly BuildingsBuilderConfigs m_configs = null;
-
-        public BuildingsBuilderConfigs BuilderConfigs => m_configs;
+        
+        public IReadOnlyList<BuildingBuilderConfigs> BuilderConfigs => m_configs.GroupBuilderConfigs;
         
         [Inject]
         public BuildingBuilderModel(
             BuildingsBuilderConfigs configs
-        )
+            )
         {
             m_configs = configs;
         }
-
-        public int BuildingsCount => m_configs.GroupBuilderConfigs.Count;
 
         public bool TryGetBuildingConfig(EBuildingType buildingType, out BuildingBuilderConfigs configs)
         {

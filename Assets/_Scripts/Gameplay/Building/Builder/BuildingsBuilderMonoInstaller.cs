@@ -1,4 +1,7 @@
-using UI.Building.Impact.Builder;
+using _Scripts.Gameplay.Building;
+using _Scripts.Gameplay.Building.Builder;
+using _Scripts.Gameplay.Building.Builder.Configs;
+using _Scripts.UI.Buildings.Builder;
 using UnityEngine;
 using Zenject;
 
@@ -6,14 +9,11 @@ namespace Gameplay.Building.Builder
 {
     public class BuildingsBuilderMonoInstaller : MonoInstaller
     {
-        [SerializeField] private RectTransform m_parent = null;
-
         [Header("Configs")] 
         [SerializeField] private BuildingsBuilderConfigs m_configs = null;
 
         [Header("View")] 
         [SerializeField] private UIBuildingsBuilderPanel m_view = null;
-
         [SerializeField] private GameObject m_uiBuildingPrefab = null;
 
         public override void InstallBindings()
@@ -35,7 +35,6 @@ namespace Gameplay.Building.Builder
         {
             Container.BindInterfacesAndSelfTo<UIBuildingsBuilderPanel>()
                 .FromComponentInNewPrefab(m_view)
-                .UnderTransform(m_parent)
                 .AsSingle().NonLazy();
         }
 
