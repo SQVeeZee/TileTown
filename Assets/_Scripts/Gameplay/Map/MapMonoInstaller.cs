@@ -23,6 +23,9 @@ namespace _Scripts.Gameplay.Tile.Map
             Container.BindInterfacesAndSelfTo<MapGenerationSystem>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GridMapGenerator>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<MapController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<MapModel>().AsSingle().NonLazy();
+            
+            Container.BindInterfacesAndSelfTo<MapHighlighting>().AsSingle().NonLazy();
         }
 
         private void BindTileFactory()

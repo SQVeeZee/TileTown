@@ -10,7 +10,7 @@ namespace _Scripts.UI.Building.Impact
 {
     public class UIBuildingImpactViewModel: MonoBehaviour, IPoolable<BuildingImpactConfigs, Transform>
     {
-        public event Action<EBuildingImpactType> ImpactClicked = null;
+        public event Action<EImpactType> ImpactClicked = null;
         
         [SerializeField] private RectTransform m_transform = null;
         

@@ -69,8 +69,6 @@
                 </e>
                 <e p="Info" t="Include">
                   <e p="BuildingInfoModel.cs" t="Include" />
-                  <e p="BuildingInfoMonoInstaller.cs" t="Include" />
-                  <e p="BuildingInfoViewModel.cs" t="Include" />
                 </e>
                 <e p="Remove" t="Include">
                   <e p="BuildingRemoveViewModel.cs" t="Include" />
@@ -80,8 +78,31 @@
             <e p="GameController" t="Include">
               <e p="GameController.cs" t="Include" />
             </e>
+            <e p="Impacts" t="Include">
+              <e p="BaseImpactViewModel.cs" t="Include" />
+              <e p="Move" t="Include">
+                <e p="MoveImpactModel.cs" t="Include" />
+                <e p="MoveImpactMonoInstaller.cs" t="Include" />
+                <e p="MoveImpactViewModel.cs" t="Include" />
+              </e>
+              <e p="Remove" t="Include">
+                <e p="RemoveImpactModel.cs" t="Include" />
+                <e p="RemoveImpactMonoInstaller.cs" t="Include" />
+                <e p="RemoveImpactView.cs" t="Include" />
+                <e p="RemoveImpactViewModel.cs" t="Include" />
+              </e>
+              <e p="ShowInfo" t="Include">
+                <e p="InfoImpactModel.cs" t="Include" />
+                <e p="InfoImpactMonoInstaller.cs" t="Include" />
+                <e p="InfoImpactView.cs" t="Include" />
+                <e p="InfoImpactViewModel.cs" t="Include" />
+              </e>
+            </e>
             <e p="Level" t="Include">
+              <e p="LevelConfigs.cs" t="Include" />
               <e p="LevelController.cs" t="Include" />
+              <e p="LevelModel.cs" t="Include" />
+              <e p="LevelMonoInstaller.cs" t="Include" />
               <e p="Levels" t="Include">
                 <e p="LevelsMonoInstaller.cs" t="Include" />
               </e>
@@ -93,6 +114,8 @@
               <e p="IMapGenerator.cs" t="Include" />
               <e p="MapController.cs" t="Include" />
               <e p="MapGenerationSystem.cs" t="Include" />
+              <e p="MapHighlighting.cs" t="Include" />
+              <e p="MapModel.cs" t="Include" />
               <e p="MapMonoInstaller.cs" t="Include" />
             </e>
             <e p="Tile" t="Include">
@@ -123,7 +146,7 @@
                 <e p="UIBuildingsBuilderPanel.cs" t="Include" />
               </e>
               <e p="Impact" t="Include">
-                <e p="EBuildingImpactType.cs" t="Include" />
+                <e p="EImpactType.cs" t="Include" />
                 <e p="Impacts" t="Include">
                   <e p="BuildingImpactsMonoInstaller.cs" t="Include" />
                   <e p="Info" t="Include">

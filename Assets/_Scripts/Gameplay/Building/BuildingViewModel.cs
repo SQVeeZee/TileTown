@@ -20,7 +20,8 @@ namespace _Scripts.Gameplay.Building
         
         public BaseBuildingConfigs Configs => m_model.Configs;
         public BuildingImpactsConfigs ImpactConfigs => m_model.ImpactsConfigs;
-
+        public Transform ImpactPoint => m_view.ImpactPoint;
+        
         private Tweener m_moveTween = null;
         
         [Inject]
@@ -52,6 +53,8 @@ namespace _Scripts.Gameplay.Building
             {
                 SetPosition(targetTransform);
             }
+            
+            m_transform.SetParent(targetTransform, true);
         }
 
         private void DoMove(Transform targetTransform)

@@ -8,17 +8,24 @@ namespace _Scripts.Gameplay.Level
     public class LevelController: MonoBehaviour
     {
         private MapGenerationSystem m_mapGenerator = null;
+        private LevelModel m_model = null;
         
         [Inject]
         public void Construct(
-            MapGenerationSystem mapGenerator)
+            MapGenerationSystem mapGenerator,
+            LevelModel model
+            )
         {
             m_mapGenerator = mapGenerator;
+
+            m_model = model;
         }
         
         private void Start()
         {
-            m_mapGenerator.GenerateMap();
+            (int width, int height) gridSize = (m_model.Width, m_model.Height);
+            
+            m_mapGenerator.GenerateMap(gridSize);
         }
 
         private void SetParent(Transform parent)

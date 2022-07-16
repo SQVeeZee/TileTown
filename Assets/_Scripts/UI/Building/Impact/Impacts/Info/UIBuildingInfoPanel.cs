@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace _Scripts.UI.Building.Impact.Info
+namespace _Scripts.Gameplay.Building.Impact.Info
 {
     public class UIBuildingInfoPanel : BaseUIView
     {

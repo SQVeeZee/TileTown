@@ -23,7 +23,6 @@ namespace _Scripts.Gameplay.Building.Builder
         
         private TileController m_clickedTile = null;
         
-        
         [Inject]
         public BuildingsBuilderViewModel(
             BuildingBuilderModel model,
@@ -44,17 +43,36 @@ namespace _Scripts.Gameplay.Building.Builder
             
             m_mapController = mapController;
         }
-
+        
         void IInitializable.Initialize()
         {
-            m_mapController.EmptyTileClicked += OnEmptyTileClicked;
+            m_mapController.UpdateSelectedTile += OnUpdateSelectedTile;
         }
 
         void IDisposable.Dispose()
         {
-            m_mapController.EmptyTileClicked -= OnEmptyTileClicked;
+            m_mapController.UpdateSelectedTile -= OnUpdateSelectedTile;
         }
 
+        private void OnUpdateSelectedTile(TileController previousTile, TileController selectedTile)
+        {
+            if(CanShowBuildingPanel(selectedTile))
+            {
+                OnEmptyTileClicked(selectedTile);
+            }
+        }
+
+        private bool CanShowBuildingPanel(TileController selectedTile)
+        {
+            if (m_mapController.InteractionState.HasFlag(EMapInteractionState.BUILDER)
+                && selectedTile.TileState == ETileState.EMPTY)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        
         private void OnEmptyTileClicked(TileController tileController)
         {
             Validation();

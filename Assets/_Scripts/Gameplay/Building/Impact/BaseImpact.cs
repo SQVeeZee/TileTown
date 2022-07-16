@@ -10,7 +10,7 @@ namespace _Scripts.Gameplay.Building.Impact
 
         protected BuildingViewModel m_building = null;
 
-        public abstract EBuildingImpactType ImpactType { get; }
+        public abstract EImpactType ImpactType { get; }
         protected abstract void DoImpact(TileController tileController);
 
         protected BaseImpact(

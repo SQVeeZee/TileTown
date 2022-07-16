@@ -11,11 +11,11 @@ namespace _Scripts.UI.Building.Impact.Configs
         private const string ASSET_FILE_PATH = nameof(BuildingImpactsConfigs) + "/Configs/" + ASSET_FILE_NAME;
         private const int ASSET_MENU_ORDER = int.MinValue + 1001;
 
-        [SerializeField] private EBuildingImpactType m_buildImpactType = EBuildingImpactType.NONE;
+        [SerializeField] private EImpactType m_buildImpactType = EImpactType.NONE;
         [SerializeField] private Color m_color = Color.white;
         [SerializeField] private string m_impactName = default;
         
-        public EBuildingImpactType BuildImpactType => m_buildImpactType;
+        public EImpactType BuildImpactType => m_buildImpactType;
         public Color ImpactColor => m_color;
         public string ImpactName => m_impactName;
     }

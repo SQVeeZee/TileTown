@@ -7,7 +7,7 @@ namespace _Scripts.Gameplay.Building.Impact.Remove
 {
     public class BuildingRemoveViewModel : BaseImpact
     {
-        public override EBuildingImpactType ImpactType => EBuildingImpactType.REMOVE;
+        public override EImpactType ImpactType => EImpactType.REMOVE;
 
         [Inject]
         public BuildingRemoveViewModel(

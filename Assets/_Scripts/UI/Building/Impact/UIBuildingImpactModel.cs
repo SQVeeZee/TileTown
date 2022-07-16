@@ -9,11 +9,13 @@ namespace _Scripts.UI.Building.Impact
     {
         private BuildingImpactConfigs m_configs = null;
 
-        public EBuildingImpactType ImpactType => m_configs.BuildImpactType;
-        
+        public EImpactType ImpactType { get; private set; }
+    
         public void Initialize(BuildingImpactConfigs impactConfigs)
         {
             m_configs = impactConfigs;
+            
+            ImpactType = m_configs.BuildImpactType;
         }
     }
 }

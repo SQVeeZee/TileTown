@@ -1,5 +1,6 @@
 using System;
 using _Scripts.Gameplay.Tile.Map.Grid;
+using UnityEngine;
 using Zenject;
 
 namespace _Scripts.Gameplay.Tile.Map
@@ -18,9 +19,9 @@ namespace _Scripts.Gameplay.Tile.Map
             m_mapGenerator = mapGenerator;
         }
 
-        public void GenerateMap()
+        public void GenerateMap((int width, int height) size)
         {
-            var map = m_mapGenerator.GenerateMap();
+            var map = m_mapGenerator.GenerateMap(size);
 
             MapGenerated?.Invoke(map);
         }

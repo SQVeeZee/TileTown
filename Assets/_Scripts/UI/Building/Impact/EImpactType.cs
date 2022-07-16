@@ -1,6 +1,6 @@
 namespace _Scripts.Gameplay.Building.Impact
 {
-    public enum EBuildingImpactType
+    public enum EImpactType
     {
         NONE = 0,
 

@@ -10,9 +10,6 @@ namespace _Scripts.Gameplay.Tile.Map.Grid
         
         private readonly TileController.Factory m_tileFactory = null;
 
-        private int m_width = 5;
-        private int m_height = 4;
-        
         [Inject]
         public GridMapGenerator(
             TileController.Factory tileFactory
@@ -21,18 +18,21 @@ namespace _Scripts.Gameplay.Tile.Map.Grid
             m_tileFactory = tileFactory;
         }
         
-        TileController[,] IMapGenerator.GenerateMap()
+        TileController[,] IMapGenerator.GenerateMap((int width, int height) size)
         {
-            return GenerateMap();
+            return GenerateMap(size);
         }
 
-        private TileController[,] GenerateMap()
+        private TileController[,] GenerateMap((int width, int height) size)
         {
-            TileController[,] map = new TileController[m_width, m_height];
+            int width = size.width;
+            int height = size.height;
             
-            for (int i = 0; i < m_width; i++)
+            TileController[,] map = new TileController[width, height];
+            
+            for (int i = 0; i < width; i++)
             {
-                for (int j = 0; j < m_height; j++)
+                for (int j = 0; j < height; j++)
                 {
                     Vector2 tilePosition = new Vector2(i, j); 
                     

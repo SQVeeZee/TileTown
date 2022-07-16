@@ -9,7 +9,7 @@ namespace _Scripts.UI.View
 {
     public abstract class BaseUIView : MonoBehaviour, IUIView
     {
-        [SerializeField] private RectTransform m_transform = null;
+        [SerializeField] protected RectTransform m_transform = null;
         [SerializeField] private UnityEngine.Canvas m_canvas = null;
         [SerializeField] private CanvasGroup m_canvasGroup = null;
 

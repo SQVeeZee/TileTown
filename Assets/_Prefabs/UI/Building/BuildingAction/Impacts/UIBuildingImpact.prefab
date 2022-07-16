@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 809274316127170217}
   - component: {fileID: 5427547333225119734}
   m_Layer: 0
-  m_Name: UIBuildingImpactViewModel
+  m_Name: UIBuildingImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
