@@ -18,7 +18,7 @@ namespace _Scripts.Gameplay.Building
             Container.BindInstance(m_configs);
             Container.BindInterfacesAndSelfTo<BuildingViewModel>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildingView>().FromInstance(m_view).AsSingle();
-            Container.BindInterfacesAndSelfTo<BuildingModel>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BuildingData>().AsSingle();
         }
     }
 }

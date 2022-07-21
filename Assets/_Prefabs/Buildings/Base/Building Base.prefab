@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 3681807547551902683}
   - component: {fileID: 3681807547551902680}
   - component: {fileID: 3681807547551902681}
-  - component: {fileID: 8999460555867196640}
   m_Layer: 0
   m_Name: Building Base
   m_TagString: Untagged
@@ -103,19 +102,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_configs: {fileID: 11400000, guid: 4f0b12d35796f93459d8d5f412b4e4fc, type: 2}
   m_view: {fileID: 848653127033616183}
---- !u!114 &8999460555867196640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3681807547551902682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edd228acce47d4e4a9c52ab9d450ee8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_transform: {fileID: 3681807547551902683}
 --- !u!1 &3681807549174315535
 GameObject:
   m_ObjectHideFlags: 0

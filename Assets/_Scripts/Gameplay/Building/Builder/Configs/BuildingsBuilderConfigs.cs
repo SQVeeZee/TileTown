@@ -8,7 +8,7 @@ namespace _Scripts.Gameplay.Building.Builder.Configs
     public class BuildingsBuilderConfigs : ScriptableObject
     {
         private const string ASSET_FILE_NAME = nameof(BuildingsBuilderConfigs);
-        private const string ASSET_FILE_PATH = nameof(BuildingBuilderConfigs) + "/Configs/" + ASSET_FILE_NAME;
+        private const string ASSET_FILE_PATH = nameof(BuildingBuilderConfigs) + "/Data/" + ASSET_FILE_NAME;
         private const int ASSET_MENU_ORDER = int.MinValue + 1001;
 
         [SerializeField] private List<BuildingBuilderConfigs> m_builderConfigs;

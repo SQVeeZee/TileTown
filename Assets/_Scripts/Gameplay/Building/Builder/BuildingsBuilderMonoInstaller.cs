@@ -8,11 +8,11 @@ namespace _Scripts.Gameplay.Building.Builder
 {
     public class BuildingsBuilderMonoInstaller : MonoInstaller
     {
-        [Header("Configs")] 
+        [Header("Data")] 
         [SerializeField] private BuildingsBuilderConfigs m_configs = null;
 
         [Header("View")] 
-        [SerializeField] private UIBuildingsBuilderPanel m_view = null;
+        [SerializeField] private UIBuildingsBuilderScreen m_view = null;
         [SerializeField] private GameObject m_uiBuildingPrefab = null;
 
         public override void InstallBindings()
@@ -32,7 +32,7 @@ namespace _Scripts.Gameplay.Building.Builder
 
         private void BindView()
         {
-            Container.BindInterfacesAndSelfTo<UIBuildingsBuilderPanel>()
+            Container.BindInterfacesAndSelfTo<UIBuildingsBuilderScreen>()
                 .FromComponentInNewPrefab(m_view)
                 .AsSingle().NonLazy();
         }
@@ -40,15 +40,15 @@ namespace _Scripts.Gameplay.Building.Builder
         private void BindViewModel()
         {
             Container.Bind<BuildingBuilderModel>().AsSingle();
-            Container.BindInterfacesAndSelfTo<BuildingsBuilderViewModel>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<BuildingsBuilderModule>().AsSingle().NonLazy();
         }
         
         private void BindFactory()
         {
-            Container.BindFactory<UnityEngine.Object, Transform, BuildingViewModel, BuildingViewModel.Factory>()
-                .FromFactory<PrefabFactory<Transform, BuildingViewModel>>();
+            Container.BindFactory<UnityEngine.Object, Transform, BuildingView, BuildingViewModel.Factory>()
+                .FromFactory<PrefabFactory<Transform, BuildingView>>();
             
-            Container.BindFactory<UIBuildingViewModel, UIBuildingViewModel.Factory>()
+            Container.BindFactory<UIBuildingView, UIBuildingViewModel.Factory>()
                 .FromComponentInNewPrefab(m_uiBuildingPrefab);
         }
     }

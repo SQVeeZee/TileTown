@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56b835d224d41843b485134c66059da, type: 3}
   m_Name: TileViewConfigs
   m_EditorClassIdentifier: 
-  m_interactiveColor: {r: 0.33456588, g: 0.8867924, b: 0.323484, a: 0.65882355}
+  m_tileData:
+    m_interactiveColor: {r: 0.2790138, g: 0.9339623, b: 0.4139985, a: 0.6156863}
+    m_selectedColor: {r: 0.48166603, g: 0.5969779, b: 0.9339623, a: 1}

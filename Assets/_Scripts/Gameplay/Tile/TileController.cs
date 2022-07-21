@@ -1,3 +1,4 @@
+using System;
 using _Scripts.Gameplay.Building;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -5,72 +6,71 @@ using Zenject;
 
 namespace _Scripts.Gameplay.Tile
 {
-    public class TileController : MonoBehaviour
+    public interface ISelectable
     {
-        [SerializeField] private Transform m_tileTransform = null;
+        public event Action<bool> SelectStateChanged;
+        void Select();
+        void UnSelect();
+    }
+    
+    [UsedImplicitly]
+    public class TileController: ISelectable
+    {
+        public event Action<bool> TileHighlightStateChanged = null;
+        public event Action<bool> SelectStateChanged;
+
+        public Color InteractiveColor => m_model.TileData.InteractiveColor;
+        public Color SelectedColor => m_model.TileData.SelectedColor;
+        public Transform TileTransform => m_model.TileTransform;
         
-        private TileView m_view = null;
+        public ETileState GetTileState => m_model.TileState;
+        
         private TileModel m_model = null;
-
-        public Transform TileTransform => m_tileTransform;
-
-        public ETileState TileState { get; private set; } = ETileState.EMPTY;
-        
-        public BuildingViewModel BuildingViewModel { get; private set; } = null;
-        
-        private Vector3 m_tileSize = default;
-        private Vector3 m_position = default;
 
         [Inject]
         public void Construct(
-            TileView view,
             TileModel model
         )
         {
-            m_view = view;
             m_model = model;
         }
 
-        private void Start()
+        public void Initialize(
+            Transform tileTransform,
+            Vector3 tileSize
+            )
         {
-            m_model.DefaultColor = m_view.SpriteColor;
+            m_model.TileTransform = tileTransform;
+            m_model.TileSize = tileSize;
         }
 
-        public void SetPosition(Vector3 position)
+        public void SetTilePosition(Vector3 position)
         {
-            ReceiveTileStartSize();
-            
-            m_position = new Vector3(position.x, 0, position.y);
-            
-            m_view.ChangePosition(m_position);
+            m_model.Position = position;
         }
-
+        
         public void SetTileBuilding(BuildingViewModel building)
         {
             if (building == null) return;
             
-            BuildingViewModel = building;
-            TileState = ETileState.FILLED;
-                
-            BuildingViewModel.TileMove += ResetBuilding;
-            BuildingViewModel.TileRemove += ResetBuilding;
+            m_model.BuildingViewModel = building;
+            m_model.TileState = ETileState.FILLED;
         }
 
-        private void ResetBuilding()
+        public void SetTileHighlightState(bool state)
         {
-            BuildingViewModel.TileMove -= ResetBuilding;
-            BuildingViewModel.TileRemove -= ResetBuilding;
-            
-            TileState = ETileState.EMPTY;
-            BuildingViewModel = null;
+            TileHighlightStateChanged?.Invoke(state);
         }
 
         public bool IsClickedTile(Vector3 clickPosition)
         {
-            Vector2 clickedPoint = new Vector2(clickPosition.x, clickPosition.y);
-            Vector2 tilePosition = new Vector2(m_position.x, m_position.z);
+            var position = m_model.Position;
+            var tileSize = m_model.TileSize;
             
-            if (Vector2.Distance(clickedPoint, tilePosition) < m_tileSize.x)
+            Vector2 clickedPoint = new Vector2(clickPosition.x, clickPosition.y);
+            Vector2 tilePosition = new Vector2(position.x, position.z);
+            
+            if (Vector2.Distance(clickedPoint, tilePosition) < tileSize.x)
             {
                 return true;
             }
@@ -78,38 +78,23 @@ namespace _Scripts.Gameplay.Tile
             return false;
         }
 
-        public void TryToHighlight()
+        void ISelectable.Select()
         {
-            if (IsFreeTile())
-            {
-                ChangeToInteractiveColor();
-            }
+            SelectStateChanged?.Invoke(true);
         }
 
-        private bool IsFreeTile()
+        void ISelectable.UnSelect()
         {
-            if (TileState == ETileState.EMPTY) 
-                return true;
-
-            return false;
-        }
-
-        private void ChangeToInteractiveColor()
-        {
-            m_view.ChangeColor(m_model.ViewConfigs.InteractiveColor);
-        }
-
-        public void ChangeToDefaultColor()
-        {
-            m_view.ChangeColor(m_model.DefaultColor);
+            SelectStateChanged?.Invoke(false);
         }
         
-        private void ReceiveTileStartSize()
+        private void ResetBuilding()
         {
-            m_tileSize = m_tileTransform.lossyScale / 2;
+            m_model.TileState = ETileState.EMPTY;
+            m_model.BuildingViewModel = null;
         }
         
         [UsedImplicitly]
-        public class Factory : PlaceholderFactory<TileController> { }
+        public class Factory : PlaceholderFactory<TileView> { }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace _Scripts.Gameplay.Tile
 {
@@ -7,26 +8,53 @@ namespace _Scripts.Gameplay.Tile
         [SerializeField] private Transform m_tileTransform = null;
         [SerializeField] private Transform m_hudPoint = null;
 
-        [Header("View")] [SerializeField] private SpriteRenderer m_sprite = null;
+        [Header("View")] 
+        [SerializeField] private SpriteRenderer m_sprite = null;
 
         public Transform HudPoint => m_hudPoint;
-        public Color SpriteColor => m_sprite.color;
 
-        public void ChangePosition(Transform parent, Vector2 position)
+        public TileController TileController { get; private set; }
+        
+        private Color m_defaultColor = Color.white;
+        
+        [Inject]
+        public void Constructor(
+            TileController controller)
         {
-            m_tileTransform.SetParent(parent);
+            TileController = controller;
 
-            m_tileTransform.position = position;
+            m_defaultColor = m_sprite.color;
+
+            TileController.TileHighlightStateChanged += OnHighlightingChanged;
+            TileController.SelectStateChanged += OnSelectStateChanged;
+                
+            BindController();
         }
 
-        public void ChangePosition(Vector3 position)
+        private void BindController()
         {
-            m_tileTransform.position = position;
+            var tileSize = m_tileTransform.lossyScale / 2;
+            
+            TileController.Initialize(m_tileTransform, tileSize);
+        }
+        
+        private void OnSelectStateChanged(bool state)
+        {
+            m_sprite.color = state ? TileController.SelectedColor : m_defaultColor;
         }
 
-        public void ChangeColor(Color targetColor)
+        private void OnHighlightingChanged(bool state)
         {
-            m_sprite.color = targetColor;
+            m_sprite.color = state ? TileController.InteractiveColor : m_defaultColor;
+        }
+        
+        public void SetPosition(Vector3 targetPosition)
+        {
+            targetPosition = new Vector3(targetPosition.x, 0, targetPosition.y);
+
+            TileController.SetTilePosition(targetPosition);
+
+            m_tileTransform.position = targetPosition;
         }
     }
 }

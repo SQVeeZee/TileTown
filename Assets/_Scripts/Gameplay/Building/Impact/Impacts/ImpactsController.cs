@@ -10,17 +10,17 @@ namespace _Scripts.Gameplay.Building.Impact.Impacts
         public event Action<EImpactType> ClickImpact = null;
         
         private readonly BuildingImpactsViewModel m_impactsViewModel;
-        private readonly MapController m_mapController = null;
+        private readonly MapClickModule m_mapClickModule = null;
         
         [Inject]
         public ImpactsController(
             BuildingImpactsViewModel impactsViewModel,
-            MapController mapController
+            MapClickModule mapClickModule
         )
         {
             m_impactsViewModel = impactsViewModel;
 
-            m_mapController = mapController;
+            m_mapClickModule = mapClickModule;
         }
 
         void IInitializable.Initialize()

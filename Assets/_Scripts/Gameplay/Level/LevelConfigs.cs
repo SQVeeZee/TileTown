@@ -6,7 +6,7 @@ namespace _Scripts.Gameplay.Level.Configs
     public class LevelConfigs : ScriptableObject
     {
         private const string ASSET_FILE_NAME = nameof(LevelConfigs);
-        private const string ASSET_FILE_PATH = nameof(_Scripts) + "/Configs/" + ASSET_FILE_NAME;
+        private const string ASSET_FILE_PATH = nameof(_Scripts) + "/Data/" + ASSET_FILE_NAME;
         private const int ASSET_MENU_ORDER = int.MinValue + 1001;
 
 

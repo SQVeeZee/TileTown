@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 5297812372968264682}
   - component: {fileID: 8983868023090027366}
   - component: {fileID: 4571249193637484784}
-  - component: {fileID: 2864962715098907315}
+  - component: {fileID: 2867821413139550574}
   m_Layer: 5
   m_Name: UIBuildingViewModel
   m_TagString: Untagged
@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27069d2bcec68474e83d78d8efcc6be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_view: {fileID: 1182196938103726940}
---- !u!114 &2864962715098907315
+  m_view: {fileID: 2867821413139550574}
+--- !u!114 &2867821413139550574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,10 +163,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3780363110641348149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b81a46351fa19ff4982e087018f218e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c2b54922cf976a42bb2009be8c38e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_transform: {fileID: 5297812372968264682}
+  m_Button: {fileID: 5167997965417054928}
+  m_nameText: {fileID: 4850704940323067153}
+  m_iconImage: {fileID: 8775616408850746912}
 --- !u!1 &4711924459675793975
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +254,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2039414458019306174}
-  - component: {fileID: 1182196938103726940}
   m_Layer: 5
   m_Name: UIBuildingView
   m_TagString: Untagged
@@ -281,21 +282,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1182196938103726940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7142200015019269870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c2b54922cf976a42bb2009be8c38e5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Button: {fileID: 5167997965417054928}
-  m_nameText: {fileID: 4850704940323067153}
-  m_iconImage: {fileID: 8775616408850746912}
 --- !u!1 &8286678175821091143
 GameObject:
   m_ObjectHideFlags: 0

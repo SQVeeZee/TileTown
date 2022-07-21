@@ -18,7 +18,7 @@ namespace _Scripts.UI.Building.Impact.Impacts
         private readonly UIBuildingImpactsPanel m_view = null;
         private readonly UIBuildingImpactViewModel.Pool m_impactPool = null;
         
-        private readonly MapController m_mapController = null;
+        private readonly MapClickModule m_mapClickModule = null;
         
         private List<UIBuildingImpactViewModel> m_impacts;
         
@@ -28,7 +28,7 @@ namespace _Scripts.UI.Building.Impact.Impacts
             UIBuildingImpactsPanel view,
             UIBuildingImpactViewModel.Pool impactPool,
             
-            MapController mapController
+            MapClickModule mapClickModule
         )
         {
             m_model = model;
@@ -36,17 +36,17 @@ namespace _Scripts.UI.Building.Impact.Impacts
 
             m_impactPool = impactPool;
 
-            m_mapController = mapController;
+            m_mapClickModule = mapClickModule;
         }
 
         void IInitializable.Initialize()
         {
-            m_mapController.UpdateSelectedTile += OnUpdateSelectedTile;
+            // m_mapClickModule.UpdateSelectedTile += OnUpdateSelectedTile;
         }
 
         void IDisposable.Dispose()
         {
-            m_mapController.UpdateSelectedTile -= OnUpdateSelectedTile;
+            // m_mapClickModule.UpdateSelectedTile -= OnUpdateSelectedTile;
         }
 
         private void OnUpdateSelectedTile(TileController previousTile, TileController selectedTile)
@@ -59,8 +59,8 @@ namespace _Scripts.UI.Building.Impact.Impacts
 
         private bool CanShowBuildingPanel(TileController selectedTile)
         {
-            if (m_mapController.InteractionState.HasFlag(EMapInteractionState.IMPACTS)
-                && selectedTile.TileState == ETileState.FILLED)
+            // if (m_mapClickModule.InteractionState.HasFlag(EMapInteractionState.IMPACTS)
+                // && selectedTile.TileState == ETileState.FILLED)
             {
                 return true;
             }
@@ -70,16 +70,16 @@ namespace _Scripts.UI.Building.Impact.Impacts
 
         private void ShowBuildingPanel(TileController selectedTile)
         {
-            var building = selectedTile.BuildingViewModel;
+            // var building = selectedTile.BuildingViewModel;
             
-            OnEnabledBuildingImpactsView(building);
+            // OnEnabledBuildingImpactsView(building);
         }
         
         private void OnEnabledBuildingImpactsView(BuildingViewModel building)
         {
             var clickedBuilding = building;
 
-            m_model.ImpactsConfigs = clickedBuilding.ImpactConfigs;
+            // m_model.ImpactsConfigs = clickedBuilding.ImpactConfigs;
 
             FillActionPanel(m_model.ImpactsConfigs);
             

@@ -8,7 +8,7 @@ namespace _Scripts.Gameplay.Building.Impact.Move
         
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<MoveImpactViewModel>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<BuildingMoveModule>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<MoveImpactModel>().AsSingle().NonLazy();
             // Container.BindInstance(m_view).AsSingle();
         }

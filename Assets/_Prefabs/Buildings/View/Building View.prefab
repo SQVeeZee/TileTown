@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e333e838e4e5d4fa20bbbe76551eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_transform: {fileID: 1885209907374917439}
   m_sprite: {fileID: 1885209907400590679}
   m_impactPoint: {fileID: 5303475197182309184}
 --- !u!1 &1885209907400590633

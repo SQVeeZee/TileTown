@@ -9,7 +9,7 @@ namespace _Scripts.UI
     {
         [SerializeField] private UICanvas m_canvas = null;
 
-        [Header("Configs")] 
+        [Header("Data")] 
         [SerializeField] private UIViewConfigs m_configs = null;
 
         public override void InstallBindings()

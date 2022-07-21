@@ -1,146 +1,53 @@
-using System;
 using System.Collections.Generic;
-using _Scripts.Gameplay.Building.Builder.Configs;
-using _Scripts.Gameplay.Tile;
 using _Scripts.UI.Building;
-using _Scripts.UI.Building.Builder;
-using _Scripts.Gameplay.Tile.Map;
+using UnityEngine;
 using Zenject;
 
 namespace _Scripts.Gameplay.Building.Builder
 {
-    public class BuildingsBuilderViewModel: IInitializable, IDisposable
+    public interface IBuildingsBuilder
+    {
+        List<UIBuildingViewModel> AddBuildingIcon(Transform parentTransform);
+        IBuilding Build(EBuildingType buildingType, Transform parentTransform);
+    }
+    
+    public class BuildingsBuilderViewModel: IBuildingsBuilder
     {
         private readonly BuildingBuilderModel m_model = null;
-        private readonly UIBuildingsBuilderPanel m_view = null;
+        private readonly IBuildingBuilder m_builderModule = null;
 
-        private readonly List<UIBuildingViewModel> m_uiBuildings = new List<UIBuildingViewModel>();
-        
-        private readonly BuildingViewModel.Factory m_buildingsFactory = null;
-        private readonly UIBuildingViewModel.Factory m_uiBuildingsFactory = null;
-
-        private readonly MapController m_mapController = null;
-        
-        private TileController m_clickedTile = null;
-        
         [Inject]
         public BuildingsBuilderViewModel(
             BuildingBuilderModel model,
-            UIBuildingsBuilderPanel view,
-            
-            BuildingViewModel.Factory buildingsFactory,
-            UIBuildingViewModel.Factory uiBuildingsFactory,
-
-            MapController mapController
-        )
+            IBuildingBuilder builderModule
+            )
         {
             m_model = model;
-            m_view = view;
 
-            m_buildingsFactory = buildingsFactory;
+            m_builderModule = builderModule;
+        }
 
-            m_uiBuildingsFactory = uiBuildingsFactory;
+        List<UIBuildingViewModel> IBuildingsBuilder.AddBuildingIcon(Transform parentTransform)
+        {
+            List<UIBuildingViewModel> buildingIcons = new List<UIBuildingViewModel>();
             
-            m_mapController = mapController;
-        }
-        
-        void IInitializable.Initialize()
-        {
-            m_mapController.UpdateSelectedTile += OnUpdateSelectedTile;
-        }
-
-        void IDisposable.Dispose()
-        {
-            m_mapController.UpdateSelectedTile -= OnUpdateSelectedTile;
-        }
-
-        private void OnUpdateSelectedTile(TileController previousTile, TileController selectedTile)
-        {
-            if(CanShowBuildingPanel(selectedTile))
-            {
-                OnEmptyTileClicked(selectedTile);
-            }
-        }
-
-        private bool CanShowBuildingPanel(TileController selectedTile)
-        {
-            if (m_mapController.InteractionState.HasFlag(EMapInteractionState.BUILDER)
-                && selectedTile.TileState == ETileState.EMPTY)
-            {
-                return true;
-            }
-
-            return false;
-        }
-        
-        private void OnEmptyTileClicked(TileController tileController)
-        {
-            Validation();
-            
-            m_clickedTile = tileController;
-            
-            m_view.DoShow();
-        }
-
-        private void Validation()
-        {
-            if (m_uiBuildings.Count == 0)
-            {
-                FillGrid();
-            }
-        }
-        
-        private void FillGrid()
-        {
             var builderConfigs = m_model.BuilderConfigs;
-
-            if (builderConfigs.Count == 0) return;
-
-            foreach (var buildingConfigs in builderConfigs)
+            foreach (var configs in builderConfigs)
             {
-                UIBuildingViewModel buildingViewModel = m_uiBuildingsFactory.Create();
+                var buildingType = configs.BuildingConfigs.BuildingData.BuildingType;
+                var buildingIcon = m_builderModule.CreateBuildingIcon(buildingType, parentTransform);
                 
-                buildingViewModel.Initialize(
-                    buildingConfigs.BuildingConfigs,
-                    buildingConfigs.ViewBuildingConfigs,
-                    m_view.GridRoot);
+                buildingIcons.Add(buildingIcon);
+            }
 
-                m_uiBuildings.Add(buildingViewModel);
-                
-                buildingViewModel.BuildingClicked += OnBuildingClicked;
-            }
-        }
-        
-        private void ClearGrid()
-        {
-            foreach (var uiBuilding in m_uiBuildings)
-            {
-                uiBuilding.BuildingClicked -= OnBuildingClicked;
-                m_uiBuildingsFactory.Remove(uiBuilding);
-            }
-            
-            m_uiBuildings.Clear();
+            return buildingIcons;
         }
 
-        private void OnBuildingClicked(EBuildingType buildingType)
+        IBuilding IBuildingsBuilder.Build(EBuildingType buildingType, Transform parentTransform)
         {
-            BuildBuilding(buildingType);
-            
-            m_clickedTile = null;
-            
-            m_view.DoHide();
-        }
+            var building = m_builderModule.CreateBuilding(buildingType, parentTransform);
 
-        private void BuildBuilding(EBuildingType buildingType)
-        {
-            if (m_model.TryGetBuildingConfig(buildingType, out BuildingBuilderConfigs configs))
-            {
-                var buildingPrefab = configs.BuildingPrefab;
-
-                var instance = m_buildingsFactory.Create(buildingPrefab, m_clickedTile.TileTransform);
-
-                m_clickedTile.SetTileBuilding(instance);
-            }
+            return building;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace _Scripts.UI.Building.Impact.Impacts.Configs
     public class BuildingImpactsConfigs : ScriptableObject
     {
         private const string ASSET_FILE_NAME = nameof(BuildingImpactsConfigs);
-        private const string ASSET_FILE_PATH = nameof(BuildingImpactsConfigs) + "/Configs/" + ASSET_FILE_NAME;
+        private const string ASSET_FILE_PATH = nameof(BuildingImpactsConfigs) + "/Data/" + ASSET_FILE_NAME;
         private const int ASSET_MENU_ORDER = int.MinValue + 1001;
         
         [SerializeField] private List<BuildingImpactConfigs> m_impactConfigs = new List<BuildingImpactConfigs>();

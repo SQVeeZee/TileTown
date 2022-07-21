@@ -36,10 +36,10 @@ namespace _Scripts.Gameplay.Tile.Map.Grid
                 {
                     Vector2 tilePosition = new Vector2(i, j); 
                     
-                    var controller = m_tileFactory.Create();
-                    controller.SetPosition(tilePosition);
+                    var tileView = m_tileFactory.Create();
+                    tileView.SetPosition(tilePosition);
 
-                    map[i, j] = controller;
+                    map[i, j] = tileView.TileController;
                 }   
             }
 

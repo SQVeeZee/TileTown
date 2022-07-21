@@ -28,14 +28,16 @@ namespace _Scripts.UI.Building
 
         public void Initialize(
             BaseBuildingConfigs buildingConfigs,
-            UIBuildingConfigs viewBuildingConfigs,
             Transform parent)
         {
             m_buildingConfigs = buildingConfigs;
-
+            
+            var data = buildingConfigs.BuildingData;
+            var uiData = buildingConfigs.UIData;
+            
             m_view.Initialize(
-                buildingConfigs.BuildingName,
-                viewBuildingConfigs.IconColor
+                data.BuildingName,
+                uiData.BuildingColor
             );
 
             SetTransform(parent);
@@ -45,7 +47,7 @@ namespace _Scripts.UI.Building
 
         private void OnViewClicked()
         {
-            BuildingClicked?.Invoke(m_buildingConfigs.BuildingType);
+            BuildingClicked?.Invoke(m_buildingConfigs.BuildingData.BuildingType);
         }
 
         private void SetTransform(Transform parent)
@@ -61,24 +63,7 @@ namespace _Scripts.UI.Building
         }
 
         [UsedImplicitly]
-        public class Factory : PlaceholderFactory<UIBuildingViewModel>
-        {
-            private List<UIBuildingViewModel> m_buildings = new List<UIBuildingViewModel>();
-
-            public override UIBuildingViewModel Create()
-            {
-                var building = base.Create();
-
-                m_buildings.Add(building);
-
-                return building;
-            }
-
-            public void Remove(UIBuildingViewModel buildingViewModel)
-            {
-                m_buildings.Remove(buildingViewModel);
-                buildingViewModel.Destroy();
-            }
-        }
+        public class Factory : PlaceholderFactory<UIBuildingView>
+        { }
     }
 }

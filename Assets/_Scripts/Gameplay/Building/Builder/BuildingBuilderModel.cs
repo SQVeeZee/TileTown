@@ -24,7 +24,7 @@ namespace _Scripts.Gameplay.Building.Builder
             
             foreach (var buildingsConfig in m_configs.GroupBuilderConfigs)
             {
-                if (buildingsConfig.BuildingConfigs.BuildingType == buildingType)
+                if (buildingsConfig.BuildingConfigs.BuildingData.BuildingType == buildingType)
                 {
                     configs = buildingsConfig;
                     

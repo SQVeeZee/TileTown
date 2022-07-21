@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -6,20 +6,35 @@ namespace _Scripts.Gameplay.Building
 {
     public class BuildingView : MonoBehaviour
     {
+        public event Action<BuildingView> TileDestroyed = null;
+        
+        [SerializeField] private Transform m_transform = null;
+        
         [SerializeField] protected SpriteRenderer m_sprite = null;
         [SerializeField] protected Transform m_impactPoint = null;
 
         public Transform ImpactPoint => m_impactPoint;
-            
-        [UsedImplicitly]
-        public class Factory : PlaceholderFactory<UnityEngine.Object, Transform, BuildingView>
+        
+        public IBuilding Building { get; private set; }
+        
+        [Inject]
+        public void Constructor(
+            IBuilding building
+            )
         {
-            public override BuildingView Create(Object prefab, Transform parent)
-            {
-                var instance = base.Create(prefab, parent);
+            Building = building;
+        }
+        
+        public void Remove()
+        {
+            TileDestroyed?.Invoke(this);
+            
+            Destroy(gameObject);
+        }
 
-                return instance;
-            }
+        public void SetParent(Transform parent, bool positionStays = false)
+        {
+            m_transform.SetParent(parent, positionStays);
         }
     }
 }

@@ -1,91 +1,65 @@
-using System;
-using _Scripts.Gameplay.Building.Configs;
-using DG.Tweening;
+using _Scripts.Gameplay.Building.Impact.Info;
+using _Scripts.Gameplay.Building.Impact.Move;
+using _Scripts.Gameplay.Building.Impact.Remove;
 using JetBrains.Annotations;
-using _Scripts.UI.Building.Impact.Impacts.Configs;
 using UnityEngine;
 using Zenject;
 
 namespace _Scripts.Gameplay.Building
 {
-    public class BuildingViewModel: MonoBehaviour
+    public interface IBuilding
     {
-        public event Action TileMove = null;
-        public event Action TileRemove = null;
+        public void MoveBuilding(Transform buildingTransform, Transform targetTransform);
+        public void RemoveBuilding(BuildingView buildingViewModel);
+        public void GetBuildingInfo();
+    }
+    
+    public class BuildingViewModel: IBuilding
+    {
+        private readonly BuildingData m_data = null;
         
-        [SerializeField] private Transform m_transform;
-        
-        private BuildingModel m_model = null;
-        private BuildingView m_view = null;
-        
-        public BaseBuildingConfigs Configs => m_model.Configs;
-        public BuildingImpactsConfigs ImpactConfigs => m_model.ImpactsConfigs;
-        public Transform ImpactPoint => m_view.ImpactPoint;
-        
-        private Tweener m_moveTween = null;
+        private readonly BuildingMoveModule m_buildingMoveModule = null;
+        private readonly BuildingRemoveModule m_buildingRemoveModule = null;
+        private readonly BuildingInfoModule m_buildingInfoModule = null;
         
         [Inject]
-        public void Constructor(
-            BuildingModel buildingModel,
-            BuildingView buildingView
+        public BuildingViewModel(
+            BuildingData buildingData,
+            BuildingMoveModule buildingMoveModule,
+            BuildingRemoveModule buildingRemoveModule,
+            BuildingInfoModule buildingInfoModule
         )
         {
-            m_model = buildingModel;
-            m_view = buildingView;
+            m_data = buildingData;
+
+            m_buildingMoveModule = buildingMoveModule;
+
+            m_buildingRemoveModule = buildingRemoveModule;
+
+            m_buildingInfoModule = buildingInfoModule;
+        }
+        
+        void IBuilding.MoveBuilding(Transform buildingTransform, Transform targetTransform)
+        {
+            m_buildingMoveModule.ChangePosition(buildingTransform, targetTransform);
         }
 
-        public void Remove()
+        void IBuilding.RemoveBuilding(BuildingView buildingViewModel)
         {
-            TileRemove?.Invoke();
+            m_buildingRemoveModule.RemoveBuilding(buildingViewModel);
+        }
+
+        void IBuilding.GetBuildingInfo()
+        {
+            var buildingConfigs = m_data.Data;
             
-            Destroy(gameObject);
-        }
-
-        public void ChangePosition(Transform targetTransform, bool isAnimated = true)
-        {
-            TileMove?.Invoke();
-            
-            if (isAnimated)
-            {
-                DoMove(targetTransform);
-            }
-            else
-            {
-                SetPosition(targetTransform);
-            }
-            
-            m_transform.SetParent(targetTransform, true);
-        }
-
-        private void DoMove(Transform targetTransform)
-        {
-            ResetMove();
-            
-            Vector3 targetPosition = targetTransform.position;
-            
-            m_moveTween = m_transform.DOMove(targetPosition, 0.5f);
-        }
-
-        private void ResetMove()
-        {
-            m_moveTween?.Kill();
-            m_moveTween = null;
-        }
-
-        private void SetPosition(Transform targetTransform)
-        {
-            m_transform.position = targetTransform.position;
-        }
-
-        public void SetParent(Transform parent, bool positionStays = false)
-        {
-            m_transform.SetParent(parent, positionStays);
+            m_buildingInfoModule.ShowInfo(buildingConfigs);
         }
         
         [UsedImplicitly]
-        public class Factory : PlaceholderFactory<UnityEngine.Object, Transform, BuildingViewModel>
+        public class Factory : PlaceholderFactory<UnityEngine.Object, Transform, BuildingView>
         {
-            public override BuildingViewModel Create(UnityEngine.Object prefab, Transform parent)
+            public override BuildingView Create(Object prefab, Transform parent)
             {
                 var instance = base.Create(prefab, parent);
 

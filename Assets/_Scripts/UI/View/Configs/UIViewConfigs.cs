@@ -6,7 +6,7 @@ namespace _Scripts.UI.View.Configs
     public class UIViewConfigs : ScriptableObject
     {
         private const string ASSET_FILE_NAME = nameof(UIViewConfigs);
-        private const string ASSET_FILE_PATH = nameof(UI) + "/Configs/" + ASSET_FILE_NAME;
+        private const string ASSET_FILE_PATH = nameof(UI) + "/Data/" + ASSET_FILE_NAME;
         private const int ASSET_MENU_ORDER = int.MinValue + 1001;
 
         [SerializeField] private float m_showDuration = 0;
