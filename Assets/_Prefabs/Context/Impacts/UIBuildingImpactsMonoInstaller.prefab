@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9930ddecbdfd540a270138bb55933c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_impactsPanel: {fileID: 1831416043457753450, guid: da9f4368131287644934e341d18042a0, type: 3}
-  m_impactPrefab: {fileID: 5427547333225119734, guid: 728f20380e5fdb345b5587e5bbc419e5, type: 3}
+  m_parent: {fileID: 0}
+  m_buildingImpactsScreen: {fileID: 1831416043457753450, guid: da9f4368131287644934e341d18042a0, type: 3}
+  m_impactPrefab: {fileID: 3060992438347948202, guid: 728f20380e5fdb345b5587e5bbc419e5, type: 3}

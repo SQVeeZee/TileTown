@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da93a4ddecb57704980d3b1aac217847, type: 3}
   m_Name: Red Building
   m_EditorClassIdentifier: 
-  m_buildingName: RED
-  m_buildingType: 13
-  m_buildingDescription: "\u042D\u0442\u043E \u0437\u0434\u0430\u043D\u0438\u0435
-    \u043D\u0435\u043B\u044C\u0437\u044F \u0443\u0434\u0430\u043B\u0438\u0442\u044C\n\u0438
-    \u043F\u043E\u0434\u0432\u0438\u0433\u0430\u0442\u044C. \n\u0422\u0430\u043A\u043E\u0432\u044B
-    \u043F\u0440\u0430\u0432\u0438\u043B\u0430!"
+  m_buildingData:
+    m_buildingName: Red tower
+    m_buildingType: 13
+    m_buildingDescription: 

@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1667303844727104381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7397306329708502845}
+  - component: {fileID: 8472132751533093925}
+  m_Layer: 0
+  m_Name: UIMonoInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7397306329708502845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667303844727104381}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8472132751533093925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667303844727104381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70e08aa2dfcc3014b95c0aca8af45ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_parentTransform: {fileID: 0}
+  m_configs: {fileID: 11400000, guid: 50d30d37e12438a4c98f0e893905a777, type: 2}
+  m_buildingsBuilderScreen: {fileID: 6142685099733860492, guid: 2eb149cb20624aa4a817134b2bf47a0a, type: 3}
+  m_uiBuildingsConfigs: {fileID: 11400000, guid: 20c226f307af80048ae488113170155a, type: 2}
+  m_uiBuildingPrefab: {fileID: 3780363110641348149, guid: 160a6fcc1e06dd842bbace7f7c4a5425, type: 3}
+  m_buildingInfoScreen: {fileID: 2447112727235788046, guid: 5eeadceb672d4d445ab5fa4b1197cbcc, type: 3}
+  m_buildingImpactsScreen: {fileID: 1831416043457753450, guid: da9f4368131287644934e341d18042a0, type: 3}
+  m_impactPrefab: {fileID: 3060992438347948202, guid: 728f20380e5fdb345b5587e5bbc419e5, type: 3}

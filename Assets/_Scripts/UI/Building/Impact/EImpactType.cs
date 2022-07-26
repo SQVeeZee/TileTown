@@ -1,4 +1,4 @@
-namespace _Scripts.Gameplay.Building.Impact
+namespace _Scripts.Gameplay.Building.Impacts
 {
     public enum EImpactType
     {

@@ -1,64 +1,66 @@
+using System;
 using _Scripts.Gameplay.Building.Builder.Configs;
-using _Scripts.UI.Building;
-using UnityEngine;
 using Zenject;
 
 namespace _Scripts.Gameplay.Building.Builder
 {
-    public interface IBuildingBuilder
+    public interface IBuildingsBuilder
     {
-        IBuilding CreateBuilding(EBuildingType buildingType, Transform parentTransform);
-        UIBuildingViewModel CreateBuildingIcon(EBuildingType buildingType, Transform parentTransform);
+        public event Action<IBuilding> BuildingCreated;
+        IBuilding CreateBuilding(EBuildingType buildingType);
     }
     
-    public class BuildingsBuilderModule: IBuildingBuilder
+    public class BuildingsBuilderModule: IBuildingsBuilder
     {
-        private readonly BuildingBuilderModel m_model = null;
-
+        public event Action<IBuilding> BuildingCreated;
+        
+        private readonly BuildingsBuilderConfigs m_configs = null;
         private readonly BuildingViewModel.Factory m_buildingsFactory = null;
-        private readonly UIBuildingViewModel.Factory m_uiBuildingsFactory = null;
         
         [Inject]
         public BuildingsBuilderModule(
-            BuildingBuilderModel model,
-            BuildingViewModel.Factory buildingsFactory,
-            UIBuildingViewModel.Factory uiBuildingFactory
+            BuildingsBuilderConfigs configs,
+            BuildingViewModel.Factory buildingsFactory
         )
         {
-            m_model = model;
-
+            m_configs = configs;
+            
             m_buildingsFactory = buildingsFactory;
-            m_uiBuildingsFactory = uiBuildingFactory;
         }
 
-        IBuilding IBuildingBuilder.CreateBuilding(EBuildingType buildingType, Transform parentTransform)
-        {
-            if (m_model.TryGetBuildingConfig(buildingType, out BuildingBuilderConfigs configs))
-            {
-                var buildingPrefab = configs.ViewBuildingConfigs;
-                
-                var building = m_buildingsFactory.Create(buildingPrefab, parentTransform);
 
-                return building.Building;
+        IBuilding IBuildingsBuilder.CreateBuilding(EBuildingType buildingType)
+        {
+            if (TryGetBuildingConfig(buildingType, out BuildingBuilderConfigs configs))
+            {
+                var buildingPrefab = configs.BuildingPrefab;
+                
+                var buildingView = m_buildingsFactory.Create(buildingPrefab, null);
+                var building = buildingView.BuildingViewModel;
+                
+                BuildingCreated?.Invoke(building);
+                
+                return building;
             }
             
             return null;
-
         }
 
-        UIBuildingViewModel IBuildingBuilder.CreateBuildingIcon(EBuildingType buildingType, Transform parentTransform)
+        private bool TryGetBuildingConfig(EBuildingType buildingType, out BuildingBuilderConfigs configs)
         {
-            if (m_model.TryGetBuildingConfig(buildingType, out BuildingBuilderConfigs configs))
-            {
-                var buildingViewModel = m_uiBuildingsFactory.Create().UiBuildingViewModel;
-                var baseBuildingConfigs = configs.BuildingConfigs;
-                
-                buildingViewModel.Initialize(baseBuildingConfigs, parentTransform);
-                
-                return buildingViewModel;
-            }
+            configs = null;
             
-            return null;
+            foreach (var buildingsConfig in m_configs.GroupBuilderConfigs)
+            {
+                if (buildingsConfig.BuildingConfigs.BuildingData.BuildingType == buildingType)
+                {
+                    configs = buildingsConfig;
+                    
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

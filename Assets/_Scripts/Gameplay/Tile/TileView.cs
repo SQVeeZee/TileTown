@@ -1,60 +1,108 @@
+using System;
+using System.Collections.Generic;
+using _Scripts.Gameplay.Tile.Configs;
+using JetBrains.Annotations;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
 namespace _Scripts.Gameplay.Tile
 {
-    public class TileView : MonoBehaviour
+    public class TileView : MonoBehaviour, IPoolable<Vector3, Transform>
     {
+        [Header("BuildingContainer")]
         [SerializeField] private Transform m_tileTransform = null;
         [SerializeField] private Transform m_hudPoint = null;
 
         [Header("View")] 
         [SerializeField] private SpriteRenderer m_sprite = null;
 
-        public Transform HudPoint => m_hudPoint;
-
-        public TileController TileController { get; private set; }
+        public ITileViewModel TileViewModel { get; private set; }
         
+        public Transform HudPoint => m_hudPoint;
+        public Transform TileTransform => m_tileTransform;
+        
+        private TileData m_tileData = null;
         private Color m_defaultColor = Color.white;
+
+        private List<IDisposable> m_disposables = new List<IDisposable>();
         
         [Inject]
         public void Constructor(
-            TileController controller)
+            ITileViewModel viewModel,
+            TileViewConfigs viewConfigs
+            )
         {
-            TileController = controller;
-
+            TileViewModel = viewModel;
+            
+            m_tileData = viewConfigs.TileData;
+        }
+        
+        public void OnSpawned(Vector3 position, Transform parent)
+        {
+            TileViewModel.BuildingContainer = m_tileTransform;
+            SetTileSize();
+            
             m_defaultColor = m_sprite.color;
+            
+            m_tileTransform.SetParent(parent);
+            m_tileTransform.position = position;
 
-            TileController.TileHighlightStateChanged += OnHighlightingChanged;
-            TileController.SelectStateChanged += OnSelectStateChanged;
-                
-            BindController();
+            TileViewModel.Position = position;
+
+            SubscribeOnDataUpdate();
         }
 
-        private void BindController()
+        private void SetTileSize()
         {
             var tileSize = m_tileTransform.lossyScale / 2;
+            TileViewModel.Size = tileSize;
+        }
+
+        private void SubscribeOnDataUpdate()
+        {
+            m_disposables.Add(TileViewModel.IsHighlighted
+                .ObserveEveryValueChanged(x => x.Value)
+                .Subscribe(OnHighlightStateChanged));
             
-            TileController.Initialize(m_tileTransform, tileSize);
+            m_disposables.Add(TileViewModel.IsSelected
+                .ObserveEveryValueChanged(x => x.Value)
+                .Subscribe(OnSelectedStateChanged));
         }
         
-        private void OnSelectStateChanged(bool state)
+        public void OnDespawned()
         {
-            m_sprite.color = state ? TileController.SelectedColor : m_defaultColor;
+            foreach (var disposable in m_disposables)
+            {
+                disposable.Dispose();
+            }
+            m_disposables.Clear();
         }
 
-        private void OnHighlightingChanged(bool state)
+        private void OnHighlightStateChanged(bool highlightState)
         {
-            m_sprite.color = state ? TileController.InteractiveColor : m_defaultColor;
+            ToggleHighlightingColor(highlightState);
+        }
+
+        private void OnSelectedStateChanged(bool isSelected)
+        {
+            ToggleSelectColor(isSelected);
         }
         
-        public void SetPosition(Vector3 targetPosition)
+        private void ToggleSelectColor(bool state)
         {
-            targetPosition = new Vector3(targetPosition.x, 0, targetPosition.y);
+            m_sprite.color = state ? m_tileData.SelectedColor : m_defaultColor;
+        }
 
-            TileController.SetTilePosition(targetPosition);
+        private void ToggleHighlightingColor(bool state)
+        {
+            m_sprite.color = state ? m_tileData.InteractiveColor : m_defaultColor;
+        }
 
-            m_tileTransform.position = targetPosition;
+        [UsedImplicitly]
+        public class Pool : MonoPoolableMemoryPool<Vector3, Transform, TileView>
+        {
+            
         }
     }
 }

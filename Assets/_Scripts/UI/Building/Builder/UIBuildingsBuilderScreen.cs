@@ -1,44 +1,61 @@
 using System.Collections.Generic;
 using _Scripts.Gameplay.Building;
 using _Scripts.Gameplay.Building.Builder;
-using _Scripts.UI.View;
+using _Scripts.UI.Screen;
 using UnityEngine;
 using Zenject;
 
 namespace _Scripts.UI.Building.Builder
 {
-    public class UIBuildingsBuilderScreen : BaseUIView
+    public class UIBuildingsBuilderScreen : BaseScreen
     {
         [SerializeField] private Transform m_buildingsElementsRoot = null;
-
-        private Transform m_buildingTransform = null;
-
+        
         private IBuildingsBuilder BuildingsBuilder { get; set; }
-        
-        private List<UIBuildingViewModel> m_buildingViewModels = null;
-        
+        private IUIBuildingsBuilderModule m_buildingsIconsBuilderModule = null;
+
+        private List<UIBuildingView> m_buildingViewModels = new List<UIBuildingView>();
+
         [Inject]
         public void Constructor(
-            IBuildingsBuilder buildingsBuilder
-            )
+            IBuildingsBuilder buildingsBuilder,
+            IUIBuildingsBuilderModule uiBuildingsBuilderModule
+        )
         {
             BuildingsBuilder = buildingsBuilder;
 
-            m_buildingViewModels = BuildingsBuilder.AddBuildingIcon(m_buildingsElementsRoot);
+            m_buildingsIconsBuilderModule = uiBuildingsBuilderModule;
+        }
 
+        public override void Initialize()
+        {
+            m_buildingViewModels = m_buildingsIconsBuilderModule.CreateAndGetBuildingIcons(m_buildingsElementsRoot);
+        }
+        
+        public override void Dispose()
+        {
+            
+        }
+
+        protected override void OnAfterScreenShow()
+        {
+            base.OnAfterScreenShow();
+            
             Subscribe();
         }
 
-        public void Initialize(Transform buildingTransform)
+        protected override void OnBeforeScreenHide()
         {
-            m_buildingTransform = buildingTransform;
+            base.OnBeforeScreenHide();
+            
+            UnSubscribe();
         }
 
         private void Subscribe()
         {
             foreach (var building in m_buildingViewModels)
             {
-                building.BuildingClicked += OnBuildingClick;
+                building.ViewClicked += OnBuildingClick;
             }   
         }
 
@@ -46,13 +63,15 @@ namespace _Scripts.UI.Building.Builder
         {
             foreach (var building in m_buildingViewModels)
             {
-                building.BuildingClicked -= OnBuildingClick;
+                building.ViewClicked -= OnBuildingClick;
             }   
         }
 
         private void OnBuildingClick(EBuildingType buildingType)
         {
-            BuildingsBuilder.Build(buildingType, m_buildingTransform);
+            BuildingsBuilder.CreateBuilding(buildingType);
+
+            HideThisScreen();
         }
     }
 }

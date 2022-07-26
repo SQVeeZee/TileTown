@@ -1,6 +1,6 @@
-using _Scripts.Gameplay.Building.Impact.Info;
-using _Scripts.Gameplay.Building.Impact.Move;
-using _Scripts.Gameplay.Building.Impact.Remove;
+using _Scripts.Gameplay.Building.Impacts.Info;
+using _Scripts.Gameplay.Building.Impacts.Move;
+using _Scripts.Gameplay.Building.Impacts.Remove;
 
 namespace _Scripts.Gameplay.Building.Buildings.Blue
 {

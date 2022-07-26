@@ -1,8 +1,8 @@
-using _Scripts.Gameplay.Building.Impact;
-using _Scripts.UI.Building.Impact.Impacts.Configs;
+using _Scripts.Gameplay.Building.Impacts;
+using _Scripts.UI.Building.Impacts.Configs;
 using UnityEngine;
 
-namespace _Scripts.UI.Building.Impact.Configs
+namespace _Scripts.UI.Building.Impacts.Configs
 {
     [CreateAssetMenu(fileName = ASSET_FILE_NAME, menuName = ASSET_FILE_PATH, order = ASSET_MENU_ORDER)]
     public class BuildingImpactConfigs : ScriptableObject

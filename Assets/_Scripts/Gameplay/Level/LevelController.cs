@@ -1,4 +1,5 @@
-using _Scripts.Gameplay.Tile.Map;
+using _Scripts.Gameplay.Level.Configs;
+using _Scripts.Gameplay.Tile.Map.Grid;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
@@ -7,32 +8,33 @@ namespace _Scripts.Gameplay.Level
 {
     public class LevelController: MonoBehaviour
     {
-        private IMap m_mapViewModel = null;
-        private LevelModel m_model = null;
+        [SerializeField] private Transform m_container = null;
+        
+        private LevelConfigs m_levelConfigs = null;
+        private IMapGenerator m_mapGenerator = null;
         
         [Inject]
         public void Construct(
-            LevelModel model,
-            IMap mapViewModel
+            LevelConfigs levelConfigs,
+            IMapGenerator mapViewModel
             )
         {
-            m_mapViewModel = mapViewModel;
+            m_levelConfigs = levelConfigs;
 
-            m_model = model;
+            m_mapGenerator = mapViewModel;
         }
         
-        private void Start()
+        private void Awake()
         {
-            (int width, int height) gridSize = (m_model.Width, m_model.Height);
+            var gridSize = (m_levelConfigs.Width, m_levelConfigs.Height);
             
-            m_mapViewModel.GenerateMap(gridSize);
+            m_mapGenerator.GenerateMap(gridSize, m_container);
         }
 
         private void SetParent(Transform parent)
         {
             transform.SetParent(parent, true);
         }
-        
         
         [UsedImplicitly]
         public class Factory : PlaceholderFactory<UnityEngine.Object, Transform, LevelController>

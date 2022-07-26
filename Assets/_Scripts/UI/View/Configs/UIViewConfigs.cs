@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Scripts.UI.View.Configs
+namespace _Scripts.UI.Screen.Configs
 {
     [CreateAssetMenu(fileName = ASSET_FILE_NAME, menuName = ASSET_FILE_PATH, order = ASSET_MENU_ORDER)]
     public class UIViewConfigs : ScriptableObject

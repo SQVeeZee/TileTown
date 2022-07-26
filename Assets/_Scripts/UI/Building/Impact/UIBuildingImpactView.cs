@@ -1,38 +1,62 @@
+using System;
+using _Scripts.Gameplay.Building.Impacts;
+using _Scripts.UI.Building.Impacts.Configs;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
+using Zenject;
 
-namespace _Scripts.UI.Building.Impact
+namespace _Scripts.UI.Building.Impacts
 {
-    public class UIBuildingImpactView : MonoBehaviour
+    public interface IUIBuildingImpact: IPoolable<BuildingImpactConfigs, Transform>
     {
-        public event System.Action ImpactClicked = null;
+        event Action<EImpactType> ImpactClicked;
+    }
+    
+    public class UIBuildingImpactView : MonoBehaviour, IUIBuildingImpact
+    {
+        public event Action<EImpactType> ImpactClicked;
 
+        [SerializeField] private Transform m_transform = null;
+        
         [SerializeField] private TextMeshProUGUI m_actionText = null;
         [SerializeField] private Image m_backgroundImage = null;
+        [SerializeField] private Button m_button = null;
 
-        [SerializeField] private Button m_actionButton = null;
+        private EImpactType m_buildingType = EImpactType.NONE;
 
-        public void Initialize(
-            string actionText,
-            Color backgroundColor
-            )
+        public void OnSpawned(BuildingImpactConfigs configs, Transform parent)
         {
-            UpdateActionText(actionText);
-            ChangeBackgroundColor(backgroundColor);
+            m_buildingType = configs.BuildImpactType;
+            
+            
+            UpdateActionText(configs.ImpactName);
+            ChangeBackgroundColor(configs.ImpactColor);
 
-            AddListener(OnActionClicked);
+            AddListener();
+
+            SetRootTransform(parent);
+        }
+        
+        public void OnDespawned()
+        {
+            RemoveListener();
         }
 
-        private void AddListener(UnityAction action)
+        private void AddListener()
         {
-            m_actionButton.onClick.AddListener(action);
+            m_button.onClick.AddListener(OnImpactClicked);
+        }
+        
+        private void RemoveListener()
+        {
+            m_button.onClick.AddListener(OnImpactClicked);
         }
 
-        private void OnActionClicked()
+        private void OnImpactClicked()
         {
-            ImpactClicked?.Invoke();
+            ImpactClicked?.Invoke(m_buildingType);
         }
 
         private void ChangeBackgroundColor(Color backgroundColor)
@@ -43,6 +67,17 @@ namespace _Scripts.UI.Building.Impact
         private void UpdateActionText(string text)
         {
             m_actionText.text = text;
+        }
+        
+        private void SetRootTransform(Transform parent)
+        {
+            m_transform.SetParent(parent, false);
+        }
+        
+        [UsedImplicitly]
+        public class Pool : MonoPoolableMemoryPool<BuildingImpactConfigs, Transform, UIBuildingImpactView>
+        {
+            
         }
     }
 }

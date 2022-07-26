@@ -3,38 +3,48 @@ using JetBrains.Annotations;
 
 namespace _Scripts.Gameplay.Tile.Map.Selection
 {
-    [UsedImplicitly]
-    public class MapSelectionModule
+    public interface ISelectionModule
     {
-        public event Action<ISelectable, ISelectable> UpdateSelectedTile = null;
+        event Action<ITileViewModel> TileSelected;
         
-        private ISelectable m_selectedTile = null;
-        private ISelectable m_previousSelectedTile = null;
-
-        public ISelectable SelectedTile
+        ITileViewModel SelectedTile { get; }
+        
+        void Select(ITileViewModel tile);
+        void UnSelect();
+    }
+    
+    [UsedImplicitly]
+    public class MapSelectionModule: ISelectionModule
+    {
+        public event Action<ITileViewModel> TileSelected;
+        public ITileViewModel SelectedTile { get; private set; }
+        public void Select(ITileViewModel tile)
         {
-            get => m_selectedTile;
-            private set => m_selectedTile = value;
+            SelectTile(tile);
         }
 
-        public void SelectTile(ISelectable tile)
+        public void UnSelect()
         {
-            if (tile == m_selectedTile) return;
-
-            UnSelect();
-            
-            m_selectedTile = tile;
-            m_selectedTile.Select();
-            
-            UpdateSelectedTile?.Invoke(m_previousSelectedTile, m_selectedTile);
+            UnselectTile();
         }
 
-        private void UnSelect()
+        private void SelectTile(ITileViewModel tile)
         {
-            if (m_selectedTile == null) return;
+            UnselectTile();
+
+            SelectedTile = tile;
+
+            SelectedTile.Select();
             
-            m_selectedTile.UnSelect();
-            m_previousSelectedTile = m_selectedTile;
+            TileSelected?.Invoke(SelectedTile);
+        }
+
+        private void UnselectTile()
+        {
+            if (SelectedTile == null) return;
+
+            SelectedTile.UnSelect();
+            SelectedTile = null;
         }
     }
 }

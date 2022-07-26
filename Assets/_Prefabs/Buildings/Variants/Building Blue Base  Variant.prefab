@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3681807547551902680, guid: 65a56c92db31c07409946c8070fb2d08, type: 3}
+      propertyPath: _monoInstallers.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3681807547551902682, guid: 65a56c92db31c07409946c8070fb2d08, type: 3}
       propertyPath: m_Name
       value: Building Blue Base  Variant
@@ -67,5 +71,6 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.4054823
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4413604863075673906, guid: 65a56c92db31c07409946c8070fb2d08, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 65a56c92db31c07409946c8070fb2d08, type: 3}

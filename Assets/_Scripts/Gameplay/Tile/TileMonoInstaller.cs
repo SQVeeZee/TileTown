@@ -14,8 +14,7 @@ namespace _Scripts.Gameplay.Tile
         {
             Container.BindInstance(m_viewConfigs).AsSingle();
             
-            Container.BindInterfacesAndSelfTo<TileController>().AsSingle();
-            Container.BindInterfacesAndSelfTo<TileModel>().AsSingle();
+            Container.BindInterfacesAndSelfTo<TileViewModel>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<TileView>().FromInstance(m_view).AsSingle();
         }

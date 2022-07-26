@@ -1,4 +1,7 @@
 using System;
+using _Scripts.Gameplay.Building;
+using _Scripts.UI.Building.Configs;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,27 +11,29 @@ namespace _Scripts.UI.Building
 {
     public class UIBuildingView : MonoBehaviour
     {
-        public event Action ViewClicked = null;
+        public event Action<EBuildingType> ViewClicked = null;
 
+        [SerializeField] private Transform m_transform = null;
+        
         [SerializeField] private Button m_Button = null;
         [SerializeField] private TextMeshProUGUI m_nameText = null;
         [SerializeField] private Image m_iconImage = null;
 
-        public UIBuildingViewModel UiBuildingViewModel = null;
-
-        [Inject]
-        public UIBuildingView(
-            UIBuildingViewModel buildingViewModel
-            )
-        {
-            UiBuildingViewModel = buildingViewModel;
-        }
+        private EBuildingType m_buildingType = EBuildingType.NONE;
         
-        public void Initialize(string nameText, Color iconColor)
+        public void Initialize(UIBuildingConfigs buildingConfigs)
         {
-            UpdateIconColor(iconColor);
-            ChangeName(nameText);
+            var baseBuildingConfigs = buildingConfigs.BuildingIconData;
+            var buildingData = baseBuildingConfigs.BaseBuildingConfigs.BuildingData;
 
+            var buildingType = buildingData.BuildingType;
+            var text = buildingData.BuildingName;
+            var iconColor = baseBuildingConfigs.IconColor;
+            
+            ChangeName(text);
+            UpdateIconColor(iconColor);
+            
+            m_buildingType = buildingType;
             AddListener();
         }
 
@@ -44,7 +49,7 @@ namespace _Scripts.UI.Building
 
         private void OnButtonClicked()
         {
-            ViewClicked?.Invoke();
+            ViewClicked?.Invoke(m_buildingType);
         }
 
         private void UpdateNameText(string nameText)
@@ -56,5 +61,16 @@ namespace _Scripts.UI.Building
         {
             m_iconImage.color = targetColor;
         }
+        
+        public void SetTransform(Transform parent)
+        {
+            m_transform.SetParent(parent, false);
+
+            m_transform.localScale = Vector3.one;
+        }
+        
+        [UsedImplicitly]
+        public class Factory : PlaceholderFactory<UIBuildingView>
+        { }
     }
 }

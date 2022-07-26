@@ -1,74 +1,93 @@
 using System;
+using _Scripts.Gameplay.Building;
+using _Scripts.Gameplay.Building.Builder;
+using _Scripts.Gameplay.Tile.Map.Click;
 using _Scripts.Gameplay.Tile.Map.Selection;
-using _Scripts.UI.Control;
+using _Scripts.UI.Building.Impacts;
+using _Scripts.UI.Screens;
 using UnityEngine;
 using Zenject;
 
 namespace _Scripts.Gameplay.Tile.Map
 {
-    public interface IMap
+    public class MapViewModel: BaseMapClickListener, IInitializable, IDisposable
     {
-        public event Action<TileController> TileClicked;
-        public void GenerateMap((int width, int height) gridSize);
-    }
-    
-    public class MapViewModel: IMap, IInitializable, IDisposable
-    {
-        public event Action<TileController> TileClicked;
+        protected override MapClickMode ClickMode => MapClickMode.SELECTION;
         
-        private readonly MapModel m_model = null;
-        private readonly ControlController m_controlController;
+        private readonly UIManager m_uiManager = null;
+        private readonly ISelectionModule m_selectionModule = null;
+        private readonly IBuildingsBuilder m_buildingsBuilder = null;
+        private readonly IUIBuildingImpacts m_iuiBuildingImpacts = null;
 
-        private readonly MapClickModule m_mapClickModule = null;
-        private readonly MapSelectionModule m_selectionModule = null;
-        private readonly MapGenerationModule m_mapGenerationModule = null;
-
+        private ITileViewModel m_clickedTile = null;
+        
         [Inject]
         public MapViewModel(
-            MapModel model,
-            ControlController controlController,
-            MapClickModule mapClickModule,
-            MapSelectionModule selectionModule,
-            MapGenerationModule mapGenerationModule
-            )
+            UIManager uiManager,
+            ISelectionModule selectionModule,
+            IBuildingsBuilder buildingsBuilderViewModel,
+            IUIBuildingImpacts iuiBuildingImpacts,
+            
+            IMapClickHandler mapClickHandler,
+            IClickModeListener clickModeListener
+        ): base(mapClickHandler, clickModeListener)
         {
-            m_model = model;
-            
-            m_controlController = controlController;
-            
-            m_mapClickModule = mapClickModule;
+            m_uiManager = uiManager;
+
             m_selectionModule = selectionModule;
-            m_mapGenerationModule = mapGenerationModule;
+            m_buildingsBuilder = buildingsBuilderViewModel;
+            m_iuiBuildingImpacts = iuiBuildingImpacts;
         }
-        
+
         void IInitializable.Initialize()
-        {
-            m_controlController.Clicked += OnClicked;
+        { 
+            Initialize();
+            
+            m_buildingsBuilder.BuildingCreated += OnBuildingCreated;
         }
 
         void IDisposable.Dispose()
         {
-            m_controlController.Clicked -= OnClicked;
+            Dispose();
+
+            m_buildingsBuilder.BuildingCreated -= OnBuildingCreated;
+        }
+        
+        private void OnBuildingCreated(IBuilding createdBuilding)
+        {
+            m_clickedTile.Building = createdBuilding;
+            
+            m_selectionModule.UnSelect();
+            
+            createdBuilding.SetRootTransform(m_clickedTile.BuildingContainer);
         }
 
-
-        void IMap.GenerateMap((int width, int height) gridSize)
+        protected override void OnClickTile(ITileViewModel tile)
         {
-            var generateMap = m_mapGenerationModule.GenerateMap(gridSize);
-
-            m_model.Tiles = generateMap;
+            OnTileClicked(tile);
         }
 
-        private void OnClicked(Vector2 screenPosition)
+        private void OnTileClicked(ITileViewModel tile)
         {
-            var clickedTile = m_mapClickModule.GetTileByPosition(m_model.Tiles, screenPosition);
-
-            if (clickedTile != null)
+            if (tile == null) return;
+            
+            m_clickedTile = tile;
+            var tileState = m_clickedTile.IsEmpty;
+            
+            UpdateTileSelection(m_clickedTile);
+            ShowScreenDependsOnTileState(tileState);
+            if (!tile.IsEmpty)
             {
-                m_selectionModule.SelectTile(clickedTile);
-                
-                TileClicked?.Invoke(clickedTile);
+                m_iuiBuildingImpacts.SetBuildingImpactsConfigs(tile.Building.ImpactsConfigs);
             }
         }
+
+        private void UpdateTileSelection(ITileViewModel clickedTile)
+        {
+            m_selectionModule.Select(clickedTile);
+        }
+
+        private void ShowScreenDependsOnTileState(bool isEmpty) =>
+            m_uiManager.ShowScreenByType(isEmpty ? EScreenType.BUILDER : EScreenType.IMPACTS);
     }
 }

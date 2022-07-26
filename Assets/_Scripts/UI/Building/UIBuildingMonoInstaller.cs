@@ -10,7 +10,6 @@ namespace UI.Building
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<UIBuildingViewModel>().AsSingle();
             Container.BindInterfacesAndSelfTo<UIBuildingView>().FromInstance(m_view).AsSingle();
         }
     }

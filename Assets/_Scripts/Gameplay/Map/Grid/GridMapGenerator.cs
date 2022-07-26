@@ -6,40 +6,40 @@ namespace _Scripts.Gameplay.Tile.Map.Grid
 {
     public class GridMapGenerator : IMapGenerator
     {
-        public event Action<TileController[,]> MapGenerated = null;
+        public event Action<ITileViewModel[,]> MapGenerated = null;
         
-        private readonly TileController.Factory m_tileFactory = null;
+        private readonly TileView.Pool m_tilePool = null;
 
         [Inject]
         public GridMapGenerator(
-            TileController.Factory tileFactory
+            TileView.Pool tilePool
         )
         {
-            m_tileFactory = tileFactory;
+            m_tilePool = tilePool;
         }
         
-        TileController[,] IMapGenerator.GenerateMap((int width, int height) size)
+        ITileViewModel[,] IMapGenerator.GenerateMap((int width, int height) size, Transform parent)
         {
-            return GenerateMap(size);
+            return GenerateMap(size, parent);
         }
 
-        private TileController[,] GenerateMap((int width, int height) size)
+        private ITileViewModel[,] GenerateMap((int width, int height) size, Transform parent)
         {
             int width = size.width;
             int height = size.height;
             
-            TileController[,] map = new TileController[width, height];
+            ITileViewModel[,] map = new ITileViewModel[width, height];
             
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
-                    Vector2 tilePosition = new Vector2(i, j); 
+                    Vector3 tilePosition = new Vector3(i,0, j); 
                     
-                    var tileView = m_tileFactory.Create();
-                    tileView.SetPosition(tilePosition);
-
-                    map[i, j] = tileView.TileController;
+                    var tileView = m_tilePool.Spawn(tilePosition, parent);
+                    tileView.gameObject.name = $"Tile {i}:{j}";
+                    
+                    map[i, j] = tileView.TileViewModel;
                 }   
             }
 

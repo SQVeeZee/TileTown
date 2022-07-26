@@ -1,128 +1,71 @@
 using System;
 using System.Collections.Generic;
-using _Scripts.Gameplay.Building;
-using _Scripts.Gameplay.Building.Impact;
-using _Scripts.Gameplay.Building.Impact.Impacts;
-using _Scripts.Gameplay.Tile;
-using _Scripts.Gameplay.Tile.Map;
-using _Scripts.UI.Building.Impact.Impacts.Configs;
+using _Scripts.Gameplay.Building.Impacts;
+using _Scripts.UI.Building.Impacts.Builder;
+using _Scripts.UI.Building.Impacts.Configs;
+using JetBrains.Annotations;
+using UniRx;
+using UnityEngine;
 using Zenject;
 
-namespace _Scripts.UI.Building.Impact.Impacts
+namespace _Scripts.UI.Building.Impacts
 {
-    public class BuildingImpactsViewModel: IInitializable,IDisposable
+    public interface IUIBuildingImpacts
+    {
+        event Action<EImpactType> ImpactClicked;
+
+        ReactiveProperty<BuildingImpactsConfigs> BuildingImpactsConfigs { get; }
+        
+        void CreateImpacts(Transform parent);
+        void SetBuildingImpactsConfigs(BuildingImpactsConfigs impactsConfigs);
+    }
+    
+    [UsedImplicitly]
+    public class UIBuildingImpactsViewModel: IUIBuildingImpacts, IDisposable
     {
         public event Action<EImpactType> ImpactClicked = null;
+
+        public ReactiveProperty<BuildingImpactsConfigs> BuildingImpactsConfigs { get; } = 
+            new ReactiveProperty<BuildingImpactsConfigs>();
         
-        private readonly BuildingImpactsModel m_model = null;
-        private readonly UIBuildingImpactsPanel m_view = null;
-        private readonly UIBuildingImpactViewModel.Pool m_impactPool = null;
+        private readonly UIBuildingImpactsBuilder m_buildingImpactsBuilder = null;
         
-        private readonly MapClickModule m_mapClickModule = null;
-        
-        private List<UIBuildingImpactViewModel> m_impacts;
+        private List<IUIBuildingImpact> m_uiBuildingImpacts = new List<IUIBuildingImpact>();
         
         [Inject]
-        BuildingImpactsViewModel(
-            BuildingImpactsModel model,
-            UIBuildingImpactsPanel view,
-            UIBuildingImpactViewModel.Pool impactPool,
-            
-            MapClickModule mapClickModule
+        public UIBuildingImpactsViewModel(
+            UIBuildingImpactsBuilder buildingImpactsBuilder
         )
         {
-            m_model = model;
-            m_view = view;
-
-            m_impactPool = impactPool;
-
-            m_mapClickModule = mapClickModule;
+            m_buildingImpactsBuilder = buildingImpactsBuilder;
         }
 
-        void IInitializable.Initialize()
+        void IUIBuildingImpacts.CreateImpacts(Transform parent)
         {
-            // m_mapClickModule.UpdateSelectedTile += OnUpdateSelectedTile;
+            m_uiBuildingImpacts = m_buildingImpactsBuilder.FillActionPanel(BuildingImpactsConfigs.Value, parent);
+            
+            foreach (var impact in m_uiBuildingImpacts)
+            {
+                impact.ImpactClicked += OnImpactClicked;
+            }
         }
 
         void IDisposable.Dispose()
         {
-            // m_mapClickModule.UpdateSelectedTile -= OnUpdateSelectedTile;
-        }
-
-        private void OnUpdateSelectedTile(TileController previousTile, TileController selectedTile)
-        {
-            if(CanShowBuildingPanel(selectedTile))
+            foreach (var impact in m_uiBuildingImpacts)
             {
-                ShowBuildingPanel(selectedTile);
+                impact.ImpactClicked -= OnImpactClicked;
             }
-        }
-
-        private bool CanShowBuildingPanel(TileController selectedTile)
-        {
-            // if (m_mapClickModule.InteractionState.HasFlag(EMapInteractionState.IMPACTS)
-                // && selectedTile.TileState == ETileState.FILLED)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private void ShowBuildingPanel(TileController selectedTile)
-        {
-            // var building = selectedTile.BuildingViewModel;
-            
-            // OnEnabledBuildingImpactsView(building);
         }
         
-        private void OnEnabledBuildingImpactsView(BuildingViewModel building)
+        void IUIBuildingImpacts.SetBuildingImpactsConfigs(BuildingImpactsConfigs impactsConfigs)
         {
-            var clickedBuilding = building;
-
-            // m_model.ImpactsConfigs = clickedBuilding.ImpactConfigs;
-
-            FillActionPanel(m_model.ImpactsConfigs);
-            
-            m_view.DoShow();
-        }
-        
-        private void FillActionPanel(BuildingImpactsConfigs impactsConfigs)
-        {
-            var configs = impactsConfigs.ImpactConfigs;
-            
-            if (configs.Count == 0) return;
-
-            m_impacts = new List<UIBuildingImpactViewModel>();
-            
-            foreach (var impactConfig in configs)
-            {
-                var instance = m_impactPool.Spawn(impactConfig, m_view.ImpactParent);
-                
-                m_impacts.Add(instance);
-                
-                instance.ImpactClicked += OnImpactClicked;
-            }
+            BuildingImpactsConfigs.Value = impactsConfigs;
         }
 
         private void OnImpactClicked(EImpactType impactType)
         {
-            m_view.DoHide();
-            
             ImpactClicked?.Invoke(impactType);
-
-            ClearImpacts();
-        }
-
-        private void ClearImpacts()
-        {
-            foreach (var impact in m_impacts)
-            {
-                impact.ImpactClicked -= OnImpactClicked;
-                
-                m_impactPool.Despawn(impact);
-            }
-
-            m_impacts.Clear();
         }
     }
 }

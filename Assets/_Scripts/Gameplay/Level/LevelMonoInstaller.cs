@@ -11,8 +11,6 @@ namespace _Scripts.Gameplay.Level
         public override void InstallBindings()
         {
             Container.BindInstance(m_levelConfigs).AsSingle();
-            // Container.BindInterfacesAndSelfTo<LevelController>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<LevelModel>().AsSingle().NonLazy();
         }
     }
 }

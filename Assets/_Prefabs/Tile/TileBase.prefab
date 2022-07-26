@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 75791022534846265}
-  - component: {fileID: 1354300602517292576}
   m_Layer: 0
   m_Name: BaseView
   m_TagString: Untagged
@@ -35,21 +34,6 @@ Transform:
   m_Father: {fileID: 75791022852826401}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1354300602517292576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 75791022534846262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a200f4898f5b39446b3a5b554e4d367a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tileTransform: {fileID: 75791022852826401}
-  m_hudPoint: {fileID: 2739956484055782040}
-  m_sprite: {fileID: 75791022586962337}
 --- !u!1 &75791022586962335
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +129,7 @@ GameObject:
   - component: {fileID: 75791022852826401}
   - component: {fileID: 409905795728905025}
   - component: {fileID: 5303914323762106610}
+  - component: {fileID: 5419006568166222649}
   m_Layer: 0
   m_Name: TileBase
   m_TagString: Untagged
@@ -201,7 +186,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_viewConfigs: {fileID: 11400000, guid: c7fd40f24c6df7c47b64f24797cc003f, type: 2}
-  m_view: {fileID: 1354300602517292576}
+  m_view: {fileID: 5419006568166222649}
+--- !u!114 &5419006568166222649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75791022852826398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a200f4898f5b39446b3a5b554e4d367a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tileTransform: {fileID: 75791022852826401}
+  m_hudPoint: {fileID: 2739956484055782040}
+  m_sprite: {fileID: 75791022586962337}
 --- !u!1 &170871997389779191
 GameObject:
   m_ObjectHideFlags: 0

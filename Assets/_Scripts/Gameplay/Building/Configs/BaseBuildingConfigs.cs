@@ -11,10 +11,8 @@ namespace _Scripts.Gameplay.Building.Configs
         private const int ASSET_MENU_ORDER = int.MinValue + 1001;
 
         [SerializeField] private BaseBuildingData m_buildingData = null;
-        [SerializeField] private UIBuildingData m_uiData = null;
 
         public BaseBuildingData BuildingData => m_buildingData;
-        public UIBuildingData UIData => m_uiData;
     }
 
     [Serializable]
@@ -30,13 +28,5 @@ namespace _Scripts.Gameplay.Building.Configs
         public string BuildingName => m_buildingName;
         public EBuildingType BuildingType => m_buildingType;
         public string BuildingDescription => m_buildingDescription;
-    }
-
-    [Serializable]
-    public class UIBuildingData
-    {
-        [SerializeField] private Color m_buildingColor = Color.white;
-
-        public Color BuildingColor => m_buildingColor;
     }
 }

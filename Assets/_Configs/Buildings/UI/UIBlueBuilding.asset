@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2397c36d6a9f52f4fb5c0a2274bbc775, type: 3}
   m_Name: UIBlueBuilding
   m_EditorClassIdentifier: 
-  m_buildingConfigs: {fileID: 11400000, guid: 4f0b12d35796f93459d8d5f412b4e4fc, type: 2}
-  m_color: {r: 0.3285273, g: 0.3876364, b: 0.9245283, a: 1}
+  m_buildingIconData:
+    m_baseBuildingConfigs: {fileID: 11400000, guid: 4f0b12d35796f93459d8d5f412b4e4fc, type: 2}
+    m_color: {r: 0.29963204, g: 0.45448646, b: 0.9433962, a: 1}

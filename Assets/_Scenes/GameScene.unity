@@ -850,7 +850,6 @@ GameObject:
   - component: {fileID: 1799557703}
   - component: {fileID: 1799557704}
   - component: {fileID: 1799557705}
-  - component: {fileID: 1799557706}
   m_Layer: 0
   m_Name: UICanvas
   m_TagString: Untagged
@@ -922,19 +921,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &1799557706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799557701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 126df18ae882d7842aeaa9fceb7ff5b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_canvasTransform: {fileID: 1799557703}
 --- !u!1 &1896551879
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,9 +1015,17 @@ PrefabInstance:
       propertyPath: m_parent
       value: 
       objectReference: {fileID: 1799557703}
+    - target: {fileID: 8412600495318679261, guid: 59c89bdb9fd696347930651696ea3fb1, type: 3}
+      propertyPath: m_parent
+      value: 
+      objectReference: {fileID: 1799557703}
     - target: {fileID: 8849733978227048383, guid: 59c89bdb9fd696347930651696ea3fb1, type: 3}
       propertyPath: m_canvas
       value: 
-      objectReference: {fileID: 1799557706}
+      objectReference: {fileID: 0}
+    - target: {fileID: 8849733978227048383, guid: 59c89bdb9fd696347930651696ea3fb1, type: 3}
+      propertyPath: m_parentTransform
+      value: 
+      objectReference: {fileID: 1799557703}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59c89bdb9fd696347930651696ea3fb1, type: 3}
