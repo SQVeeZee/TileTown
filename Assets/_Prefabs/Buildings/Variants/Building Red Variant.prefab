@@ -12,9 +12,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 68357d4592971ef40b109676a9d01c9b, type: 2}
     - target: {fileID: 596375480471336184, guid: 4cedcd8c688893d4abd020569f8cb3a5, type: 3}
+      propertyPath: _configs
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f5590b23f03f9a4f980eca738b89c4a, type: 2}
+    - target: {fileID: 596375480471336184, guid: 4cedcd8c688893d4abd020569f8cb3a5, type: 3}
       propertyPath: m_configs
       value: 
       objectReference: {fileID: 11400000, guid: 6f5590b23f03f9a4f980eca738b89c4a, type: 2}
+    - target: {fileID: 596375480471336184, guid: 4cedcd8c688893d4abd020569f8cb3a5, type: 3}
+      propertyPath: _impactsConfigs
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b269252d60e9cb499bcaaeba0423e98, type: 2}
     - target: {fileID: 596375480471336186, guid: 4cedcd8c688893d4abd020569f8cb3a5, type: 3}
       propertyPath: m_RootOrder
       value: 0

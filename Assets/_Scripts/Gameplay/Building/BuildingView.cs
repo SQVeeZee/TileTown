@@ -8,16 +8,16 @@ namespace _Scripts.Gameplay.Building
 {
     public class BuildingView : MonoBehaviour
     {
-        [SerializeField] protected SpriteRenderer m_sprite = null;
-        [SerializeField] protected Transform m_impactPoint = null;
+        [SerializeField] protected SpriteRenderer _sprite = null;
+        [SerializeField] protected Transform _impactPoint = null;
         
-        [SerializeField] private Transform m_transform = null;
+        [SerializeField] private Transform _transform = null;
 
-        public Transform ImpactPoint => m_impactPoint;
+        public Transform ImpactPoint => _impactPoint;
 
         public IBuilding BuildingViewModel { get; private set; } = null;
 
-        private readonly Stack<IDisposable> m_disposables = new Stack<IDisposable>();
+        private readonly Stack<IDisposable> _disposables = new Stack<IDisposable>();
         
         [Inject]
         public void Constructor(
@@ -36,18 +36,18 @@ namespace _Scripts.Gameplay.Building
 
         private void Initialize()
         {
-            BuildingViewModel.BuildingTransform = m_transform;
+            BuildingViewModel.BuildingTransform = _transform;
             
-            m_disposables.Push(BuildingViewModel.RootTransform
+            _disposables.Push(BuildingViewModel.RootTransform
                 .ObserveEveryValueChanged(x => x.Value)
                 .Subscribe(SetParent));
         }
         
         private void Dispose()
         {
-            for (int i = 0; i < m_disposables.Count; i++)
+            for (int i = 0; i < _disposables.Count; i++)
             {
-                if (m_disposables.TryPop(out IDisposable disposable))
+                if (_disposables.TryPop(out IDisposable disposable))
                 {
                     disposable.Dispose();
                 }
@@ -63,7 +63,7 @@ namespace _Scripts.Gameplay.Building
 
         private void SetParent(Transform parent)
         {
-            m_transform.SetParent(parent, false);
+            _transform.SetParent(parent, false);
         }
     }
 }

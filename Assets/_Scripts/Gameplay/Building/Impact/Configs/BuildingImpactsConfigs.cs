@@ -2,17 +2,17 @@ using System.Collections.Generic;
 using _Scripts.UI.Building.Impacts.Configs;
 using UnityEngine;
 
-namespace _Scripts.UI.Building.Impacts.Configs
+namespace _Scripts.Gameplay.Building.Impact.Configs
 {
-    [CreateAssetMenu(fileName = ASSET_FILE_NAME, menuName = ASSET_FILE_PATH, order = ASSET_MENU_ORDER)]
+    [CreateAssetMenu(fileName = AssetFileName, menuName = AssetFilePath, order = AssetMenuOrder)]
     public class BuildingImpactsConfigs : ScriptableObject
     {
-        private const string ASSET_FILE_NAME = nameof(BuildingImpactsConfigs);
-        private const string ASSET_FILE_PATH = nameof(BuildingImpactsConfigs) + "/Data/" + ASSET_FILE_NAME;
-        private const int ASSET_MENU_ORDER = int.MinValue + 1001;
+        private const string AssetFileName = nameof(BuildingImpactsConfigs);
+        private const string AssetFilePath = nameof(BuildingImpactsConfigs) + "/Data/" + AssetFileName;
+        private const int AssetMenuOrder = int.MinValue + 1001;
         
-        [SerializeField] private List<BuildingImpactConfigs> m_impactConfigs = new List<BuildingImpactConfigs>();
+        [SerializeField] private List<BuildingImpactConfigs> _impactConfigs = new List<BuildingImpactConfigs>();
 
-        public IReadOnlyList<BuildingImpactConfigs> ImpactConfigs => m_impactConfigs;
+        public IReadOnlyList<BuildingImpactConfigs> ImpactConfigs => _impactConfigs;
     }
 }

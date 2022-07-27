@@ -1,15 +1,15 @@
 using System;
 
-namespace Cameras
+namespace _Scripts.Cameras
 {
     [Serializable]
     public enum ECameraId
     {
-        NONE = 0,
+        None = 0,
         
-        BASE = 1,
+        Base = 1,
         
-        GAME = 10,
+        Game = 10,
         
         UI = 20
     }

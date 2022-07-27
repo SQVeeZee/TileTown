@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da93a4ddecb57704980d3b1aac217847, type: 3}
   m_Name: Purple Building
   m_EditorClassIdentifier: 
-  m_buildingData:
-    m_buildingName: weapon house
-    m_buildingType: 12
-    m_buildingDescription: 
+  _buildingData:
+    _buildingName: Purple smth
+    _buildingType: 12
+    _buildingDescription: IDK what is it but you need it!

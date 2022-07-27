@@ -315,10 +315,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a216c8a9d58fc5468f9c0f354147051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_transform: {fileID: 8877472557299215188}
-  m_canvas: {fileID: 3675936350652423703}
-  m_canvasGroup: {fileID: 2576076687896855166}
-  m_buildingsElementsRoot: {fileID: 3675936351232370941}
+  _transform: {fileID: 8877472557299215188}
+  _canvas: {fileID: 3675936350652423703}
+  _canvasGroup: {fileID: 2576076687896855166}
+  _buildingsElementsRoot: {fileID: 3675936351232370941}
 --- !u!1 &5468349331944188944
 GameObject:
   m_ObjectHideFlags: 0

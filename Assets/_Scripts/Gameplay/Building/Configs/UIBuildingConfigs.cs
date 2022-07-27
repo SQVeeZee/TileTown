@@ -1,28 +1,27 @@
 using System;
-using _Scripts.Gameplay.Building.Configs;
 using UnityEngine;
 
-namespace _Scripts.UI.Building.Configs
+namespace _Scripts.Gameplay.Building.Configs
 {
-    [CreateAssetMenu(fileName = ASSET_FILE_NAME, menuName = ASSET_FILE_PATH, order = ASSET_MENU_ORDER)]
+    [CreateAssetMenu(fileName = AssetFileName, menuName = AssetFilePath, order = AssetMenuOrder)]
     public class UIBuildingConfigs : ScriptableObject
     {
-        private const string ASSET_FILE_NAME = nameof(UIBuildingConfigs);
-        private const string ASSET_FILE_PATH = nameof(UIBuildingsConfigs) + "/" + ASSET_FILE_NAME;
-        private const int ASSET_MENU_ORDER = int.MinValue + 1001;
+        private const string AssetFileName = nameof(UIBuildingConfigs);
+        private const string AssetFilePath = nameof(UIBuildingsConfigs) + "/" + AssetFileName;
+        private const int AssetMenuOrder = int.MinValue + 1001;
 
-        [SerializeField] private UIBuildingIconData m_buildingIconData = null;
+        [SerializeField] private UIBuildingIconData _buildingIconData = null;
         
-        public UIBuildingIconData BuildingIconData => m_buildingIconData;
+        public UIBuildingIconData BuildingIconData => _buildingIconData;
     }
 
     [Serializable]
     public class UIBuildingIconData
     {
-        [SerializeField] private BaseBuildingConfigs m_baseBuildingConfigs = null;
-        [SerializeField] private Color m_color = Color.white;
+        [SerializeField] private BaseBuildingConfigs _baseBuildingConfigs = null;
+        [SerializeField] private Color _color = Color.white;
         
-        public BaseBuildingConfigs BaseBuildingConfigs => m_baseBuildingConfigs;
-        public Color IconColor => m_color;
+        public BaseBuildingConfigs BaseBuildingConfigs => _baseBuildingConfigs;
+        public Color IconColor => _color;
     }
 }

@@ -9,27 +9,27 @@ namespace _Scripts.UI.Building.Builder
 {
     public class UIBuildingsBuilderScreen : BaseScreen
     {
-        [SerializeField] private Transform m_buildingsElementsRoot = null;
+        [SerializeField] private Transform _buildingsElementsRoot = null;
         
         private IBuildingsBuilder BuildingsBuilder { get; set; }
-        private IUIBuildingsBuilderModule m_buildingsIconsBuilderModule = null;
+        private IUIBuildingsBuilderModule _buildingsIconsBuilderModule = null;
 
-        private List<UIBuildingView> m_buildingViewModels = new List<UIBuildingView>();
+        private List<UIBuildingView> _buildingViewModels = new List<UIBuildingView>();
 
         [Inject]
         public void Constructor(
             IBuildingsBuilder buildingsBuilder,
-            IUIBuildingsBuilderModule uiBuildingsBuilderModule
+            IUIBuildingsBuilderModule iuiBuildingsBuilderModule
         )
         {
             BuildingsBuilder = buildingsBuilder;
 
-            m_buildingsIconsBuilderModule = uiBuildingsBuilderModule;
+            _buildingsIconsBuilderModule = iuiBuildingsBuilderModule;
         }
 
         public override void Initialize()
         {
-            m_buildingViewModels = m_buildingsIconsBuilderModule.CreateAndGetBuildingIcons(m_buildingsElementsRoot);
+            _buildingViewModels = _buildingsIconsBuilderModule.CreateAndGetBuildingIcons(_buildingsElementsRoot);
         }
         
         public override void Dispose()
@@ -53,7 +53,7 @@ namespace _Scripts.UI.Building.Builder
 
         private void Subscribe()
         {
-            foreach (var building in m_buildingViewModels)
+            foreach (var building in _buildingViewModels)
             {
                 building.ViewClicked += OnBuildingClick;
             }   
@@ -61,7 +61,7 @@ namespace _Scripts.UI.Building.Builder
 
         private void UnSubscribe()
         {
-            foreach (var building in m_buildingViewModels)
+            foreach (var building in _buildingViewModels)
             {
                 building.ViewClicked -= OnBuildingClick;
             }   

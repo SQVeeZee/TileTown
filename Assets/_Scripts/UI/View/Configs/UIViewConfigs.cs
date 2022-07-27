@@ -1,18 +1,18 @@
 using UnityEngine;
 
-namespace _Scripts.UI.Screen.Configs
+namespace _Scripts.UI.View.Configs
 {
-    [CreateAssetMenu(fileName = ASSET_FILE_NAME, menuName = ASSET_FILE_PATH, order = ASSET_MENU_ORDER)]
+    [CreateAssetMenu(fileName = AssetFileName, menuName = AssetFilePath, order = AssetMenuOrder)]
     public class UIViewConfigs : ScriptableObject
     {
-        private const string ASSET_FILE_NAME = nameof(UIViewConfigs);
-        private const string ASSET_FILE_PATH = nameof(UI) + "/Data/" + ASSET_FILE_NAME;
-        private const int ASSET_MENU_ORDER = int.MinValue + 1001;
+        private const string AssetFileName = nameof(UIViewConfigs);
+        private const string AssetFilePath = nameof(UI) + "/Data/" + AssetFileName;
+        private const int AssetMenuOrder = int.MinValue + 1001;
 
-        [SerializeField] private float m_showDuration = 0;
-        [SerializeField] private float m_hideDuration = 0;
+        [SerializeField] private float _showDuration = 0;
+        [SerializeField] private float _hideDuration = 0;
 
-        public float ShowDuration => m_showDuration;
-        public float HideDuration => m_hideDuration;
+        public float ShowDuration => _showDuration;
+        public float HideDuration => _hideDuration;
     }
 }

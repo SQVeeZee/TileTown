@@ -4,18 +4,12 @@ using Zenject;
 
 namespace _Scripts.Gameplay.Building.Builder
 {
-    public interface IBuildingsBuilder
-    {
-        public event Action<IBuilding> BuildingCreated;
-        IBuilding CreateBuilding(EBuildingType buildingType);
-    }
-    
     public class BuildingsBuilderModule: IBuildingsBuilder
     {
         public event Action<IBuilding> BuildingCreated;
         
-        private readonly BuildingsBuilderConfigs m_configs = null;
-        private readonly BuildingViewModel.Factory m_buildingsFactory = null;
+        private readonly BuildingsBuilderConfigs _configs = null;
+        private readonly BuildingViewModel.Factory _buildingsFactory = null;
         
         [Inject]
         public BuildingsBuilderModule(
@@ -23,9 +17,9 @@ namespace _Scripts.Gameplay.Building.Builder
             BuildingViewModel.Factory buildingsFactory
         )
         {
-            m_configs = configs;
+            _configs = configs;
             
-            m_buildingsFactory = buildingsFactory;
+            _buildingsFactory = buildingsFactory;
         }
 
 
@@ -35,7 +29,7 @@ namespace _Scripts.Gameplay.Building.Builder
             {
                 var buildingPrefab = configs.BuildingPrefab;
                 
-                var buildingView = m_buildingsFactory.Create(buildingPrefab, null);
+                var buildingView = _buildingsFactory.Create(buildingPrefab, null);
                 var building = buildingView.BuildingViewModel;
                 
                 BuildingCreated?.Invoke(building);
@@ -50,7 +44,7 @@ namespace _Scripts.Gameplay.Building.Builder
         {
             configs = null;
             
-            foreach (var buildingsConfig in m_configs.GroupBuilderConfigs)
+            foreach (var buildingsConfig in _configs.GroupBuilderConfigs)
             {
                 if (buildingsConfig.BuildingConfigs.BuildingData.BuildingType == buildingType)
                 {

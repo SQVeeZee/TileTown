@@ -1,47 +1,30 @@
 using System;
 using _Scripts.Gameplay.Tile;
-using _Scripts.Gameplay.Tile.Map.Selection;
-using Zenject;
+using JetBrains.Annotations;
 
 namespace _Scripts.Gameplay.Building.Impacts.Move
 {
-    public interface IMoveImpactModule
-    {
-        void DoMoveImpact(ITileViewModel targetTile, Action callback);
-        void ResetTileSelection();
-    }
-
+    [UsedImplicitly]
     public class MoveImpactModule: IMoveImpactModule
     {
-        private readonly ISelectionModule m_selectionModule = null;
+        public event Action MoveImpactCompleted;
+        
+        private ITileViewModel _selectedTile = null;
 
-        private ITileViewModel m_selectedTile = null;
-        
-        [Inject]
-        public MoveImpactModule(
-            ISelectionModule selectionModule
-        )
-        {
-            m_selectionModule = selectionModule;
-        }
-        
-        void IMoveImpactModule.DoMoveImpact(ITileViewModel targetTile, Action callback)
+        void IMoveImpactModule.DoMoveImpact(ITileViewModel clickedTile, ITileViewModel targetTile)
         {
             if (!targetTile.IsEmpty) return;
             
-            m_selectedTile = m_selectionModule.SelectedTile;
-            var building = m_selectedTile.Building;
+            _selectedTile = clickedTile;
+            var building = clickedTile.Building;
 
             targetTile.Building = building;
             building.MoveBuilding(targetTile.BuildingContainer);
-            
-            callback?.Invoke();
-        }
 
-        void IMoveImpactModule.ResetTileSelection()
-        {
-            m_selectedTile.Building = null;
-            m_selectionModule.UnSelect();
+            _selectedTile.Building = null;
+            _selectedTile.UnSelect();
+            
+            MoveImpactCompleted?.Invoke();
         }
     }
 }

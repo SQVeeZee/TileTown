@@ -11,21 +11,22 @@ namespace _Scripts.Gameplay.Tile
     public class TileView : MonoBehaviour, IPoolable<Vector3, Transform>
     {
         [Header("BuildingContainer")]
-        [SerializeField] private Transform m_tileTransform = null;
-        [SerializeField] private Transform m_hudPoint = null;
+        [SerializeField] private Transform _tileTransform = null;
+        [SerializeField] private Transform _hudPoint = null;
 
         [Header("View")] 
-        [SerializeField] private SpriteRenderer m_sprite = null;
+        [SerializeField] private SpriteRenderer _sprite = null;
 
         public ITileViewModel TileViewModel { get; private set; }
         
-        public Transform HudPoint => m_hudPoint;
-        public Transform TileTransform => m_tileTransform;
-        
-        private TileData m_tileData = null;
-        private Color m_defaultColor = Color.white;
+        public Transform HudPoint => _hudPoint;
+        public Transform TileTransform => _tileTransform;
 
-        private List<IDisposable> m_disposables = new List<IDisposable>();
+        private readonly List<IDisposable> _disposables = new List<IDisposable>();
+        
+        private TileData _tileData = null;
+        private Color _defaultColor = Color.white;
+
         
         [Inject]
         public void Constructor(
@@ -35,18 +36,18 @@ namespace _Scripts.Gameplay.Tile
         {
             TileViewModel = viewModel;
             
-            m_tileData = viewConfigs.TileData;
+            _tileData = viewConfigs.TileData;
         }
         
         public void OnSpawned(Vector3 position, Transform parent)
         {
-            TileViewModel.BuildingContainer = m_tileTransform;
+            TileViewModel.BuildingContainer = _tileTransform;
             SetTileSize();
             
-            m_defaultColor = m_sprite.color;
+            _defaultColor = _sprite.color;
             
-            m_tileTransform.SetParent(parent);
-            m_tileTransform.position = position;
+            _tileTransform.SetParent(parent);
+            _tileTransform.position = position;
 
             TileViewModel.Position = position;
 
@@ -55,28 +56,28 @@ namespace _Scripts.Gameplay.Tile
 
         private void SetTileSize()
         {
-            var tileSize = m_tileTransform.lossyScale / 2;
+            var tileSize = _tileTransform.lossyScale / 2;
             TileViewModel.Size = tileSize;
         }
 
         private void SubscribeOnDataUpdate()
         {
-            m_disposables.Add(TileViewModel.IsHighlighted
+            _disposables.Add(TileViewModel.IsHighlighted
                 .ObserveEveryValueChanged(x => x.Value)
                 .Subscribe(OnHighlightStateChanged));
             
-            m_disposables.Add(TileViewModel.IsSelected
+            _disposables.Add(TileViewModel.IsSelected
                 .ObserveEveryValueChanged(x => x.Value)
                 .Subscribe(OnSelectedStateChanged));
         }
         
         public void OnDespawned()
         {
-            foreach (var disposable in m_disposables)
+            foreach (var disposable in _disposables)
             {
                 disposable.Dispose();
             }
-            m_disposables.Clear();
+            _disposables.Clear();
         }
 
         private void OnHighlightStateChanged(bool highlightState)
@@ -91,12 +92,12 @@ namespace _Scripts.Gameplay.Tile
         
         private void ToggleSelectColor(bool state)
         {
-            m_sprite.color = state ? m_tileData.SelectedColor : m_defaultColor;
+            _sprite.color = state ? _tileData.SelectedColor : _defaultColor;
         }
 
         private void ToggleHighlightingColor(bool state)
         {
-            m_sprite.color = state ? m_tileData.InteractiveColor : m_defaultColor;
+            _sprite.color = state ? _tileData.InteractiveColor : _defaultColor;
         }
 
         [UsedImplicitly]

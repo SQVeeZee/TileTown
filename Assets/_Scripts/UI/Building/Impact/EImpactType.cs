@@ -1,11 +1,11 @@
-namespace _Scripts.Gameplay.Building.Impacts
+namespace _Scripts.UI.Building.Impact
 {
     public enum EImpactType
     {
-        NONE = 0,
+        None = 0,
 
-        REMOVE = 10,
-        MOVE = 11,
-        SHOW_INFO = 12,
+        Remove = 10,
+        Move = 11,
+        ShowInfo = 12,
     }
 }

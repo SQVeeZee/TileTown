@@ -3,30 +3,30 @@ using UnityEngine;
 
 namespace _Scripts.Gameplay.Building.Configs
 {
-    [CreateAssetMenu(fileName = ASSET_FILE_NAME, menuName = ASSET_FILE_PATH, order = ASSET_MENU_ORDER)]
+    [CreateAssetMenu(fileName = AssetFileName, menuName = AssetFilePath, order = AssetMenuOrder)]
     public class BaseBuildingConfigs : ScriptableObject
     {
-        private const string ASSET_FILE_NAME = nameof(BaseBuildingConfigs);
-        private const string ASSET_FILE_PATH = nameof(BuildingsConfigs) + "/Data/" + ASSET_FILE_NAME;
-        private const int ASSET_MENU_ORDER = int.MinValue + 1001;
+        private const string AssetFileName = nameof(BaseBuildingConfigs);
+        private const string AssetFilePath = nameof(BuildingsConfigs) + "/Data/" + AssetFileName;
+        private const int AssetMenuOrder = int.MinValue + 1001;
 
-        [SerializeField] private BaseBuildingData m_buildingData = null;
+        [SerializeField] private BaseBuildingData _buildingData = null;
 
-        public BaseBuildingData BuildingData => m_buildingData;
+        public BaseBuildingData BuildingData => _buildingData;
     }
 
     [Serializable]
     public class BaseBuildingData
     {
         [Header("Info")]
-        [SerializeField] private string m_buildingName = default;
-        [SerializeField] private EBuildingType m_buildingType = default;
+        [SerializeField] private string _buildingName = default;
+        [SerializeField] private EBuildingType _buildingType = default;
         
         [Multiline(5)]
-        [SerializeField] private string m_buildingDescription = default;
+        [SerializeField] private string _buildingDescription = default;
         
-        public string BuildingName => m_buildingName;
-        public EBuildingType BuildingType => m_buildingType;
-        public string BuildingDescription => m_buildingDescription;
+        public string BuildingName => _buildingName;
+        public EBuildingType BuildingType => _buildingType;
+        public string BuildingDescription => _buildingDescription;
     }
 }

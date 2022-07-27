@@ -8,43 +8,40 @@ namespace _Scripts.UI.Control
     {
         public event Action<Vector2> Clicked = null;
         
-        private readonly UIControlPanel m_controlPanel = null;
+        private readonly UIControlPanel _controlPanel = null;
 
-        private float m_clickRange = 0.5f;
+        private float _clickRange = 0.5f;
 
-        private float m_leftLimit = 0;
-        private float m_rightLimit = 10;
-
-        private Vector2 m_pointerPosition = default;
+        private Vector2 _pointerPosition = default;
         
         [Inject]
         public ControlController(
             UIControlPanel controlPanel
         )
         {
-            m_controlPanel = controlPanel;
+            _controlPanel = controlPanel;
         }
 
         void IInitializable.Initialize()
         {
-            m_controlPanel.PointerDown += OnPointerDown;
-            m_controlPanel.PointerUp += OnPointerUp;
+            _controlPanel.PointerDown += OnPointerDown;
+            _controlPanel.PointerUp += OnPointerUp;
         }
 
         void IDisposable.Dispose()
         {
-            m_controlPanel.PointerDown -= OnPointerDown;
-            m_controlPanel.PointerUp -= OnPointerUp;
+            _controlPanel.PointerDown -= OnPointerDown;
+            _controlPanel.PointerUp -= OnPointerUp;
         }
 
         private void OnPointerDown(Vector2 viewPoint)
         {
-            m_pointerPosition = viewPoint;
+            _pointerPosition = viewPoint;
         }
 
         private void OnPointerUp(Vector2 viewPoint)
         {
-            if (Vector2.Distance(m_pointerPosition, viewPoint) < m_clickRange)
+            if (Vector2.Distance(_pointerPosition, viewPoint) < _clickRange)
             {
                 Clicked?.Invoke(viewPoint);
             }

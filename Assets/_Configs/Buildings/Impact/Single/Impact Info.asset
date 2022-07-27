@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fcdfb943c1dec245b5a425f7d5aed68, type: 3}
   m_Name: Impact Info
   m_EditorClassIdentifier: 
-  m_buildImpactType: 12
-  m_color: {r: 0.26764917, g: 0.85882354, b: 0.254902, a: 1}
-  m_impactName: INFO
+  _buildImpactType: 12
+  _color: {r: 0.32935798, g: 0.49558818, b: 0.8584906, a: 1}
+  _impactName: Get info

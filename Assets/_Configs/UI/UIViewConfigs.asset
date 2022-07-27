@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c99887f4d76b440a894ff5ba5b5a81, type: 3}
   m_Name: UIViewConfigs
   m_EditorClassIdentifier: 
-  m_showDuration: 0.5
-  m_hideDuration: 0.5
+  _showDuration: 0.5
+  _hideDuration: 0.5

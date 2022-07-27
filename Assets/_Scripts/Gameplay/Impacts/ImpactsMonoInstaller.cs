@@ -2,6 +2,7 @@ using _Scripts.Gameplay.Building.Impacts.Info;
 using _Scripts.Gameplay.Building.Impacts.Move;
 using _Scripts.Gameplay.Building.Impacts.Remove;
 using _Scripts.Gameplay.Tile.Map.Selection;
+using _Scripts.UI.Building.Impact.Impacts;
 using Zenject;
 
 namespace _Scripts.Gameplay.Building.Impacts

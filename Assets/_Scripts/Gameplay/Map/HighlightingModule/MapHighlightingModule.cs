@@ -6,52 +6,46 @@ using Zenject;
 
 namespace _Scripts.Gameplay.Tile.Map.Highlighting
 {
-    public interface IHighlightingModule
-    {
-        void HighlightFreeTiles();
-        void ResetHighlighting();
-    }
-
     [UsedImplicitly]
     public class MapHighlightingModule : IHighlightingModule, IInitializable, IDisposable
     {
-        private readonly IMapGenerator m_generator = null;
+        private readonly IMapGenerator _generator = null;
 
-        private List<ITileViewModel> m_highlightedTiles;
-        private ITileViewModel[,] m_tiles;
+        private List<ITileViewModel> _highlightedTiles;
+        private ITileViewModel[,] _tiles;
 
         [Inject]
         public MapHighlightingModule(
             IMapGenerator mapGenerator
         )
         {
-            m_generator = mapGenerator;
+            _generator = mapGenerator;
         }
 
         void IInitializable.Initialize()
         {
-            m_generator.MapGenerated += OnMapGenerated;
+            _generator.MapGenerated += OnMapGenerated;
         }
 
         void IDisposable.Dispose()
         {
-            m_generator.MapGenerated -= OnMapGenerated;
+            _generator.MapGenerated -= OnMapGenerated;
         }
 
         private void OnMapGenerated(ITileViewModel[,] tiles)
         {
-            m_tiles = tiles;
+            _tiles = tiles;
         }
 
         void IHighlightingModule.HighlightFreeTiles()
         {
-            m_highlightedTiles = new List<ITileViewModel>();
+            _highlightedTiles = new List<ITileViewModel>();
 
-            foreach (var tile in m_tiles)
+            foreach (var tile in _tiles)
             {
                 if (!tile.IsEmpty) continue;
 
-                m_highlightedTiles.Add(tile);
+                _highlightedTiles.Add(tile);
 
                 tile.SetTileHighlightState(true);
             }
@@ -59,14 +53,14 @@ namespace _Scripts.Gameplay.Tile.Map.Highlighting
 
         void IHighlightingModule.ResetHighlighting()
         {
-            if (m_highlightedTiles.Count == 0) return;
+            if (_highlightedTiles.Count == 0) return;
 
-            foreach (var tile in m_highlightedTiles)
+            foreach (var tile in _highlightedTiles)
             {
                 tile.SetTileHighlightState(false);
             }
 
-            m_highlightedTiles.Clear();
+            _highlightedTiles.Clear();
         }
     }
 }

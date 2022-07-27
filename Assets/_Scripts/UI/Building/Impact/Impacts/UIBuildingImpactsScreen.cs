@@ -1,50 +1,49 @@
 using System;
-using _Scripts.Gameplay.Building.Impacts;
+using _Scripts.Gameplay.Building.Impact.Configs;
+using _Scripts.UI.Building.Impacts;
 using _Scripts.UI.Screen;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace _Scripts.UI.Building.Impacts
+namespace _Scripts.UI.Building.Impact.Impacts
 {
     public class UIBuildingImpactsScreen : BaseScreen
     {
-        [SerializeField] private Transform m_impactParent = null;
+        [SerializeField] private Transform _impactParent = null;
 
-        private IUIBuildingImpacts m_impactsViewModel = null;
-        private IDisposable m_disposableConfigs = null;
+        private IUIBuildingImpacts _impactsViewModel = null;
+        private IDisposable _disposableConfigs = null;
         
         [Inject]
         public void Constructor(
             IUIBuildingImpacts impactsViewModel
         )
         {
-            m_impactsViewModel = impactsViewModel;
+            _impactsViewModel = impactsViewModel;
         }
 
         public override void Initialize()
         {
-            m_impactsViewModel.ImpactClicked += OnImpactClicked;
+            _impactsViewModel.ImpactClicked += OnImpactClicked;
             
-            m_disposableConfigs = m_impactsViewModel.BuildingImpactsConfigs.Where(x => x != null)
-                .Subscribe(_=> OnImpactsConfigsUpdate());
+            _disposableConfigs = _impactsViewModel.BuildingImpactsConfigs
+                .ObserveEveryValueChanged(x => x.Value)
+                .Subscribe(OnImpactsConfigsUpdate);
         }
 
         public override void Dispose()
         {
-            m_impactsViewModel.ImpactClicked -= OnImpactClicked;
+            _impactsViewModel.ImpactClicked -= OnImpactClicked;
         }
 
-        protected override void OnBeforeScreenHide()
+        private void OnImpactsConfigsUpdate(BuildingImpactsConfigs buildingImpactsConfigs)
         {
-            base.OnBeforeScreenHide();
+            _impactsViewModel.ResetImpacts();
             
-            m_disposableConfigs?.Dispose();
-        }
-
-        private void OnImpactsConfigsUpdate()
-        {
-            m_impactsViewModel.CreateImpacts(m_impactParent);
+            if (buildingImpactsConfigs == null) return;
+            
+            _impactsViewModel.CreateImpacts(_impactParent);
         }
 
         private void OnImpactClicked(EImpactType impactType)

@@ -1,18 +1,18 @@
 using UnityEngine;
 using Zenject;
 
-namespace Cameras
+namespace _Scripts.Cameras
 {
     public class CameraMonoInstaller : MonoInstaller
     {
         [SerializeField]
-        private CameraView m_view = null;
+        private CameraView _view = null;
         
         
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<CameraController>().FromNew().AsSingle().NonLazy();
-            Container.BindInstance(m_view).AsSingle().NonLazy();
+            Container.BindInstance(_view).AsSingle().NonLazy();
         }
     }
 }

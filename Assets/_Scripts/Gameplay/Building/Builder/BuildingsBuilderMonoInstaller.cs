@@ -6,7 +6,7 @@ namespace _Scripts.Gameplay.Building.Builder
 {
     public class BuildingsBuilderMonoInstaller : MonoInstaller
     {
-        [SerializeField] private BuildingsBuilderConfigs m_configs = null;
+        [SerializeField] private BuildingsBuilderConfigs _configs = null;
 
         public override void InstallBindings()
         {
@@ -15,7 +15,7 @@ namespace _Scripts.Gameplay.Building.Builder
 
         private void BindBuildingBuilder()
         {
-            Container.BindInstance(m_configs).AsSingle().NonLazy();
+            Container.BindInstance(_configs).AsSingle().NonLazy();
 
             Container.BindInterfacesAndSelfTo<BuildingsBuilderModule>().AsSingle().NonLazy();
 

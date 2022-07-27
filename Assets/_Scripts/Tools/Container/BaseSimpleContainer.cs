@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace Tools
+namespace _Scripts.Tools.Container
 {
     public class BaseSimpleContainer<T>
     {
@@ -11,45 +11,45 @@ namespace Tools
         public event Action Cleared = null; 
 
 
-        private readonly List<T> m_items = null;
+        private readonly List<T> _items = null;
 
 
-        public int Count => m_items.Count;
+        public int Count => _items.Count;
         public T this[int index] => GetAt(index);
 
 
         [UsedImplicitly]
         public BaseSimpleContainer()
         {
-            m_items = new List<T>();
+            _items = new List<T>();
         }
 
         public BaseSimpleContainer(int capacity)
         {
-            m_items = new List<T>(capacity);
+            _items = new List<T>(capacity);
         }
 
         public void Add(T item)
         {
-            m_items.Add(item);
+            _items.Add(item);
             Added?.Invoke(item);
         }
 
         public void Remove(T item)
         {
-            m_items.Remove(item);
+            _items.Remove(item);
             Removed?.Invoke(item);
         }
 
         public void Clear()
         {
-            m_items.Clear();
+            _items.Clear();
             Cleared?.Invoke();
         }
 
         private T GetAt(int index)
         {
-            return m_items[index];
+            return _items[index];
         }
     }
 }

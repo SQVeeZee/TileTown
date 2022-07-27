@@ -1,16 +1,15 @@
-using _Scripts.UI.Building;
 using UnityEngine;
 using Zenject;
 
-namespace UI.Building
+namespace _Scripts.UI.Building
 {
     public sealed class UIBuildingMonoInstaller : MonoInstaller
     {
-        [SerializeField] private UIBuildingView m_view;
+        [SerializeField] private UIBuildingView _view;
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<UIBuildingView>().FromInstance(m_view).AsSingle();
+            Container.BindInterfacesAndSelfTo<UIBuildingView>().FromInstance(_view).AsSingle();
         }
     }
 }

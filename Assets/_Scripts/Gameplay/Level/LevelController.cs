@@ -8,10 +8,10 @@ namespace _Scripts.Gameplay.Level
 {
     public class LevelController: MonoBehaviour
     {
-        [SerializeField] private Transform m_container = null;
+        [SerializeField] private Transform _container = null;
         
-        private LevelConfigs m_levelConfigs = null;
-        private IMapGenerator m_mapGenerator = null;
+        private LevelConfigs _levelConfigs = null;
+        private IMapGenerator _mapGenerator = null;
         
         [Inject]
         public void Construct(
@@ -19,16 +19,16 @@ namespace _Scripts.Gameplay.Level
             IMapGenerator mapViewModel
             )
         {
-            m_levelConfigs = levelConfigs;
+            _levelConfigs = levelConfigs;
 
-            m_mapGenerator = mapViewModel;
+            _mapGenerator = mapViewModel;
         }
         
         private void Awake()
         {
-            var gridSize = (m_levelConfigs.Width, m_levelConfigs.Height);
+            var gridSize = (_levelConfigs.Width, _levelConfigs.Height);
             
-            m_mapGenerator.GenerateMap(gridSize, m_container);
+            _mapGenerator.GenerateMap(gridSize, _container);
         }
 
         private void SetParent(Transform parent)

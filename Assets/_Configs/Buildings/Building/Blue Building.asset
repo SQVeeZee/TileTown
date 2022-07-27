@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da93a4ddecb57704980d3b1aac217847, type: 3}
   m_Name: Blue Building
   m_EditorClassIdentifier: 
-  m_buildingData:
-    m_buildingName: Tower
-    m_buildingType: 11
-    m_buildingDescription: 
+  _buildingData:
+    _buildingName: Blue Farm
+    _buildingType: 11
+    _buildingDescription: "Blue farm. \nMb default farm for this genre"

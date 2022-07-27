@@ -9,20 +9,20 @@ namespace Tools.Zenject
     {
         [Header("CONFIGS")]
         [SerializeField]
-        private bool m_injectInChildrenMonoBehaviours = true;
+        private bool _injectInChildrenMonoBehaviours = true;
         [SerializeField]
-        private bool m_injectInChildrenAnimators = true;
+        private bool _injectInChildrenAnimators = true;
 
 
         protected override void GetInjectableMonoBehaviours(List<MonoBehaviour> monoBehaviours)
         {
-            if (m_injectInChildrenMonoBehaviours && m_injectInChildrenAnimators)
+            if (_injectInChildrenMonoBehaviours && _injectInChildrenAnimators)
             {
                 base.GetInjectableMonoBehaviours(monoBehaviours);
                 return;
             }
             
-            if (m_injectInChildrenAnimators)
+            if (_injectInChildrenAnimators)
             {
                 ZenUtilInternal.AddStateMachineBehaviourAutoInjectersUnderGameObject(gameObject);
             }
@@ -48,7 +48,7 @@ namespace Tools.Zenject
                 monoBehaviours.Add(monoBehaviour);
             }
 
-            if (m_injectInChildrenMonoBehaviours)
+            if (_injectInChildrenMonoBehaviours)
             {
                 for (int i = 0; i < transform.childCount; i++)
                 {

@@ -1,7 +1,7 @@
+using _Scripts.Tools.Container;
 using JetBrains.Annotations;
-using Tools;
 
-namespace Cameras
+namespace _Scripts.Cameras
 {
     [UsedImplicitly]
     public class CamerasContainer : BaseSimpleContainer<CameraController>

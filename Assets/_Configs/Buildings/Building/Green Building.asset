@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da93a4ddecb57704980d3b1aac217847, type: 3}
   m_Name: Green Building
   m_EditorClassIdentifier: 
-  m_buildingData:
-    m_buildingName: Farm
-    m_buildingType: 10
-    m_buildingDescription: 
+  _buildingData:
+    _buildingName: Green Building
+    _buildingType: 10
+    _buildingDescription: Green building green as grass

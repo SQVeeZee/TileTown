@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da93a4ddecb57704980d3b1aac217847, type: 3}
   m_Name: Red Building
   m_EditorClassIdentifier: 
-  m_buildingData:
-    m_buildingName: Red tower
-    m_buildingType: 13
-    m_buildingDescription: 
+  _buildingData:
+    _buildingName: Red Church
+    _buildingType: 13
+    _buildingDescription: 'Church which looks like not a church
+
+      But it''s
+      not a problem.
+
+      U can''t move it, SORRY
+
+      my game - my rules'

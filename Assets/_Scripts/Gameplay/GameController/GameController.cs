@@ -6,17 +6,17 @@ namespace Gameplay.Game
 {
     public class GameController : MonoBehaviour
     {
-        [SerializeField] private GameObject m_levelControllerPrefab = null;
-        [SerializeField] private Transform m_levelParent = null;
+        [SerializeField] private GameObject _levelControllerPrefab = null;
+        [SerializeField] private Transform _levelParent = null;
         
-        private LevelController.Factory m_levelFactory = null;
+        private LevelController.Factory _levelFactory = null;
 
         [Inject]
         public void Construct(
             LevelController.Factory levelFactory
         )
         {
-            m_levelFactory = levelFactory;
+            _levelFactory = levelFactory;
         }
 
         private void Start()
@@ -26,7 +26,7 @@ namespace Gameplay.Game
 
         private void InstanceLevel()
         {
-            m_levelFactory.Create(m_levelControllerPrefab, m_levelParent);
+            _levelFactory.Create(_levelControllerPrefab, _levelParent);
         }
     }
 }

@@ -7,16 +7,16 @@ namespace _Scripts.Gameplay.Tile
     public sealed class TileMonoInstaller : MonoInstaller
     {
         [Header("View")] 
-        [SerializeField] private TileViewConfigs m_viewConfigs = null;
-        [SerializeField] private TileView m_view;
+        [SerializeField] private TileViewConfigs _viewConfigs = null;
+        [SerializeField] private TileView _view;
         
         public override void InstallBindings()
         {
-            Container.BindInstance(m_viewConfigs).AsSingle();
+            Container.BindInstance(_viewConfigs).AsSingle();
             
             Container.BindInterfacesAndSelfTo<TileViewModel>().AsSingle();
             
-            Container.BindInterfacesAndSelfTo<TileView>().FromInstance(m_view).AsSingle();
+            Container.BindInterfacesAndSelfTo<TileView>().FromInstance(_view).AsSingle();
         }
     }
 }

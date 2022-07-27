@@ -2,13 +2,13 @@ namespace _Scripts.Gameplay.Building
 {
     public enum EBuildingType
     {
-        NONE = 0,
+        None = 0,
 
-        GREEN = 10,
-        BLUE = 11,
-        PURPLE = 12,
-        RED = 13,
+        Green = 10,
+        Blue = 11,
+        Purple = 12,
+        Red = 13,
 
-        BASHNYA_MAGOV = 999,
+        BashnyaMagov = 999,
     }
 }

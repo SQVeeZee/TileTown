@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be46672f37944b609094b3226ab91210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_view: {fileID: 585435662}
+  _view: {fileID: 585435662}
 --- !u!114 &585435662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,8 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d759d231f34c97ae38f8243d86ed88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_camera: {fileID: 585435659}
-  m_cameraId: 20
+  _camera: {fileID: 585435659}
+  _cameraId: 20
 --- !u!114 &585435663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,8 +280,8 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
-  m_injectInChildrenMonoBehaviours: 1
-  m_injectInChildrenAnimators: 1
+  _injectInChildrenMonoBehaviours: 1
+  _injectInChildrenAnimators: 1
 --- !u!1 &694417451
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be46672f37944b609094b3226ab91210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_view: {fileID: 963194231}
+  _view: {fileID: 963194231}
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,8 +452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d759d231f34c97ae38f8243d86ed88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_camera: {fileID: 963194227}
-  m_cameraId: 1
+  _camera: {fileID: 963194227}
+  _cameraId: 1
 --- !u!114 &963194232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,8 +472,8 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
-  m_injectInChildrenMonoBehaviours: 1
-  m_injectInChildrenAnimators: 1
+  _injectInChildrenMonoBehaviours: 1
+  _injectInChildrenAnimators: 1
 --- !u!1 &971903060
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be46672f37944b609094b3226ab91210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_view: {fileID: 971903065}
+  _view: {fileID: 971903065}
 --- !u!114 &971903065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,8 +611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d759d231f34c97ae38f8243d86ed88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_camera: {fileID: 971903062}
-  m_cameraId: 10
+  _camera: {fileID: 971903062}
+  _cameraId: 10
 --- !u!114 &971903066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,8 +631,8 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
-  m_injectInChildrenMonoBehaviours: 1
-  m_injectInChildrenAnimators: 1
+  _injectInChildrenMonoBehaviours: 1
+  _injectInChildrenAnimators: 1
 --- !u!1 &1391946723
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,8 +775,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19518677bac5d741a7de72891d44a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelControllerPrefab: {fileID: 9073011031504975663, guid: eea3192d6d24e894c88d3430e0f9535d, type: 3}
-  m_levelParent: {fileID: 1896551880}
+  _levelControllerPrefab: {fileID: 9073011031504975663, guid: eea3192d6d24e894c88d3430e0f9535d, type: 3}
+  _levelParent: {fileID: 1896551880}
 --- !u!1 &1676512729
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,10 +959,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3283390206859137535, guid: 59c89bdb9fd696347930651696ea3fb1, type: 3}
-      propertyPath: m_rootTransform
-      value: 
-      objectReference: {fileID: 1896551880}
     - target: {fileID: 3283390207068071153, guid: 59c89bdb9fd696347930651696ea3fb1, type: 3}
       propertyPath: m_Name
       value: SceneContext
@@ -1012,19 +1008,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3283390207700051789, guid: 59c89bdb9fd696347930651696ea3fb1, type: 3}
-      propertyPath: m_parent
+      propertyPath: _parent
       value: 
       objectReference: {fileID: 1799557703}
     - target: {fileID: 8412600495318679261, guid: 59c89bdb9fd696347930651696ea3fb1, type: 3}
-      propertyPath: m_parent
+      propertyPath: _parent
       value: 
       objectReference: {fileID: 1799557703}
     - target: {fileID: 8849733978227048383, guid: 59c89bdb9fd696347930651696ea3fb1, type: 3}
-      propertyPath: m_canvas
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849733978227048383, guid: 59c89bdb9fd696347930651696ea3fb1, type: 3}
-      propertyPath: m_parentTransform
+      propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 1799557703}
     m_RemovedComponents: []

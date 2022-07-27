@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76e1a459783b0449a6ad1a2140ed73f, type: 3}
   m_Name: BuilderBlue
   m_EditorClassIdentifier: 
-  m_buildingConfigs: {fileID: 11400000, guid: 4f0b12d35796f93459d8d5f412b4e4fc, type: 2}
-  m_viewBuildingConfigs: {fileID: 11400000, guid: a7c6a3871bf925344b076d871643a305, type: 2}
-  m_buildingPrefab: {fileID: 2781557168071864402, guid: 28d47786891fa9f408befa2cb072e185, type: 3}
+  _buildingConfigs: {fileID: 11400000, guid: 4f0b12d35796f93459d8d5f412b4e4fc, type: 2}
+  _buildingPrefab: {fileID: 2781557168071864402, guid: 28d47786891fa9f408befa2cb072e185, type: 3}

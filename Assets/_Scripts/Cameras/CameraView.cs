@@ -1,18 +1,18 @@
 using UnityEngine;
 
-namespace Cameras
+namespace _Scripts.Cameras
 {
     public class CameraView : MonoBehaviour
     {
         [SerializeField]
-        private Camera m_camera = null;
+        private Camera _camera = null;
         
         [Space]
         [SerializeField]
-        private ECameraId m_cameraId = ECameraId.NONE;
+        private ECameraId _cameraId = ECameraId.None;
 
 
-        public Camera Camera => m_camera;
-        public ECameraId CameraId => m_cameraId;
+        public Camera Camera => _camera;
+        public ECameraId CameraId => _cameraId;
     }
 }

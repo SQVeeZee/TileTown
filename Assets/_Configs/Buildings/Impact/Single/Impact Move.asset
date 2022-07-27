@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fcdfb943c1dec245b5a425f7d5aed68, type: 3}
   m_Name: Impact Move
   m_EditorClassIdentifier: 
-  m_buildImpactType: 11
-  m_color: {r: 0.24207896, g: 0.43096432, b: 0.9622642, a: 1}
-  m_impactName: MOVE
+  _buildImpactType: 11
+  _color: {r: 0.28491747, g: 0.9245283, b: 0.33320063, a: 1}
+  _impactName: Move

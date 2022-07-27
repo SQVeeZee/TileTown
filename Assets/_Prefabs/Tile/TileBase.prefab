@@ -171,8 +171,8 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
-  m_injectInChildrenMonoBehaviours: 1
-  m_injectInChildrenAnimators: 1
+  _injectInChildrenMonoBehaviours: 1
+  _injectInChildrenAnimators: 1
 --- !u!114 &5303914323762106610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,8 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec05847980f8464897288e5693ce544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_viewConfigs: {fileID: 11400000, guid: c7fd40f24c6df7c47b64f24797cc003f, type: 2}
-  m_view: {fileID: 5419006568166222649}
+  _viewConfigs: {fileID: 11400000, guid: c7fd40f24c6df7c47b64f24797cc003f, type: 2}
+  _view: {fileID: 5419006568166222649}
 --- !u!114 &5419006568166222649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,9 +199,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a200f4898f5b39446b3a5b554e4d367a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tileTransform: {fileID: 75791022852826401}
-  m_hudPoint: {fileID: 2739956484055782040}
-  m_sprite: {fileID: 75791022586962337}
+  _tileTransform: {fileID: 75791022852826401}
+  _hudPoint: {fileID: 2739956484055782040}
+  _sprite: {fileID: 75791022586962337}
 --- !u!1 &170871997389779191
 GameObject:
   m_ObjectHideFlags: 0

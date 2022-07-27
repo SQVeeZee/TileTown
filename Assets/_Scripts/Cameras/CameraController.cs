@@ -2,16 +2,15 @@ using System;
 using UnityEngine;
 using Zenject;
 
-namespace Cameras
+namespace _Scripts.Cameras
 {
     public class CameraController : IDisposable
     {
-        private readonly CameraView m_view = null;
-        private readonly CamerasContainer m_container = null;
+        private readonly CameraView _view = null;
+        private readonly CamerasContainer _container = null;
 
-
-        public ECameraId CameraId => m_view.CameraId;
-        public Camera Camera => m_view.Camera;
+        public ECameraId CameraId => _view.CameraId;
+        public Camera Camera => _view.Camera;
         
         
         [Inject]
@@ -20,15 +19,15 @@ namespace Cameras
             CamerasContainer container
         )
         {
-            m_view = view;
+            _view = view;
 
-            m_container = container;
+            _container = container;
             container.Add(this);
         }
 
         void IDisposable.Dispose()
         {
-            m_container.Remove(this);
+            _container.Remove(this);
         }
     }
 }

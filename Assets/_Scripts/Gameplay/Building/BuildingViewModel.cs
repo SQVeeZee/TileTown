@@ -1,5 +1,6 @@
 using System;
 using _Scripts.Gameplay.Building.Configs;
+using _Scripts.Gameplay.Building.Impact.Configs;
 using _Scripts.Gameplay.Building.Impacts.Move;
 using _Scripts.UI.Building.Impacts.Configs;
 using JetBrains.Annotations;
@@ -10,21 +11,6 @@ using Object = UnityEngine.Object;
 
 namespace _Scripts.Gameplay.Building
 {
-    public interface IBuilding
-    {
-        event Action<IBuilding> BuildingDestroyed;
-        
-        IReactiveProperty<Transform> RootTransform { get; }
-        
-        Transform BuildingTransform { get; set; }
-        BaseBuildingData BuildingInfo { get; }
-        BuildingImpactsConfigs ImpactsConfigs { get; }
-        
-        void SetRootTransform(Transform parent);
-        void MoveBuilding(Transform targetTransform, bool isAnimated = true);
-        void RemoveBuilding();
-    }
-    
     public class BuildingViewModel: IBuilding
     {
         public event Action<IBuilding> BuildingDestroyed;
@@ -35,19 +21,19 @@ namespace _Scripts.Gameplay.Building
         public BaseBuildingData BuildingInfo { get; } = null;
         public BuildingImpactsConfigs ImpactsConfigs { get; private set; }
 
-        private readonly BuildingMoveModule m_buildingMoveModule = null;
+        private readonly IBuildingMoveModule _buildingMoveModule = null;
         
         [Inject]
         public BuildingViewModel(
             BaseBuildingConfigs baseBuildingConfigs,
             BuildingImpactsConfigs impactsConfigs,
-            BuildingMoveModule buildingMoveModule
+            IBuildingMoveModule buildingMoveModule
         )
         {
             BuildingInfo = baseBuildingConfigs.BuildingData;
             ImpactsConfigs = impactsConfigs;
             
-            m_buildingMoveModule = buildingMoveModule;
+            _buildingMoveModule = buildingMoveModule;
         }
         
         void IBuilding.SetRootTransform(Transform parent)
@@ -57,7 +43,7 @@ namespace _Scripts.Gameplay.Building
         
         void IBuilding.MoveBuilding(Transform targetTransform, bool isAnimated)
         {
-            m_buildingMoveModule.ChangePosition(BuildingTransform, targetTransform, isAnimated);
+            _buildingMoveModule.Move(BuildingTransform, targetTransform, isAnimated);
         }
 
         void IBuilding.RemoveBuilding()

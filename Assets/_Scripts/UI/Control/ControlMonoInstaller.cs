@@ -7,11 +7,11 @@ namespace _Scripts.UI.Control
     public sealed class ControlMonoInstaller : MonoInstaller
     {
         [SerializeField]
-        private RectTransform m_parent = null;
+        private RectTransform _parent = null;
         
         [Header("Panel")]
         [SerializeField]
-        private UIControlPanel m_controlPanelPrefab = null;
+        private UIControlPanel _controlPanelPrefab = null;
         
         
         public override void InstallBindings()
@@ -21,8 +21,8 @@ namespace _Scripts.UI.Control
 
             Container.BindInterfacesAndSelfTo<MapClickHandler>().AsSingle().NonLazy();
 
-            Container.BindInterfacesAndSelfTo<UIControlPanel>().FromComponentInNewPrefab(m_controlPanelPrefab)
-                .UnderTransform(m_parent)
+            Container.BindInterfacesAndSelfTo<UIControlPanel>().FromComponentInNewPrefab(_controlPanelPrefab)
+                .UnderTransform(_parent)
                 .AsSingle().NonLazy();
         }
     }

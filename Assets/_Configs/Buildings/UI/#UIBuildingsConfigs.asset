@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bdeea4c2fd34604a9ad99bf0a7b6a0d, type: 3}
   m_Name: '#UIBuildingsConfigs'
   m_EditorClassIdentifier: 
-  m_buildingConfigs:
+  _buildingConfigs:
   - {fileID: 11400000, guid: a7c6a3871bf925344b076d871643a305, type: 2}
   - {fileID: 11400000, guid: 6274273422127ab4ebc4949046c4f40f, type: 2}
   - {fileID: 11400000, guid: bac4161bfe8a27a4bae75244a102e77d, type: 2}

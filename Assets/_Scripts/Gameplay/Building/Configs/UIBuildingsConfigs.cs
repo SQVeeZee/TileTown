@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts.UI.Building.Configs
+namespace _Scripts.Gameplay.Building.Configs
 {
-    [CreateAssetMenu(fileName = ASSET_FILE_NAME, menuName = ASSET_FILE_PATH, order = ASSET_MENU_ORDER)]
+    [CreateAssetMenu(fileName = AssetFileName, menuName = AssetFilePath, order = AssetMenuOrder)]
     public class UIBuildingsConfigs : ScriptableObject
     {
-        private const string ASSET_FILE_NAME = nameof(UIBuildingsConfigs);
-        private const string ASSET_FILE_PATH = nameof(UIBuildingsConfigs) + "/" + ASSET_FILE_NAME;
-        private const int ASSET_MENU_ORDER = int.MinValue + 1001;
+        private const string AssetFileName = nameof(UIBuildingsConfigs);
+        private const string AssetFilePath = nameof(UIBuildingsConfigs) + "/" + AssetFileName;
+        private const int AssetMenuOrder = int.MinValue + 1001;
 
-        [SerializeField] private List<UIBuildingConfigs> m_buildingConfigs;
+        [SerializeField] private List<UIBuildingConfigs> _buildingConfigs;
 
-        public IReadOnlyList<UIBuildingConfigs> UIBuildingConfigs => m_buildingConfigs;
+        public IReadOnlyList<UIBuildingConfigs> UIBuildingConfigs => _buildingConfigs;
     }
 }

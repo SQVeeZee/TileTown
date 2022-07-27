@@ -2,18 +2,19 @@ using UnityEngine;
 
 namespace _Scripts.Gameplay.Level.Configs
 {
-    [CreateAssetMenu(fileName = ASSET_FILE_NAME, menuName = ASSET_FILE_PATH, order = ASSET_MENU_ORDER)]
+    [CreateAssetMenu(fileName = AssetFileName, menuName = AssetFilePath, order = AssetMenuOrder)]
     public class LevelConfigs : ScriptableObject
     {
-        private const string ASSET_FILE_NAME = nameof(LevelConfigs);
-        private const string ASSET_FILE_PATH = nameof(_Scripts) + "/Data/" + ASSET_FILE_NAME;
-        private const int ASSET_MENU_ORDER = int.MinValue + 1001;
+        private const string AssetFileName = nameof(LevelConfigs);
+        private const string AssetFilePath = nameof(_Scripts) + "/Data/" + AssetFileName;
+        private const int AssetMenuOrder = int.MinValue + 1001;
 
 
-        [Header("GridSize")] [SerializeField] private int m_width = 0;
-        [SerializeField] private int m_height = 0;
+        [Header("GridSize")] 
+        [SerializeField] private int _width = 0;
+        [SerializeField] private int _height = 0;
 
-        public int Width => m_width;
-        public int Height => m_height;
+        public int Width => _width;
+        public int Height => _height;
     }
 }

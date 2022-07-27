@@ -2,46 +2,54 @@ using System;
 using _Scripts.Gameplay.Building.Impacts.Info;
 using _Scripts.Gameplay.Building.Impacts.Move;
 using _Scripts.Gameplay.Building.Impacts.Remove;
+using _Scripts.Gameplay.Tile;
+using _Scripts.Gameplay.Tile.Map.Selection;
 using _Scripts.UI.Building.Impacts;
 using _Scripts.UI.Screens;
 using Zenject;
 
-namespace _Scripts.Gameplay.Building.Impacts
+namespace _Scripts.UI.Building.Impact.Impacts
 {
     public class ImpactsManager : IInitializable, IDisposable
     {
-        private readonly UIManager m_uiManager = null;
-        
-        private readonly IUIBuildingImpacts m_uiBuildingImpacts = null;
-        private readonly IRemoveImpactModule m_removeImpactModule = null;
-        private readonly IMoveImpact m_moveImpact = null;
-        private readonly IInfoImpactModule m_showInfoImpactModule = null;
+        private readonly UIManager _uiManager = null;
+        private readonly ISelectionModule _selectionModule = null;
+
+        private readonly IUIBuildingImpacts _buildingImpacts = null;
+        private readonly IRemoveImpactModule _removeImpactModule = null;
+        private readonly IMoveImpact _moveImpact = null;
+        private readonly IInfoImpactModule _showInfoImpactModule = null;
 
         [Inject]
         public ImpactsManager(
             UIManager uiManager,
-            IUIBuildingImpacts uiBuildingImpacts,
+            ISelectionModule selectionModule,
+
+            IUIBuildingImpacts buildingImpacts,
+            
             IRemoveImpactModule removeImpactModule,
             IMoveImpact moveImpact,
             IInfoImpactModule showInfoImpactModule
         )
         {
-            m_uiManager = uiManager;
-            m_uiBuildingImpacts = uiBuildingImpacts;
+            _uiManager = uiManager;
+            _selectionModule = selectionModule;
 
-            m_removeImpactModule = removeImpactModule;
-            m_moveImpact = moveImpact;
-            m_showInfoImpactModule = showInfoImpactModule;
+            _buildingImpacts = buildingImpacts;
+            
+            _removeImpactModule = removeImpactModule;
+            _moveImpact = moveImpact;
+            _showInfoImpactModule = showInfoImpactModule;
         }
 
         void IInitializable.Initialize()
         {
-            m_uiBuildingImpacts.ImpactClicked += OnImpactClicked;
+            _buildingImpacts.ImpactClicked += OnImpactClicked;
         }
 
         void IDisposable.Dispose()
         {
-            m_uiBuildingImpacts.ImpactClicked -= OnImpactClicked;
+            _buildingImpacts.ImpactClicked -= OnImpactClicked;
         }
 
         private void OnImpactClicked(EImpactType impactType)
@@ -51,39 +59,41 @@ namespace _Scripts.Gameplay.Building.Impacts
 
         private void ChooseImpactDependsOnType(EImpactType impactType)
         {
+            var selectedTile = _selectionModule.SelectedTile;
+            
             switch (impactType)
             {
-                case EImpactType.NONE:
+                case EImpactType.None:
                     break;
-                case EImpactType.REMOVE:
-                    OnRemoveBuilding();
+                case EImpactType.Remove:
+                    OnRemoveBuilding(selectedTile);
                     break;
-                case EImpactType.MOVE:
-                    OnMoveBuilding();
+                case EImpactType.Move:
+                    OnMoveBuilding(selectedTile);
                     break;
-                case EImpactType.SHOW_INFO:
-                    OnShowInfoBuilding();
+                case EImpactType.ShowInfo:
+                    OnShowInfoBuilding(selectedTile);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(impactType), impactType, null);
             }
         }
 
-        private void OnRemoveBuilding()
+        private void OnRemoveBuilding(ITileViewModel selectedTile)
         {
-            m_removeImpactModule.DoImpact();
+            _removeImpactModule.DoImpact(selectedTile);
         }
 
-        private void OnMoveBuilding()
+        private void OnMoveBuilding(ITileViewModel selectedTile)
         {
-            m_moveImpact.DoImpact();
+            _moveImpact.DoImpact(selectedTile);
         }
 
-        private void OnShowInfoBuilding()
+        private void OnShowInfoBuilding(ITileViewModel selectedTile)
         {
-            m_showInfoImpactModule.DoImpact();
+            _showInfoImpactModule.DoImpact(selectedTile);
             
-            m_uiManager.ShowScreenByType(EScreenType.BUILDING_INFO);
+            _uiManager.ShowScreenByType(EScreenType.BuildingInfo);
         }
     }
 }

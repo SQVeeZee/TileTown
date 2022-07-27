@@ -1,4 +1,3 @@
-using _Scripts.Gameplay.Tile.Map.Click;
 using _Scripts.Gameplay.Tile.Map.Grid;
 using _Scripts.Gameplay.Tile.Map.Highlighting;
 using UnityEngine;
@@ -9,7 +8,7 @@ namespace _Scripts.Gameplay.Tile.Map
     public sealed class MapMonoInstaller : MonoInstaller
     {
         [Header("Prefab")]
-        [SerializeField] private TileView m_tileControllerPrefab = null;
+        [SerializeField] private TileView _tileControllerPrefab = null;
         
         public override void InstallBindings()
         {
@@ -29,7 +28,7 @@ namespace _Scripts.Gameplay.Tile.Map
         private void BindTileFactory()
         {
             Container.BindMemoryPool<TileView, TileView.Pool>()
-                .FromComponentInNewPrefab(m_tileControllerPrefab);
+                .FromComponentInNewPrefab(_tileControllerPrefab);
         }
     }
 }

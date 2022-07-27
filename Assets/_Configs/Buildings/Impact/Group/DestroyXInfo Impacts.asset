@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae19bc70d5dc694ea5f1963546cdd52, type: 3}
   m_Name: DestroyXInfo Impacts
   m_EditorClassIdentifier: 
-  m_impactConfigs:
+  _impactConfigs:
   - {fileID: 11400000, guid: fd67a762368c62a43a34e78a33053692, type: 2}
   - {fileID: 11400000, guid: fe16152dd570e514d945c432ac51ce85, type: 2}

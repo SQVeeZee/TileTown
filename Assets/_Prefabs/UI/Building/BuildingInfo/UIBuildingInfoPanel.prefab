@@ -922,13 +922,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a4c631757487c4f9a4d8a8e55fd600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_transform: {fileID: 2639255975215783779}
-  m_canvas: {fileID: 7077806204772203253}
-  m_canvasGroup: {fileID: 6519120360042307648}
-  m_nameText: {fileID: 7077806204316327110}
-  m_typeText: {fileID: 7077806203700436876}
-  m_description: {fileID: 7077806203616464613}
-  m_closeButton: {fileID: 6924264380591831776}
+  _transform: {fileID: 2639255975215783779}
+  _canvas: {fileID: 7077806204772203253}
+  _canvasGroup: {fileID: 6519120360042307648}
+  _nameText: {fileID: 7077806204316327110}
+  _typeText: {fileID: 7077806203700436876}
+  _description: {fileID: 7077806203616464613}
+  _closeButton: {fileID: 6924264380591831776}
 --- !u!1 &7077806204316327108
 GameObject:
   m_ObjectHideFlags: 0

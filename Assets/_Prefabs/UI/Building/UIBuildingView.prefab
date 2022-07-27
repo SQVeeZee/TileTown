@@ -139,8 +139,8 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
-  m_injectInChildrenMonoBehaviours: 1
-  m_injectInChildrenAnimators: 1
+  _injectInChildrenMonoBehaviours: 1
+  _injectInChildrenAnimators: 1
 --- !u!114 &4571249193637484784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27069d2bcec68474e83d78d8efcc6be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_view: {fileID: 2867821413139550574}
+  _view: {fileID: 2867821413139550574}
 --- !u!114 &2867821413139550574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,10 +166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2b54922cf976a42bb2009be8c38e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_transform: {fileID: 5297812372968264682}
-  m_Button: {fileID: 5167997965417054928}
-  m_nameText: {fileID: 4850704940323067153}
-  m_iconImage: {fileID: 8775616408850746912}
+  _transform: {fileID: 5297812372968264682}
+  _button: {fileID: 5167997965417054928}
+  _nameText: {fileID: 4850704940323067153}
+  _iconImage: {fileID: 8775616408850746912}
 --- !u!1 &4711924459675793975
 GameObject:
   m_ObjectHideFlags: 0

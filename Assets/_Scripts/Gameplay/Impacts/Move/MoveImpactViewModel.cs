@@ -6,16 +6,14 @@ using Zenject;
 
 namespace _Scripts.Gameplay.Building.Impacts.Move
 {
-    public interface IMoveImpact : IImpact
+    public class MoveImpactViewModel : BaseMapClickListener, IMoveImpact, IInitializable, IDisposable
     {
-    }
-    
-    public class MoveImpactViewModel: BaseMapClickListener, IMoveImpact, IInitializable, IDisposable
-    {
-        protected override MapClickMode ClickMode => MapClickMode.MOVE;
-        
-        private readonly IMoveImpactModule m_impactModule = null;
-        private readonly IHighlightingModule m_highlightingModule = null;
+        protected override MapClickMode ClickMode => MapClickMode.Move;
+
+        private readonly IMoveImpactModule _impactModule = null;
+        private readonly IHighlightingModule _highlightingModule = null;
+
+        private ITileViewModel _tileViewModel = null;
 
         [Inject]
         public MoveImpactViewModel(
@@ -24,28 +22,40 @@ namespace _Scripts.Gameplay.Building.Impacts.Move
 
             IMapClickHandler mapClickHandler,
             IClickModeListener clickModeListener
-        ):base (mapClickHandler, clickModeListener)
+        ) : base(mapClickHandler, clickModeListener)
         {
-            m_impactModule = moveImpactModule;
-            m_highlightingModule = highlightingModule;
+            _impactModule = moveImpactModule;
+            _highlightingModule = highlightingModule;
         }
 
-        void IInitializable.Initialize() => base.Initialize();
-        void IDisposable.Dispose() => base.Dispose();
-
-        void IImpact.DoImpact()
+        void IInitializable.Initialize()
         {
+            base.Initialize();
+
+            _impactModule.MoveImpactCompleted += OnMoveImpactCompleted;
+        }
+
+        void IDisposable.Dispose()
+        {
+            base.Dispose();
+            
+            _impactModule.MoveImpactCompleted -= OnMoveImpactCompleted;
+        }
+
+        public void DoImpact(ITileViewModel tileViewModel)
+        {
+            _tileViewModel = tileViewModel;
+            
             AddClickListen();
             
-            m_highlightingModule.HighlightFreeTiles();
+            _highlightingModule.HighlightFreeTiles();
         }
 
         public void ResetImpact()
         {
             ResetClickListen();
 
-            m_highlightingModule.ResetHighlighting();
-            m_impactModule.ResetTileSelection();
+            _highlightingModule.ResetHighlighting();
         }
         
         protected override void OnClickTile(ITileViewModel tile)
@@ -55,7 +65,12 @@ namespace _Scripts.Gameplay.Building.Impacts.Move
         
         private void OnClickTargetTile(ITileViewModel tileViewModel)
         {
-            m_impactModule.DoMoveImpact(tileViewModel, ResetImpact);
+            _impactModule.DoMoveImpact(_tileViewModel, tileViewModel);
+        }
+        
+        private void OnMoveImpactCompleted()
+        {
+            ResetImpact();
         }
     }
 }

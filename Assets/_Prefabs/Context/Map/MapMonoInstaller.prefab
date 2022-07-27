@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dbb3f85773fd2f43a136d6b781e93ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tileControllerPrefab: {fileID: 5419006568166222649, guid: 5aba48c2484cf66468f539250b7a08e8, type: 3}
+  _tileControllerPrefab: {fileID: 5419006568166222649, guid: 5aba48c2484cf66468f539250b7a08e8, type: 3}

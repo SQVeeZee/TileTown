@@ -44,11 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e08aa2dfcc3014b95c0aca8af45ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_parentTransform: {fileID: 0}
-  m_configs: {fileID: 11400000, guid: 50d30d37e12438a4c98f0e893905a777, type: 2}
-  m_buildingsBuilderScreen: {fileID: 6142685099733860492, guid: 2eb149cb20624aa4a817134b2bf47a0a, type: 3}
-  m_uiBuildingsConfigs: {fileID: 11400000, guid: 20c226f307af80048ae488113170155a, type: 2}
-  m_uiBuildingPrefab: {fileID: 3780363110641348149, guid: 160a6fcc1e06dd842bbace7f7c4a5425, type: 3}
-  m_buildingInfoScreen: {fileID: 2447112727235788046, guid: 5eeadceb672d4d445ab5fa4b1197cbcc, type: 3}
-  m_buildingImpactsScreen: {fileID: 1831416043457753450, guid: da9f4368131287644934e341d18042a0, type: 3}
-  m_impactPrefab: {fileID: 3060992438347948202, guid: 728f20380e5fdb345b5587e5bbc419e5, type: 3}
+  _parentTransform: {fileID: 0}
+  _viewConfigs: {fileID: 11400000, guid: 50d30d37e12438a4c98f0e893905a777, type: 2}
+  _buildingsBuilderScreen: {fileID: 6142685099733860492, guid: 2eb149cb20624aa4a817134b2bf47a0a, type: 3}
+  _buildingsConfigs: {fileID: 11400000, guid: 20c226f307af80048ae488113170155a, type: 2}
+  _viewBuildingPrefab: {fileID: 1885209907374917424, guid: 1dd57a20e9f754a4ba9f53aa992664d9, type: 3}
+  _buildingInfoScreen: {fileID: 2447112727235788046, guid: 5eeadceb672d4d445ab5fa4b1197cbcc, type: 3}

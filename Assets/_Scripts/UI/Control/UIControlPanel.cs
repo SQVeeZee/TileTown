@@ -10,18 +10,18 @@ namespace _Scripts.UI.Control
         public event Action<Vector2> PointerDown = null;
         public event Action<Vector2> PointerUp = null;
 
-        [SerializeField] private UIInput m_uiInput = null;
+        [SerializeField] private UIInput _input = null;
 
         void IInitializable.Initialize()
         {
-            m_uiInput.PointerDown += OnPointerDown;
-            m_uiInput.PointerUp += OnPointerUp;
+            _input.PointerDown += OnPointerDown;
+            _input.PointerUp += OnPointerUp;
         }
 
         void IDisposable.Dispose()
         {
-            m_uiInput.PointerDown -= OnPointerDown;
-            m_uiInput.PointerUp -= OnPointerUp;
+            _input.PointerDown -= OnPointerDown;
+            _input.PointerUp -= OnPointerUp;
         }
 
         private void OnPointerDown(Vector2 position)

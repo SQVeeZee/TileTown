@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace Cameras
+namespace _Scripts.Cameras
 {
     public class CamerasMonoInstaller : MonoInstaller
     {

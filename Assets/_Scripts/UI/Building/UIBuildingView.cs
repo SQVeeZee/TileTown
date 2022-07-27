@@ -1,6 +1,6 @@
 using System;
 using _Scripts.Gameplay.Building;
-using _Scripts.UI.Building.Configs;
+using _Scripts.Gameplay.Building.Configs;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
@@ -13,13 +13,13 @@ namespace _Scripts.UI.Building
     {
         public event Action<EBuildingType> ViewClicked = null;
 
-        [SerializeField] private Transform m_transform = null;
+        [SerializeField] private Transform _transform = null;
         
-        [SerializeField] private Button m_Button = null;
-        [SerializeField] private TextMeshProUGUI m_nameText = null;
-        [SerializeField] private Image m_iconImage = null;
+        [SerializeField] private Button _button = null;
+        [SerializeField] private TextMeshProUGUI _nameText = null;
+        [SerializeField] private Image _iconImage = null;
 
-        private EBuildingType m_buildingType = EBuildingType.NONE;
+        private EBuildingType _buildingType = EBuildingType.None;
         
         public void Initialize(UIBuildingConfigs buildingConfigs)
         {
@@ -33,13 +33,13 @@ namespace _Scripts.UI.Building
             ChangeName(text);
             UpdateIconColor(iconColor);
             
-            m_buildingType = buildingType;
+            _buildingType = buildingType;
             AddListener();
         }
 
         private void AddListener()
         {
-            m_Button.onClick.AddListener(OnButtonClicked);
+            _button.onClick.AddListener(OnButtonClicked);
         }
 
         private void ChangeName(string nameText)
@@ -49,24 +49,24 @@ namespace _Scripts.UI.Building
 
         private void OnButtonClicked()
         {
-            ViewClicked?.Invoke(m_buildingType);
+            ViewClicked?.Invoke(_buildingType);
         }
 
         private void UpdateNameText(string nameText)
         {
-            m_nameText.text = nameText;
+            _nameText.text = nameText;
         }
 
         private void UpdateIconColor(Color targetColor)
         {
-            m_iconImage.color = targetColor;
+            _iconImage.color = targetColor;
         }
         
         public void SetTransform(Transform parent)
         {
-            m_transform.SetParent(parent, false);
+            _transform.SetParent(parent, false);
 
-            m_transform.localScale = Vector3.one;
+            _transform.localScale = Vector3.one;
         }
         
         [UsedImplicitly]

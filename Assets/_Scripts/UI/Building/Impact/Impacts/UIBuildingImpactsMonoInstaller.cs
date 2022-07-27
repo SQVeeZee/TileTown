@@ -1,4 +1,6 @@
-using _Scripts.UI.Building.Impacts.Builder;
+using _Scripts.UI.Building.Builder;
+using _Scripts.UI.Building.Impact;
+using _Scripts.UI.Building.Impact.Impacts;
 using UnityEngine;
 using Zenject;
 
@@ -6,22 +8,22 @@ namespace _Scripts.UI.Building.Impacts
 {
     public sealed class UIBuildingImpactsMonoInstaller : MonoInstaller
     {
-        [SerializeField] private Transform m_parent = null;
+        [SerializeField] private Transform _parent = null;
         
         [Header("Impacts")]
-        [SerializeField] private UIBuildingImpactsScreen m_buildingImpactsScreen = null;
-        [SerializeField] private UIBuildingImpactView m_impactPrefab = null;
+        [SerializeField] private UIBuildingImpactsScreen _buildingImpactsScreen = null;
+        [SerializeField] private UIBuildingImpactView _impactPrefab = null;
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<UIBuildingImpactsViewModel>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<IuiBuildingImpactsViewModel>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<UIBuildingImpactsBuilder>().AsSingle().NonLazy();
             
-            Container.Bind<UIBuildingImpactsScreen>().FromComponentInNewPrefab(m_buildingImpactsScreen)
-                .UnderTransform(m_parent).AsSingle().NonLazy();
+            Container.Bind<UIBuildingImpactsScreen>().FromComponentInNewPrefab(_buildingImpactsScreen)
+                .UnderTransform(_parent).AsSingle().NonLazy();
             
             Container.BindMemoryPool<UIBuildingImpactView, UIBuildingImpactView.Pool>()
-                .FromComponentInNewPrefab(m_impactPrefab);
+                .FromComponentInNewPrefab(_impactPrefab);
         }
     }
 }

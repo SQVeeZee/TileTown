@@ -8,14 +8,14 @@ namespace _Scripts.Gameplay.Tile.Map.Grid
     {
         public event Action<ITileViewModel[,]> MapGenerated = null;
         
-        private readonly TileView.Pool m_tilePool = null;
+        private readonly TileView.Pool _tilePool = null;
 
         [Inject]
         public GridMapGenerator(
             TileView.Pool tilePool
         )
         {
-            m_tilePool = tilePool;
+            _tilePool = tilePool;
         }
         
         ITileViewModel[,] IMapGenerator.GenerateMap((int width, int height) size, Transform parent)
@@ -36,7 +36,7 @@ namespace _Scripts.Gameplay.Tile.Map.Grid
                 {
                     Vector3 tilePosition = new Vector3(i,0, j); 
                     
-                    var tileView = m_tilePool.Spawn(tilePosition, parent);
+                    var tileView = _tilePool.Spawn(tilePosition, parent);
                     tileView.gameObject.name = $"Tile {i}:{j}";
                     
                     map[i, j] = tileView.TileViewModel;

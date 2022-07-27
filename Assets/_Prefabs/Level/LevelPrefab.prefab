@@ -116,8 +116,8 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
-  m_injectInChildrenMonoBehaviours: 1
-  m_injectInChildrenAnimators: 0
+  _injectInChildrenMonoBehaviours: 1
+  _injectInChildrenAnimators: 1
 --- !u!114 &2179482815207171093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8dc779b9580f2e4d96c288a2f20715d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelConfigs: {fileID: 11400000, guid: 1f56b2c168c862341846bd4bf011d922, type: 2}
+  _levelConfigs: {fileID: 11400000, guid: 1f56b2c168c862341846bd4bf011d922, type: 2}
 --- !u!114 &1224048601380619200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,4 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdbfdc923cc4d44487904830eb241fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_container: {fileID: 5367783873432379088}
+  _container: {fileID: 5367783873432379088}

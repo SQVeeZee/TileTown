@@ -6,11 +6,11 @@ namespace _Scripts.Gameplay.Level
 {
     public class LevelMonoInstaller : MonoInstaller
     {
-        [SerializeField] private LevelConfigs m_levelConfigs = null;
+        [SerializeField] private LevelConfigs _levelConfigs = null;
 
         public override void InstallBindings()
         {
-            Container.BindInstance(m_levelConfigs).AsSingle();
+            Container.BindInstance(_levelConfigs).AsSingle();
         }
     }
 }

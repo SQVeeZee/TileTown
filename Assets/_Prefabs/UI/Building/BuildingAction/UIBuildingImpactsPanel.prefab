@@ -126,10 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1743f2117fd3af447b24fa8d049f8a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_transform: {fileID: 3264863437844103672}
-  m_canvas: {fileID: 3264863438911572215}
-  m_canvasGroup: {fileID: 3264863438607144680}
-  m_impactParent: {fileID: 3264863437904336377}
+  _transform: {fileID: 3264863437844103672}
+  _canvas: {fileID: 3264863438911572215}
+  _canvasGroup: {fileID: 3264863438607144680}
+  _impactParent: {fileID: 3264863437904336377}
 --- !u!1 &3264863437904336382
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 5576695778287862577}
   - component: {fileID: 4594558418418344418}
   m_Layer: 5
-  m_Name: ImpactLayotGroup
+  m_Name: Impact_LayotGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,28 +1,27 @@
 using System;
-using UnityEngine;
 using Zenject;
 
-namespace Cameras
+namespace _Scripts.Cameras
 {
     public class CamerasController
     {
-        private readonly CamerasContainer m_container = null;
+        private readonly CamerasContainer _container = null;
         
         [Inject]
         public CamerasController(
             CamerasContainer container
         )
         {
-            m_container = container;
+            _container = container;
         }
 
         public CameraController GetCamera(ECameraId cameraId)
         {
-            int count = m_container.Count;
+            int count = _container.Count;
             
             for (int i = 0; i < count; i++)
             {
-                var camera = m_container[i];
+                var camera = _container[i];
                 if (camera.CameraId == cameraId)
                 {
                     return camera;

@@ -1,5 +1,5 @@
 using System;
-using _Scripts.UI.Screen.Configs;
+using _Scripts.UI.View.Configs;
 using DG.Tweening;
 using UniRx;
 using UnityEngine;
@@ -9,17 +9,17 @@ namespace _Scripts.UI.Screen
 {
     public abstract class BaseScreen : MonoBehaviour, IScreen
     {
-        [SerializeField] protected RectTransform m_transform = null;
-        [SerializeField] private UnityEngine.Canvas m_canvas = null;
-        [SerializeField] private CanvasGroup m_canvasGroup = null;
+        [SerializeField] protected RectTransform _transform = null;
+        [SerializeField] private UnityEngine.Canvas _canvas = null;
+        [SerializeField] private CanvasGroup _canvasGroup = null;
 
         public BoolReactiveProperty IsReadyToHide { get; } = new BoolReactiveProperty();
 
         public abstract void Initialize();
         public abstract void Dispose();
 
-        private UIViewConfigs m_viewConfigs = null;
-        private Tweener m_tween = null;
+        private UIViewConfigs _viewConfigs = null;
+        private Tweener _tween = null;
         
         protected virtual void OnBeforeScreenShow() { }
 
@@ -36,7 +36,7 @@ namespace _Scripts.UI.Screen
             UIViewConfigs viewConfigs
         )
         {
-            m_viewConfigs = viewConfigs;
+            _viewConfigs = viewConfigs;
         }
 
         protected virtual void Awake()
@@ -50,10 +50,10 @@ namespace _Scripts.UI.Screen
             
             ResetTween();
 
-            m_canvasGroup.alpha = 0;
-            m_canvas.enabled = true;
+            _canvasGroup.alpha = 0;
+            _canvas.enabled = true;
 
-            m_tween = m_canvasGroup.DOFade(1, m_viewConfigs.ShowDuration)
+            _tween = _canvasGroup.DOFade(1, _viewConfigs.ShowDuration)
                 .OnComplete(OnShow);
 
             void OnShow()
@@ -70,9 +70,9 @@ namespace _Scripts.UI.Screen
             
             ResetTween();
 
-            m_canvas.enabled = false;
+            _canvas.enabled = false;
 
-            m_tween = m_canvasGroup.DOFade(1, m_viewConfigs.ShowDuration).SetDelay(delay)
+            _tween = _canvasGroup.DOFade(1, _viewConfigs.HideDuration).SetDelay(delay)
                 .OnComplete(OnHide);
 
             void OnHide()
@@ -90,10 +90,10 @@ namespace _Scripts.UI.Screen
 
         private void ResetTween()
         {
-            if (m_tween == null) return;
+            if (_tween == null) return;
 
-            m_tween.Kill();
-            m_tween = null;
+            _tween.Kill();
+            _tween = null;
         }
 
         private void OnDestroy()
